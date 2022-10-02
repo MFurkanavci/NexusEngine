@@ -20,6 +20,10 @@ public class SpellInspectorEditor : Editor
         arcitecture.description = EditorGUILayout.TextArea(arcitecture.description, GUILayout.Height(100));
 
         EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Spell Architecture", EditorStyles.boldLabel);
+        arcitecture.type = (SpellArcType)EditorGUILayout.EnumPopup("Type", arcitecture.type);
+
+        EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Delay Time", EditorStyles.boldLabel);
         arcitecture.delay = EditorGUILayout.Toggle("Has Delay Time ?",arcitecture.delay);
 
@@ -155,25 +159,23 @@ public class SpellInspectorEditor : Editor
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("How Many New/Unique Architecture Have This Shot?", EditorStyles.boldLabel);
 
-
         arcitecture.architectureCount = EditorGUILayout.IntField("Architecture Count", arcitecture.architectureCount);
-        arcitecture.count.Add(null);
-        if(arcitecture.architectureCount>=1)
+        if(arcitecture.architectureCount > 0)
         {
-            
             for (int i = 0; i < arcitecture.architectureCount; i++)
             {
-            arcitecture.count.Add(null);
-            EditorGUILayout.LabelField("New/Unique Architecture", EditorStyles.boldLabel);
-            arcitecture.count[i] = (SpellArchitecture)EditorGUILayout.ObjectField("Architecture", arcitecture.count[i], typeof(SpellArchitecture), allowSceneObjects: true);
+                arcitecture.count.Add(null);
+                EditorGUILayout.LabelField("New/Unique Architecture", EditorStyles.boldLabel);
+                arcitecture.count[i] = (SpellArchitecture)EditorGUILayout.ObjectField("Architecture", arcitecture.count[i], typeof(SpellArchitecture), allowSceneObjects: true);
             }
         }
+        else if(arcitecture.architectureCount < 0)
+                arcitecture.count.Clear();
+
         else
         {
-            arcitecture.count.Clear(); 
+            arcitecture.architectureCount = 0;
         }
-        
-        
         
     }
 }

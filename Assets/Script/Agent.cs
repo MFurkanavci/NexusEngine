@@ -19,8 +19,8 @@ public class Agent : MonoBehaviour
 
     public void Awake()
     {
-        //agent = PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
-        //agent = agent_base;
+        agent_base = PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
+        agent_base = agent;
     }
 
     public void Update()
@@ -31,14 +31,8 @@ public class Agent : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            var x = agent.activeSpells[0];
-            switch (x.type)
-            {
-                case SpellArcType.Projectile:
-                    x.ProjectileSpawn();
-                    break;
-
-            }
+            var x = agent_base.activeSpells[0];
+            x.SpellTypeSelecter();
 
         }
     }

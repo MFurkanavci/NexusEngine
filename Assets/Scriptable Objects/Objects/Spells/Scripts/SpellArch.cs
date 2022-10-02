@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GlobalCooldown;
 
 public enum SpellArcType
 {
@@ -13,20 +14,19 @@ public enum SpellArcType
 public class SpellArchitecture : ScriptableObject
 {
     public SpellArcType type;
-    public SpellGameObject spellGameObject;
     public int ID;
     public string Name;
     public Sprite SplashArt;
     [TextArea(15, 20)]
     public string description;
 
-    public int architectureCount;
+    public int architectureCount = 1;
 
 
 
 
     public List<SpellArchitecture> 
-        count, 
+        count = new List<SpellArchitecture>(), 
         missleCount;
 
     public float
@@ -69,14 +69,43 @@ public class SpellArchitecture : ScriptableObject
     public Vector3
         direction,
         position;
-    public void ProjectileSpawn()
+
+    public void SpellTypeSelecter()
     {
-        GameObject spell = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        spell.transform.position = new Vector3(0, 2, 0);
-        spell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        spell.layer = 13;
-        spell.AddComponent<Rigidbody>();
-        spell.GetComponent<Rigidbody>().useGravity = false;
-        spell.GetComponent<Rigidbody>().AddForce(MousePosition.MousePosition.GetMousePosition() * speed);
+        switch (type)
+        {
+            case SpellArcType.Projectile:
+                ProjectileSpawn();
+                break;
+            case SpellArcType.Self:
+                SelfSpawn();
+                break;
+            case SpellArcType.Target:
+                TargetSpawn();
+                break;
+            case SpellArcType.Area:
+                AreaSpawn();
+                break;
+        }
     }
+    public void ProjectileSpawn()
+    {  
+        Debug.Log("Projectile");
+    }
+
+    public void SelfSpawn()
+    {
+        Debug.Log("Self");
+    }
+
+    public void TargetSpawn()
+    {
+        Debug.Log("Target");
+    }
+
+    public void AreaSpawn()
+    {
+        Debug.Log("Area");
+    }
+
 }
