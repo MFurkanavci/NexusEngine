@@ -2,16 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum SpellArcType
+{
+    Projectile,
+    Self,
+    Target,
+    Area
+}
 
 public class SpellArchitecture : ScriptableObject
 {
-
+    public SpellArcType type;
+    public SpellGameObject spellGameObject;
     public int ID;
     public string Name;
     public Sprite SplashArt;
     [TextArea(15, 20)]
     public string description;
+
+    public int architectureCount;
+
+
 
 
     public List<SpellArchitecture> 
@@ -19,18 +30,24 @@ public class SpellArchitecture : ScriptableObject
         missleCount;
 
     public float
-        delay,
+        delayTime,
         castTime,
         lenght,
+        maxlenght,
         width,
+        maxwidth,
         speed,
+        maxspeed,
         wayEffectTime,
         afterEffectTime,
-        stayTime;
+        stayTime,
+        returnSpeed,
+        maxreturnSpeed;
 
 
     public bool
         cast,
+        delay,
         defaultHitArea,
         uniqueShot,
         spriteHitArea,
@@ -50,6 +67,16 @@ public class SpellArchitecture : ScriptableObject
         hitArea;
 
     public Vector3
-        direction;
-
+        direction,
+        position;
+    public void ProjectileSpawn()
+    {
+        GameObject spell = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        spell.transform.position = new Vector3(0, 2, 0);
+        spell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        spell.layer = 13;
+        spell.AddComponent<Rigidbody>();
+        spell.GetComponent<Rigidbody>().useGravity = false;
+        spell.GetComponent<Rigidbody>().AddForce(MousePosition.MousePosition.GetMousePosition() * speed);
+    }
 }

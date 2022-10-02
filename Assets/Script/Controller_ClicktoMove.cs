@@ -30,8 +30,6 @@ public class Controller_ClicktoMove : MonoBehaviour
             if(Physics.Raycast(_Ray,out _isHit,100))
             {
                 agent.destination = _isHit.point;
-
-                
             }
         }
         if (Input.GetMouseButtonDown(1))

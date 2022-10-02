@@ -6,8 +6,10 @@ using System.Reflection;
 public class Agent : MonoBehaviour
 {
     public PlayableAgent agent_base;
-    private PlayableAgent agent;
+    public PlayableAgent agent;
     public Item[] inventory = new Item[6];
+
+    
 
     [Range(0,100)]
     public int max_HP;
@@ -17,8 +19,8 @@ public class Agent : MonoBehaviour
 
     public void Awake()
     {
-        agent = PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
-        agent = agent_base;
+        //agent = PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
+        //agent = agent_base;
     }
 
     public void Update()
@@ -26,6 +28,18 @@ public class Agent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             equip(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            var x = agent.activeSpells[0];
+            switch (x.type)
+            {
+                case SpellArcType.Projectile:
+                    x.ProjectileSpawn();
+                    break;
+
+            }
+
         }
     }
 

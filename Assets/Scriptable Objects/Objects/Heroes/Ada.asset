@@ -22,9 +22,9 @@ MonoBehaviour:
   experience: 450
   damage_Physical: 10
   damage_Magical: 0
-  hitPoint: 100
+  hitPoint: 600
   hitPointCurrent: 85
-  regen_hitPoint: 5
+  regen_hitPoint: 55
   manaPoint: 0
   regen_manaPoint: 0
   wildPoint: 100
@@ -63,6 +63,7 @@ MonoBehaviour:
   canMoveThroughOthers: 0
   isFriend: 0
   isEnemy: 0
-  activeSpells: []
+  activeSpells:
+  - {fileID: 11400000, guid: 49bd04f8fd51cfe499f9042acb10d844, type: 2}
   passiveSpells: []
   classes: 0
