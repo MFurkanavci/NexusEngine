@@ -17,6 +17,7 @@ public class ItemObject : ScriptableObject
     public string Name;
     public Sprite SplashArt;
     public itemType type;
+    
     [TextArea(15, 20)]
     public string description;
 
@@ -49,7 +50,8 @@ public class ItemObject : ScriptableObject
         penetration_Tenacity = 0,
         speed_Jump = 0,
         speed_Fly = 0,
-        leech = 0;
+        leech = 0,
+        time = 0;
         
 
     public int
@@ -57,6 +59,7 @@ public class ItemObject : ScriptableObject
         cost_Sell = 0,
         stack_Count = 0;
 
+    
     public bool
       isCritible = false,
       isImmuneCriticalHit = false,
@@ -64,7 +67,10 @@ public class ItemObject : ScriptableObject
       isPushable = false,
       canJump = false,
       canFly = false,
-      canMoveThroughOthers = false;
+      canMoveThroughOthers = false,
+      isEquipable = false,
+      isEquipped = false;
+
 
     public List<SpellArchitecture>
         activeSpells,

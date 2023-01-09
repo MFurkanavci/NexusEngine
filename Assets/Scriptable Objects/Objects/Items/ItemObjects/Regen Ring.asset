@@ -20,7 +20,7 @@ MonoBehaviour:
   damage_Physical: 0
   damage_Magical: 0
   hitPoint: 0
-  regen_hitPoint: 5
+  regen_hitPoint: 100
   manaPoint: 0
   regen_manaPoint: 0
   wildPoint: 0
@@ -56,6 +56,8 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
+  isEquipable: 1
+  isEquipped: 0
   activeSpells: []
   passiveSpells: []
   childItems: []

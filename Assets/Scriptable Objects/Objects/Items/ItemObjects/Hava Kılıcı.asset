@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: "Hava K\u0131l\u0131c\u0131"
   m_EditorClassIdentifier: 
-  ID: 3001
+  ID: 3003
   Name: "Hava K\u0131l\u0131c\u0131"
   SplashArt: {fileID: 0}
   type: 0
@@ -56,6 +56,8 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
+  isEquipable: 1
+  isEquipped: 0
   activeSpells: []
   passiveSpells: []
   childItems: []

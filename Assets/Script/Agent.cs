@@ -9,6 +9,8 @@ public class Agent : MonoBehaviour
     public PlayableAgent agent;
     public Item[] inventory = new Item[6];
 
+    public dictionary agentStats, itemStats;
+
     
 
     [Range(0,100)]
@@ -21,13 +23,21 @@ public class Agent : MonoBehaviour
     {
         agent_base = PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
         agent_base = agent;
+        agentStats = new dictionary();
+        itemStats = new dictionary();
+        
+            agentStats.setagentBaseStats(agent_base);
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            equip(0);
+            equip();
+        }
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            unequip();
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -35,29 +45,71 @@ public class Agent : MonoBehaviour
             x.SpellTypeSelecter();
 
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            agentStats.printFilteredStats();
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            itemStats.printFilteredStats();
+
+        }
     }
 
-    public void fieldFinder(Item item, PlayableAgent agent)
+   // public void fieldFinder(Item item, PlayableAgent agent)
+    //{
+      //  foreach (var itemStat in item.GetType().GetFields())
+       // {
+         //   foreach (var agentStat in agent.GetType().GetFields())
+           // {
+             //   if (agentStat.Name == itemStat.Name)
+               // {
+                 //   if (agentStat.FieldType == typeof(float))
+                   // {
+                    //    agentStat.SetValue(agent, (float)agentStat.GetValue(agent) + (float)itemStat.GetValue(item));
+                    //}
+                //}
+            //}
+       // }
+   // }
+
+
+    public void equip()
     {
-        foreach (var itemStat in item.GetType().GetFields())
+        foreach (Item item in inventory)
         {
-            foreach (var agentStat in agent.GetType().GetFields())
+            if (item != null)
             {
-                if (agentStat.Name == itemStat.Name)
+                if (item.isEquipable)
                 {
-                    if (agentStat.FieldType == typeof(float))
+                    if (!item.isEquipped)
                     {
-                        agentStat.SetValue(agent, (float)agentStat.GetValue(agent) + (float)itemStat.GetValue(item));
+                        item.isEquipped = true;
+                        itemStats.setitemBaseStats(item);
+                        agentStats.addStat(itemStats.stats);
                     }
                 }
             }
         }
+        
     }
-
-
-    public void equip(int slot)
+    public void unequip()
     {
-        fieldFinder(inventory[slot], agent);
+        foreach (Item item in inventory)
+        {
+            if (item != null)
+            {
+                if (item.isEquipable)
+                {
+                    if (item.isEquipped)
+                    {
+                        item.isEquipped = false;
+                        itemStats.setitemBaseStats(item);
+                        agentStats.removeStat(itemStats.stats);
+                    }
+                }
+            }
+        }
     }
 
     //public void OnTriggerStay(Collider other)

@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
-  m_Name: Constution Ring
+  m_Script: {fileID: 11500000, guid: d31fc97401f56a54bbc73c7266c06cdb, type: 3}
+  m_Name: Healing Potion
   m_EditorClassIdentifier: 
-  ID: 3001
-  Name: Constution Ring
-  SplashArt: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  type: 0
+  ID: 4001
+  Name: 
+  SplashArt: {fileID: 0}
+  type: 1
   description: 
   damage_Physical: 0
   damage_Magical: 0
-  hitPoint: 100
-  regen_hitPoint: 10
+  hitPoint: 0
+  regen_hitPoint: 0
   manaPoint: 0
   regen_manaPoint: 0
   wildPoint: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   speed_Fly: 0
   leech: 0
   time: 0
-  cost_Buy: 450
+  cost_Buy: 0
   cost_Sell: 0
   stack_Count: 0
   isCritible: 0
@@ -57,10 +57,8 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
-  isEquipable: 1
+  isEquipable: 0
   isEquipped: 0
   activeSpells: []
   passiveSpells: []
-  childItems:
-  - {fileID: 11400000, guid: afee06d2264994246b59bba7ad95ad74, type: 2}
-  - {fileID: 11400000, guid: afee06d2264994246b59bba7ad95ad74, type: 2}
+  childItems: []
