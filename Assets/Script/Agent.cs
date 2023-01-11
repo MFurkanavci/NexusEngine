@@ -21,8 +21,7 @@ public class Agent : MonoBehaviour
 
     public void Awake()
     {
-        agent_base = PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
-        agent_base = agent;
+        
         agentStats = new dictionary();
         itemStats = new dictionary();
         

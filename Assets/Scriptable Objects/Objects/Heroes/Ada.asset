@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Ada The Lost One
-  ID: 1002
+  ID: 1001
   type: 0
   description: 
   level: 5
@@ -22,9 +22,9 @@ MonoBehaviour:
   experience: 450
   damage_Physical: 10
   damage_Magical: 0
-  hitPoint: 200
+  hitPoint: 100
   hitPointCurrent: 85
-  regen_hitPoint: 65
+  regen_hitPoint: 15
   manaPoint: 0
   regen_manaPoint: 0
   wildPoint: 100

@@ -35,19 +35,21 @@ public class InventoryHandler : MonoBehaviour
 
     public void selledItem(Item item)
     {
+        removeStatfromPlayer(item);
         removeItem(item);
         recalculateInventory();
-        removeStatfromPlayer(item);
     }
 
     public void addItem(Item item)
     {
-        for (int i = 0; i < player.inventory.Length; i++)
-        {
-            if (getItem(i) == null)
+        if(isInventoryAvailable()){
+            for (int i = 0; i < player.inventory.Length; i++)
             {
-                setItem(i,item);
-                break;
+                if (getItem(i) == null)
+                {
+                    setItem(i,item);
+                    break;
+                }
             }
         }
     }
@@ -58,10 +60,23 @@ public class InventoryHandler : MonoBehaviour
         {
             if (getItem(i) == item)
             {
-                setItem(i,item);
+                setItem(i,null);
                 break;
             }
         }
+    }
+
+    //check the inventory is reach its limit
+    public bool isInventoryAvailable()
+    {
+        for (int i = 0; i < player.inventory.Length; i++)
+        {
+            if (getItem(i) == null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void recalculateInventory()
@@ -90,6 +105,7 @@ public class InventoryHandler : MonoBehaviour
     public void addStattoPlayer(Item item)
     {
         player.agentStats.addStat(getItemStats(item));
+        player.agentStats.setFilteredStats(player.agent,getItemStats(item));
     }
 
     public void removeStatfromPlayer(Item item)

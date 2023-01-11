@@ -20,6 +20,10 @@ public class SmoothFollow : MonoBehaviour
 
     public float smoothTime = .5f;
 
+    public bool
+        lockCam
+        ;
+
     private void Awake()
     {
         offset = camTransform.position - Target.position;
@@ -28,8 +32,37 @@ public class SmoothFollow : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 pos = transform.position;
+        //if player hit space follow the player until space is release
+        //if player hit L lock the player
+        //else basic camBehaviour
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            lockCam = true;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            lockCam = false;
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            lockCam = !lockCam;
+        }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (lockCam)
+        {
+            lockCamBehaviour(lockCam);
+        }
+        else
+        {
+            camBehaviour(pos);
+        }
+
+    }
+
+    //lock the camera to the player until boolean is true
+    public void lockCamBehaviour(bool lockCam)
+    {
+        if (lockCam)
         {
             Vector3 targetPosition = Target.position + offset;
 
@@ -37,11 +70,8 @@ public class SmoothFollow : MonoBehaviour
 
             transform.LookAt(Target);
         }
-        else
-        {
-            camBehaviour(pos);
-        }
     }
+
 
     public void camBehaviour(Vector3 pos)
     {

@@ -4,6 +4,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 
 //create a dictionary for stats
@@ -138,6 +139,14 @@ public class dictionary {
             }
         }
         return filteredStats;
+    }
+
+    public void setFilteredStats(PlayableAgent agent, Dictionary<string, float> filteredStats){
+        filteredStats = getFilteredStats();
+        foreach (KeyValuePair<string, float> stat in filteredStats){
+            FieldInfo field = agent.GetType().GetField(stat.Key);
+            field.SetValue(agent, stat.Value);
+        }
     }
 
     public void clearStats(){

@@ -17,9 +17,25 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
-        agent_base = PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
-        agent_base = agent;
+        //agent must be copy of the agent_base 
+        //agent_base should not change
+        //so create a new agent and copy the agent_base to it just for the instance
+
+        agent =  PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
+
+        foreach (var item in agent_base.GetType().GetFields())
+        {
+            item.SetValue(agent, item.GetValue(agent_base));
+        }
+
+
+
         agentStats = new dictionary();
-        agentStats.setagentBaseStats(agent_base);
+        setagentBaseStats(agent);
+    }
+
+    public void setagentBaseStats(PlayableAgent agent)
+    {
+        agentStats.setagentBaseStats(agent);
     }
 }
