@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TestUI : MonoBehaviour
 {
@@ -9,24 +10,38 @@ public class TestUI : MonoBehaviour
     GameObject panel;
 
     public Player player;
-    public void addInventoryImage()
+
+    public TMP_Text goldText;
+
+    public void Start()
     {
-        ClearInventory();
+        panel = this.gameObject;
+    }
+
+    public void calculateInventory()
+    {
+        if(panel.transform.childCount > 0)
+            clearInventory();
         for (int i = 0; i < player.inventory.Length; i++)
         {
             if (player.inventory[i] != null)
             {
-                panel = Instantiate(image, transform);
-                panel.GetComponent<Image>().sprite = player.inventory[i].SplashArt;
+                GameObject newImage = Instantiate(image, panel.transform);
+                newImage.GetComponent<TMP_Text>().text = player.inventory[i].Name;
             }
         }
     }
 
-    void ClearInventory()
+    public void clearInventory()
     {
-        foreach (Transform child in transform)
+        foreach (Transform child in panel.transform)
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public void Update()
+    {
+        goldText.text = player.agent.gold.ToString();
     }
 }

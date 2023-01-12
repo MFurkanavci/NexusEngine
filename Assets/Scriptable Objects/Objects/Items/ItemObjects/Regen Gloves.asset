@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
-  m_Name: New Default Item
+  m_Name: Regen Gloves
   m_EditorClassIdentifier: 
-  ID: 3001
-  Name: 
+  ID: 3002
+  Name: Regen Gloves
   SplashArt: {fileID: 0}
   type: 0
   description: 
   damage_Physical: 0
   damage_Magical: 0
-  hitPoint: 0
-  regen_hitPoint: 0
+  hitPoint: 500
+  regen_hitPoint: 100
   manaPoint: 0
   regen_manaPoint: 0
   wildPoint: 0
@@ -46,9 +46,11 @@ MonoBehaviour:
   speed_Jump: 0
   speed_Fly: 0
   leech: 0
-  cost_Buy: 0
+  time: 0
+  cost_Buy: 1200
   cost_Sell: 0
   stack_Count: 0
+  merge_Count: 0
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
@@ -56,6 +58,12 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
+  isStackable: 0
+  isMergeable: 0
+  isEquipable: 1
+  isEquipped: 0
   activeSpells: []
   passiveSpells: []
-  childItems: []
+  recipe:
+  - {fileID: 11400000, guid: 21aa89077bfab2c46bc3f817d1f55a51, type: 2}
+  - {fileID: 11400000, guid: afee06d2264994246b59bba7ad95ad74, type: 2}

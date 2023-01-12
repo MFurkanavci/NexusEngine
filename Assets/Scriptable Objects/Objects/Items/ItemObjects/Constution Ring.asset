@@ -50,6 +50,7 @@ MonoBehaviour:
   cost_Buy: 450
   cost_Sell: 0
   stack_Count: 0
+  merge_Count: 0
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
@@ -57,10 +58,10 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
+  isStackable: 0
+  isMergeable: 0
   isEquipable: 1
   isEquipped: 0
   activeSpells: []
   passiveSpells: []
-  childItems:
-  - {fileID: 11400000, guid: afee06d2264994246b59bba7ad95ad74, type: 2}
-  - {fileID: 11400000, guid: afee06d2264994246b59bba7ad95ad74, type: 2}
+  childItems: []

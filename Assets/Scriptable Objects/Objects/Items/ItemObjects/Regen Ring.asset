@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: Regen Ring
   m_EditorClassIdentifier: 
-  ID: 3002
-  Name: 
+  ID: 3004
+  Name: Regen Ring
   SplashArt: {fileID: 0}
   type: 0
   description: 
   damage_Physical: 0
   damage_Magical: 0
-  hitPoint: 0
-  regen_hitPoint: 100
+  hitPoint: 200
+  regen_hitPoint: 50
   manaPoint: 0
   regen_manaPoint: 0
   wildPoint: 0
@@ -46,9 +46,11 @@ MonoBehaviour:
   speed_Jump: 0
   speed_Fly: 0
   leech: 0
-  cost_Buy: 200
+  time: 0
+  cost_Buy: 600
   cost_Sell: 0
   stack_Count: 0
+  merge_Count: 0
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
@@ -56,8 +58,12 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
+  isStackable: 0
+  isMergeable: 0
   isEquipable: 1
   isEquipped: 0
   activeSpells: []
   passiveSpells: []
-  childItems: []
+  recipe:
+  - {fileID: 11400000, guid: 21aa89077bfab2c46bc3f817d1f55a51, type: 2}
+  - {fileID: 11400000, guid: 21aa89077bfab2c46bc3f817d1f55a51, type: 2}

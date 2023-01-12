@@ -57,7 +57,8 @@ public class ItemObject : ScriptableObject
     public int
         cost_Buy = 0,
         cost_Sell = 0,
-        stack_Count = 0;
+        stack_Count = 0,
+        merge_Count = 0;
 
     
     public bool
@@ -68,6 +69,8 @@ public class ItemObject : ScriptableObject
       canJump = false,
       canFly = false,
       canMoveThroughOthers = false,
+      isStackable = false,
+      isMergeable = false,
       isEquipable = false,
       isEquipped = false;
 
@@ -76,7 +79,6 @@ public class ItemObject : ScriptableObject
         activeSpells,
         passiveSpells;
 
-    public List<ScriptableObject>
-        childItems;
-
+    public Item[]
+        recipe;
 }

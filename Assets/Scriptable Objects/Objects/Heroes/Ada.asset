@@ -24,7 +24,7 @@ MonoBehaviour:
   damage_Magical: 0
   hitPoint: 100
   hitPointCurrent: 85
-  regen_hitPoint: 15
+  regen_hitPoint: 10
   manaPoint: 0
   regen_manaPoint: 0
   wildPoint: 100
@@ -52,7 +52,7 @@ MonoBehaviour:
   leech: 0
   drop_Gold: 0
   drop_Experience: 0
-  gold: 0
+  gold: 5000
   vaskaPoint: 0
   isCritible: 1
   isImmuneCriticalHit: 0
