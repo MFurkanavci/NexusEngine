@@ -17,10 +17,13 @@ MonoBehaviour:
   ID: 1001
   type: 0
   description: 
+  enemyTarget: {fileID: 0}
+  allyTarget: {fileID: 0}
   level: 5
   modifier: 1.2
   experience: 450
-  damage_Physical: 10
+  damage_Physical: 35
+  damage_range: 2
   damage_Magical: 0
   hitPoint: 100
   hitPointCurrent: 85
@@ -34,7 +37,7 @@ MonoBehaviour:
   armor_Physical: 15
   armor_Magical: 10
   speed_Movement: 4
-  speed_Attack: 1.2
+  speed_Attack: 0.3
   penetration_Physical: 5
   penetration_Magical: 5
   criticalchance_Physical: 30
@@ -52,8 +55,9 @@ MonoBehaviour:
   leech: 0
   drop_Gold: 0
   drop_Experience: 0
-  gold: 5000
+  gold: 1000
   vaskaPoint: 0
+  isAlive: 0
   isCritible: 1
   isImmuneCriticalHit: 0
   isInvisible: 0

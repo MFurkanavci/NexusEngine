@@ -1,56 +1,47 @@
 using UnityEngine;
 
-public class EnemySelecter : MonoBehaviour
+public class targetSelecter : MonoBehaviour
 {
-    public GameObject selectedEnemy;
+    public GameObject selectedTarget;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                GameObject enemy = hit.transform.gameObject;
+                GameObject target = hit.transform.gameObject;
 
-                if (enemy.tag == "Mob")
+                if (target.tag == "Mob")
                 {
-                    selectedEnemy = enemy;
+                    selectedTarget = target;
                 }
                 else
                 {
-                    selectedEnemy = null;
+                    selectedTarget = null;
                 }
             }
         }
     }
 
-    public GameObject GetSelectedEnemy()
+    public GameObject GetSelectedTarget()
     {
-        return selectedEnemy;
+        return selectedTarget;
     }
 
-    public void SetSelectedEnemy(GameObject enemy)
+    public bool IstargetSelected()
     {
-        selectedEnemy = enemy;
+        return selectedTarget != null;
     }
 
-    public void ClearSelectedEnemy()
+    public void DeselectTarget()
     {
-        selectedEnemy = null;
+        selectedTarget = null;
     }
 
-    public bool IsEnemySelected()
-    {
-        if (selectedEnemy != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+
+
 }

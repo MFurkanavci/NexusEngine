@@ -25,6 +25,9 @@ public class AgentObject : ScriptableObject
     [TextArea(15, 20)]
     public string description;
 
+    public notPlayableAgent enemyTarget;
+    public PlayableAgent allyTarget;
+
 
 
     public float
@@ -32,6 +35,7 @@ public class AgentObject : ScriptableObject
         modifier = 0,
         experience = 0,
         damage_Physical = 0,
+        damage_range = 0,
         damage_Magical = 0,
         hitPoint = 0,
         hitPointCurrent = 0,
@@ -70,6 +74,7 @@ public class AgentObject : ScriptableObject
 
 
     public bool
+        isAlive = false,
         isCritible = false,
         isImmuneCriticalHit = false,
         isInvisible = false,

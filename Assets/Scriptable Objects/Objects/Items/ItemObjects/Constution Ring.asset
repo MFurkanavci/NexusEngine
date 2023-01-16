@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: Constution Ring
   m_EditorClassIdentifier: 
-  ID: 3001
+  ID: 3002
   Name: Constution Ring
   SplashArt: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   speed_Fly: 0
   leech: 0
   time: 0
-  cost_Buy: 450
-  cost_Sell: 0
+  cost_Buy: 50
+  cost_Sell: 25
   stack_Count: 0
   merge_Count: 0
   isCritible: 0
@@ -64,4 +64,4 @@ MonoBehaviour:
   isEquipped: 0
   activeSpells: []
   passiveSpells: []
-  childItems: []
+  recipe: []

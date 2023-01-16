@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  Name: 
-  ID: 2003
+  Name: Goblin
+  ID: 2001
   type: 1
   description: 
+  enemyTarget: {fileID: 0}
+  allyTarget: {fileID: 0}
   level: 0
   modifier: 0
   experience: 0
-  damage_Physical: 0
+  damage_Physical: 15
+  damage_range: 5
   damage_Magical: 0
-  hitPoint: 0
+  hitPoint: 100
+  hitPointCurrent: 0
   regen_hitPoint: 0
   manaPoint: 0
   regen_manaPoint: 0
@@ -53,6 +57,7 @@ MonoBehaviour:
   drop_Experience: 0
   gold: 0
   vaskaPoint: 0
+  isAlive: 1
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0

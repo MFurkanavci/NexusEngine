@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: Regen Gloves
   m_EditorClassIdentifier: 
-  ID: 3002
+  ID: 3001
   Name: Regen Gloves
   SplashArt: {fileID: 0}
   type: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   speed_Fly: 0
   leech: 0
   time: 0
-  cost_Buy: 1200
-  cost_Sell: 0
+  cost_Buy: 800
+  cost_Sell: 125
   stack_Count: 0
   merge_Count: 0
   isCritible: 0

@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//this is the player indicator for some other scripts
+    //make a constractor for the player class
+    //and set the agent_base to the agent in the constractor
+    //and then copy the agent_base to the agent
+    //and then set the agentStats to the agentBaseStats
+
+
+
 
 public class Player : MonoBehaviour
 {
@@ -15,27 +21,33 @@ public class Player : MonoBehaviour
     
     public dictionary agentStats;
 
+    public Player()
+    {
+    }
+
     public void Awake()
     {
-        //agent must be copy of the agent_base 
-        //agent_base should not change
-        //so create a new agent and copy the agent_base to it just for the instance
-
+        
         agent =  PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
 
         foreach (var item in agent_base.GetType().GetFields())
         {
             item.SetValue(agent, item.GetValue(agent_base));
         }
-
-
-
+        
         agentStats = new dictionary();
-        setagentBaseStats(agent);
+        
+        agentStats.setplayableagentBaseStats(agent);
+
+        //create a new instance of the makeanattack class
+        //add the agent to the makeanattack class
     }
 
-    public void setagentBaseStats(PlayableAgent agent)
+
+    public void Update()
     {
-        agentStats.setagentBaseStats(agent);
+        
     }
+
+
 }

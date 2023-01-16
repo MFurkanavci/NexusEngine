@@ -12,6 +12,8 @@ public class InventoryHandler : MonoBehaviour
     Player player;
     public dictionary[] itemStats = new dictionary[6];
 
+    public List<Item> buyedItems = new List<Item>();
+
     public void Awake()
     {
         player = GetComponent<Player>();
@@ -36,18 +38,29 @@ public class InventoryHandler : MonoBehaviour
 
     public void buyedItem(Item item)
     {    
-        //check if the player can buy the item wiht the recipe if that so buy the item and remove the items in the recipe from the player inventory
-        //if cant buy with recpie check if the player has enough money to buy the item
-        //if cant buy with money return
-        //if can buy with money buy the item and remove the money from the player
-        //if can buy with recipe buy the item and remove the items in the recipe from the player inventory
-        //if can buy with money and recipe buy the item and remove the items in the recipe from the player inventory and remove the money from the player
-
-        if (hasAllItemsInRecipe(item))
+        if(enoughInventorySpace())
         {
-            if (hasEnoughMoney(item))
+
+        if (hasAllItemsInRecipe(item) && hasRecipe(item))
+        {
+            if (hasEnoughMoney(calculatePrice(buyedItems, item)))
             {
-                removeMoney(item.cost_Buy);
+                removeMoney(calculatePrice(buyedItems, item));
+                removeItemsInRecipe(item);
+                addItem(item);
+                recalculateInventory();
+                addStattoPlayer(item);
+            }
+            else
+            {
+                return;
+            }
+        }
+        else if(haveSomeItemsInRecipe(item) && hasRecipe(item))
+        {
+            if (hasEnoughMoney(calculatePrice(buyedItems, item)))
+            {
+                removeMoney(calculatePrice(buyedItems, item));
                 removeItemsInRecipe(item);
                 addItem(item);
                 recalculateInventory();
@@ -60,7 +73,7 @@ public class InventoryHandler : MonoBehaviour
         }
         else
         {
-            if (hasEnoughMoney(item))
+            if (hasEnoughMoney(calculatePrice(buyedItems, item)))
             {
                 removeMoney(item.cost_Buy);
                 addItem(item);
@@ -72,16 +85,33 @@ public class InventoryHandler : MonoBehaviour
                 return;
             }
         }
+        }
+        else
+        {
+            print("not enough inventory space");
+            return;
+        }
+        clearBuyedItems();
     }
 
     public void removeMoney(int amount)
     {
+        print(amount+" is removed from the player");
         player.agent.gold -= amount;
     }
-
-    public bool hasEnoughMoney(Item item)
+    public int calculatePrice(List<Item> items, Item item)
     {
-        if (player.agent.gold >= item.cost_Buy)
+        int total = 0;
+        foreach (Item child in items)
+        {
+            total += child.cost_Buy;
+        }
+        return item.cost_Buy - total;
+    }
+
+    public bool hasEnoughMoney(int amount)
+    {
+        if (player.agent.gold >= amount)
         {
             return true;
         }
@@ -104,25 +134,23 @@ public class InventoryHandler : MonoBehaviour
 
     public bool inventoryHasItem(Item item)
     {
-        for (int i = 0; i < player.inventory.Length; i++)
+        foreach (Item child in player.inventory)
         {
-            if (getItem(i) == item)
+            if (child == item)
             {
                 return true;
+            }
+            else
+            {
+                continue;
             }
         }
         return false;
     }
 
-    //items can have a recipe to craft them item.recipe is a list of items that are needed to craft the item
-    //this function checks if the player has all the items in the recipe
-    //but in the recipe there can be items that are not in the player inventory
-    //so this function checks if the player has all the items in the recipe that are in the player inventory
-    //recipe can have same item more then once, so check the enough of the item in the inventory
-
     public bool hasRecipe(Item item)
     {
-        if (item.recipe != null)
+        if (item.recipe.Length > 0 && item.recipe != null)
         {
             return true;
         }
@@ -133,41 +161,89 @@ public class InventoryHandler : MonoBehaviour
     }
     public bool hasAllItemsInRecipe(Item item)
     {
-        if (item.recipe != null)
+        //create a list of items that are in the player inventory
+        //check if the player has all the items in the recipe that are in the player inventory
+        //recipe can have same item more then once, so check the enough of the item in the inventory with removing the items from the list
+
+        
+        int count = 0;
+        if (hasRecipe(item))
         {
-            foreach (Item child in item.recipe)
+            List<Item> inventoryItems = new List<Item>();
+            foreach (Item child in player.inventory)
             {
-                if (inventoryHasItem(child))
+                if (child != null)
                 {
-                    if (itemCount(child) < itemCountInRecipe(child, item))
-                    {
-                        return false;
-                    }
+                    inventoryItems.Add(child);
                 }
             }
+            foreach (Item child in item.recipe)
+            {
+                if (inventoryItems.Contains(child))
+                {
+                    buyedItems.Add(child);
+                    inventoryItems.Remove(child);
+                    count++;
+                }
+            }
+        }
+        
+            if (count == item.recipe.Length)
+            {
+                print("has all items in recipe");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+    }
+
+    public bool haveSomeItemsInRecipe(Item item)
+    {
+        //create a list of items that are in the player inventory
+        //check if the player has some of the items in the recipe that are in the player inventory
+        //recipe can have same item more then once, so check the enough of the item in the inventory with removing the items from the list
+        
+        int count = 0;
+        if (hasRecipe(item))
+        {
+            List<Item> inventoryItems = new List<Item>();
+            foreach (Item child in player.inventory)
+            {
+                if (child != null)
+                {
+                    inventoryItems.Add(child);
+                }
+            }
+            foreach (Item child in item.recipe)
+            {
+                if (inventoryItems.Contains(child))
+                {
+                    buyedItems.Add(child);
+                    inventoryItems.Remove(child);
+                    count++;
+                }
+            }
+        }
+        if (count > 0)
+        {
+            print("has some items in recipe");
             return true;
         }
         else
         {
             return false;
         }
+
+        
     }
 
-    public int itemCountInRecipe(Item item, Item recipeItem)
+    public void clearBuyedItems()
     {
-        int count = 0;
-        foreach (Item child in recipeItem.recipe)
-        {
-            if (child == item)
-            {
-                count++;
-            }
-        }
-        return count;
+        buyedItems.Clear();
     }
 
-    //if player can buy the item with recpie remove the items in the recipe from the inventory
-    //do not remove all the recipe items are in the player inventory
     public void removeItemsInRecipe(Item item)
     {
         foreach (Item child in item.recipe)
@@ -198,21 +274,6 @@ public class InventoryHandler : MonoBehaviour
         {
             return false;
         }
-    }
-
-
-
-    public int itemCount(Item item)
-    {
-        int count = 0;
-        for (int i = 0; i < player.inventory.Length; i++)
-        {
-            if (getItem(i) == item)
-            {
-                count++;
-            }
-        }
-        return count;
     }
 
     public void addItem(Item item)

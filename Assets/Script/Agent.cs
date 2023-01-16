@@ -24,8 +24,6 @@ public class Agent : MonoBehaviour
         
         agentStats = new dictionary();
         itemStats = new dictionary();
-        
-            agentStats.setagentBaseStats(agent_base);
     }
 
     public void Update()

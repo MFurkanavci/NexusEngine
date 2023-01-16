@@ -8,6 +8,8 @@ TagManager:
   - Mob
   - mob
   - Enemy
+  - Terrain
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -65,7 +65,7 @@ public class dictionary {
         }
     }
 
-    public void setagentBaseStats(PlayableAgent agent){
+    public void setplayableagentBaseStats(PlayableAgent agent){
         setStat("damage_Physical", agent.damage_Physical);
         setStat("damage_Magical", agent.damage_Magical);
         setStat("hitPoint", agent.hitPoint);
@@ -97,6 +97,38 @@ public class dictionary {
         setStat("leech", agent.leech);
     }
 
+    public void setnotplayableagentStats(notPlayableAgent agent)
+    {
+        setStat("damage_Physical", agent.damage_Physical);
+        setStat("damage_Magical", agent.damage_Magical);
+        setStat("hitPoint", agent.hitPoint);
+        setStat("regen_hitPoint", agent.regen_hitPoint);
+        setStat("manaPoint", agent.manaPoint);
+        setStat("regen_manaPoint", agent.regen_manaPoint);
+        setStat("wildPoint", agent.wildPoint);
+        setStat("regen_wildPoint", agent.regen_wildPoint);
+        setStat("energyPoint", agent.energyPoint);
+        setStat("regen_energyPoint", agent.regen_energyPoint);
+        setStat("armor_Physical", agent.armor_Physical);
+        setStat("armor_Magical", agent.armor_Magical);
+        setStat("speed_Movement", agent.speed_Movement);
+        setStat("speed_Attack", agent.speed_Attack);
+        setStat("penetration_Physical", agent.penetration_Physical);
+        setStat("penetration_Magical", agent.penetration_Magical);
+        setStat("criticalchance_Physical", agent.criticalchance_Physical);
+        setStat("criticaldamage_Physical", agent.criticaldamage_Physical);
+        setStat("criticalcahnce_Magical", agent.criticalcahnce_Magical);
+        setStat("criticaldamage_Magical", agent.criticaldamage_Magical);
+        setStat("rate_Block", agent.rate_Block);
+        setStat("rate_Parry", agent.rate_Parry);
+        setStat("rate_Dodge", agent.rate_Dodge);
+        setStat("accuracy", agent.accuracy);
+        setStat("tenacity", agent.tenacity);
+        setStat("penetration_Tenacity", agent.penetration_Tenacity);
+        setStat("speed_Jump", agent.speed_Jump);
+        setStat("speed_Fly", agent.speed_Fly);
+        setStat("leech", agent.leech);
+    }
     public void setitemBaseStats(Item item)
     {
         setStat("damage_Physical", item.damage_Physical);
