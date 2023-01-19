@@ -11,7 +11,6 @@ public class Targeter : MakeAnBehaviour
     }
     public bool checkAgentType()
     {
-        //check the agent type and return true if it is a player
         if (agent.GetType() == typeof(PlayableAgent))
         {
             return true;
@@ -31,21 +30,21 @@ public class Targeter : MakeAnBehaviour
             if(targetTag(_isHit()) == "Mob")
             {
                 agent.enemyTarget = _isHit().transform.parent.GetComponent<Mobs>().agent;
-                Debug.Log("Target is an Enemy");
+                //Debug.Log("Target is an Enemy");
             }
             else if(targetTag(_isHit()) == "Player")
             {
                 agent.allyTarget = _isHit().transform.parent.GetComponent<Player>().agent;
-                Debug.Log("Target is an Player");
+                //Debug.Log("Target is an Player");
             }
             else if(targetTag(_isHit()) == "Ally")
             {
                 agent.allyTarget = _isHit().transform.parent.GetComponent<Player>().agent;
-                Debug.Log("Target is an Player");
+                //Debug.Log("Target is an Player");
             }
             else
             {
-                Debug.Log("Target is null");
+                
             }
 
         }

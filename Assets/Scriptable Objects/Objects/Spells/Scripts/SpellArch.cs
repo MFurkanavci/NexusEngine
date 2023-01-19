@@ -11,9 +11,18 @@ public enum SpellArcType
     Area
 }
 
+public enum DamageType
+{
+    Physical,
+    Magical,
+    True
+}
+
 public class SpellArchitecture : ScriptableObject
 {
     public SpellArcType type;
+
+    public DamageType damageType;
     public int ID;
     public string Name;
     public Sprite SplashArt;
@@ -55,7 +64,8 @@ public class SpellArchitecture : ScriptableObject
         hitStop,
         wayEffect,
         stay,
-        Return;
+        Return,
+        targetable;
 
     public Effects 
         effect,
@@ -65,6 +75,8 @@ public class SpellArchitecture : ScriptableObject
     public Sprite
         way,
         hitArea;
+
+    public GameObject target;
 
     public Vector3
         direction,

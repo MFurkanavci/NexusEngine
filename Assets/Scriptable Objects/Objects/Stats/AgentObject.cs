@@ -28,6 +28,8 @@ public class AgentObject : ScriptableObject
     public notPlayableAgent enemyTarget;
     public PlayableAgent allyTarget;
 
+    public DamageCalculations damageCalculations;
+
 
 
     public float
@@ -37,6 +39,8 @@ public class AgentObject : ScriptableObject
         damage_Physical = 0,
         damage_range = 0,
         damage_Magical = 0,
+
+        damage_True = 0,
         hitPoint = 0,
         hitPointCurrent = 0,
         regen_hitPoint = 0,

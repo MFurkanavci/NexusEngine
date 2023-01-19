@@ -7,52 +7,26 @@ using TMPro;
 public class MakeAnBehaviour : BasicBehaviour
 {
 
-    public TMP_Text text;
-
     public MakeAnBehaviour(PlayableAgent playableAgent, notPlayableAgent notPlayableAgent, AgentObject agent) : base(playableAgent, notPlayableAgent, agent)
     {
-        text = GameObject.Find("GCD").GetComponent<TMP_Text>();
     }
 
     public AgentObject getAgent()
     {
         return agent;
     }
-    public override void makeanAttack(GameObject player, GameObject enemy, bool inRange)
+    public override void makeanAttack(GameObject player, GameObject enemy)
     {
-        //calculate the damage if the target is not null and the target is in range
-        if (agent.enemyTarget != null && agent.enemyTarget.isAlive)
+        //here will be called when the agent is attacking an enemy with in range, so the agent will be attacking the enemy
+        //check if the global cooldown is ready to attack if it is then attack and set the global cooldown to the attack speed of the agent
+        if (GCD.GCD.gcdReady())
         {
-            //check the distance between the target and the agent
-            if (inRange)
-            {
-                        //check the cooldown is finished
-                        if (GCD.GCD.Update(agent.speed_Attack))
-                        {
-                            //calculate the damage
-                            agent.enemyTarget.hitPoint -= agent.damage_Physical;
-                            Debug.Log( agent.Name + "'s damage is " + agent.damage_Physical + " and the " +agent.enemyTarget.Name+" HP is " + agent.enemyTarget.hitPoint);
-                        }
-                        else
-                        {
-                            //Debug.Log("GCD is not finished");
-                            text.text = GCD.GCD.TimeLeft().ToString();
-
-                        }
-            }
-            else
-            {
-                Debug.Log(agent.enemyTarget.Name + " is out of range");
-            }
-        }
-        else if (agent.enemyTarget == null)
-        {
-            //Debug.Log("Target is null");
-        }
-        else
-        {
-            Debug.Log(agent.enemyTarget.Name + " is dead");
-            agent.enemyTarget = null;
+            //attack the enemy
+            float damage = 0;
+            damage += agent.damageCalculations.DealDamage(agent.damageCalculations.damageTypeandValue(agent.damageCalculations.GetDamageType(), agent.damage_Physical));
+            agent.enemyTarget.hitPoint -= damage;
+            GCD.GCD.Set(agent.speed_Attack);
+            
         }
     }
 
@@ -65,5 +39,26 @@ public class MakeAnBehaviour : BasicBehaviour
         //Debug.Log("Desicion");
     }
     
+    public void Update()
+    {
+        //keep updating the global cooldown for the agent
+
+    }
+
+    enum AgentState
+    {
+        Idle,
+        Moving,
+        Attacking,
+        Ability,
+        Dead
+    }
+
+    enum DamageType
+    {
+        Physical,
+        Magical,
+        True
+    }
 
 }

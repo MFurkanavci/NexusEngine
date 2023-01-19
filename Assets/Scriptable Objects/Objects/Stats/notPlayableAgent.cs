@@ -13,9 +13,10 @@ public enum mobType
 public class notPlayableAgent : AgentObject
 {
     public mobType mobType;
+
     public void Awake()
     {
         type = agentType.notPlayable;
-        ID = 2001 + uniqueID.nextmob++;
+        ID = 1001 + uniqueID.nextagent++;
     }
 }

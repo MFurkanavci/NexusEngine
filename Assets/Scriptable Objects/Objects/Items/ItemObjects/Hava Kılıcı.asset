@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: "Hava K\u0131l\u0131c\u0131"
   m_EditorClassIdentifier: 
-  ID: 3003
+  ID: 3001
   Name: "Hava K\u0131l\u0131c\u0131"
   SplashArt: {fileID: 0}
   type: 0
   description: 
-  damage_Physical: 30
+  damage_Physical: 35
   damage_Magical: 0
   hitPoint: 0
   regen_hitPoint: 0
@@ -46,9 +46,11 @@ MonoBehaviour:
   speed_Jump: 0
   speed_Fly: 0
   leech: 0
-  cost_Buy: 0
+  time: 0
+  cost_Buy: 600
   cost_Sell: 0
   stack_Count: 0
+  merge_Count: 0
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
@@ -56,8 +58,10 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
+  isStackable: 0
+  isMergeable: 0
   isEquipable: 1
   isEquipped: 0
   activeSpells: []
   passiveSpells: []
-  childItems: []
+  recipe: []

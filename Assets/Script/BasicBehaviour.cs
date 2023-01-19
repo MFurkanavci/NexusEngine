@@ -9,7 +9,7 @@ public abstract class BasicBehaviour
     public notPlayableAgent notPlayableAgent { get; set; }
 
     public AgentObject agent { get; set; }
-    public abstract void makeanAttack(GameObject player, GameObject enemy, bool inRange);
+    public abstract void makeanAttack(GameObject player, GameObject enemy);
     public abstract void makeanAbility(GameObject player, Vector3 position);
     public abstract void makeaDesicion();
 
@@ -17,8 +17,8 @@ public abstract class BasicBehaviour
     {
         this.playableAgent = playableAgent;
         this.notPlayableAgent = notPlayableAgent;
-
         this.agent = agent;
+
         if (playableAgent != null)
         {
             this.agent = playableAgent;
@@ -26,7 +26,7 @@ public abstract class BasicBehaviour
         else if (notPlayableAgent != null)
         {
             this.agent = notPlayableAgent;
-        } 
+        }
     }
 
     

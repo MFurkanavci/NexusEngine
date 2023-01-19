@@ -24,6 +24,10 @@ public class SpellInspectorEditor : Editor
         arcitecture.type = (SpellArcType)EditorGUILayout.EnumPopup("Type", arcitecture.type);
 
         EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Damage Type", EditorStyles.boldLabel);
+        arcitecture.damageType = (DamageType)EditorGUILayout.EnumPopup("Damage Type", arcitecture.damageType);
+
+        EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Delay Time", EditorStyles.boldLabel);
         arcitecture.delay = EditorGUILayout.Toggle("Has Delay Time ?",arcitecture.delay);
 
@@ -148,12 +152,25 @@ public class SpellInspectorEditor : Editor
             arcitecture.returnSpeed = 0;
         }
 
-
         EditorGUILayout.Space(10);
-        EditorGUILayout.LabelField("Shot Direction", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Shot Targetable?", EditorStyles.boldLabel);
+        arcitecture.targetable = EditorGUILayout.Toggle("Targetable", arcitecture.targetable);
+
+        if(arcitecture.targetable)
+        {
+            arcitecture.target = (GameObject)EditorGUILayout.ObjectField("Target", arcitecture.target, typeof(GameObject), allowSceneObjects: true);
+        }
+        else
+        {
+            arcitecture.target = null;
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("Shot Direction", EditorStyles.boldLabel);
         
-        arcitecture.direction = MousePosition.MousePosition.GetMousePosition();
-        EditorGUILayout.Vector3Field("Direction", arcitecture.direction);
+            arcitecture.direction = MousePosition.MousePosition.GetMousePosition();
+            EditorGUILayout.Vector3Field("Direction", arcitecture.direction);
+        }
+
+        
 
 
         EditorGUILayout.Space(10);

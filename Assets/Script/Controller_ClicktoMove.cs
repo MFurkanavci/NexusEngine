@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class Controller_ClicktoMove : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Controller_ClicktoMove : MonoBehaviour
 
     private NavMeshAgent agentNM;
 
-    private PlayableAgent agent;
+    public PlayableAgent agent;
 
     private MakeAnBehaviour behaviour;
 
@@ -19,12 +20,18 @@ public class Controller_ClicktoMove : MonoBehaviour
 
     public GameObject target;
 
-    private void Awake()
+    public TMP_Text text;
+
+    public bool isInRange = false;
+
+    private void Start()
     {
         agentNM = GetComponent<NavMeshAgent>();
-        agent = gameObject.GetComponent<Player>().agent;
-        behaviour = new MakeAnBehaviour(agent, null, null);
+        agent = this.gameObject.GetComponent<Player>().agent;
         targeter = new Targeter(agent, null, null);
+        behaviour = new MakeAnBehaviour(agent, null, null);
+
+        Debug.Log(agent.Name);
         
     }
 
@@ -33,9 +40,30 @@ public class Controller_ClicktoMove : MonoBehaviour
     {
         if(Input.GetMouseButton(1))
         {
-            move();
+            calculateRaycast();
         }
-        behaviour.makeanAttack(gameObject, target, isClosestPoint(target));
+
+        agentNM.speed = agent.speed_Movement;
+
+        GCD.GCD.Update(agent.speed_Attack);
+        text.text = GCD.GCD.TimeLeft().ToString("F2");
+        
+            
+        
+        if(target != null)
+        {
+            move(target);
+        }
+        else
+        {
+            agent.enemyTarget = null;
+            isInRange = false;
+        }
+
+    }
+
+    private void LateUpdate()
+    {
     }
 
     //draw range of the agent
@@ -46,68 +74,77 @@ public class Controller_ClicktoMove : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, agent.damage_range);
     }
-    
-    //chekc if the raycast hit something
-    //if it hit .tag == "Ground" then move to the point
-    //if it hit .tag == "Mob" then calculate the agent.damage_range and move to the closest point
 
-    public void move()
+    public void calculateRaycast()
     {
         Ray _Ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit _isHit;
-
         if (Physics.Raycast(_Ray, out _isHit, 100))
         {
             if (_isHit.transform.tag == "Ground")
             {
-                agentNM.destination = _isHit.point;
-                
-                var click_GO = Instantiate(click);
-                click_GO.transform.position = new Vector3(_isHit.point.x, _isHit.point.y + 0.2f, _isHit.point.z);
-                Destroy(click_GO, .2f);
+                move(_isHit.point);
+                target = null;
+                targeter.clearTarget();
             }
             else if (_isHit.transform.tag == "Mob")
             {
                 target = _isHit.transform.gameObject;
-                setTarget(_isHit.transform.gameObject);
                 targeter.setTarget(null);
-                agentNM.destination = closestPoint(_isHit.transform.gameObject);
-            }
-            else if(_isHit.transform.tag == "Ally")
-            {
-                targeter.setTarget(null);
-                agentNM.destination = closestPoint(_isHit.transform.gameObject);
-            }
-            else if (_isHit.transform.tag == "Player")
-            {
-                targeter.setTarget(null);
-                agentNM.destination = closestPoint(_isHit.transform.gameObject);
-            }
-            else if (_isHit.transform.tag == "Interactable")
-            {
-                targeter.setTarget(null);
-                agentNM.destination = closestPoint(_isHit.transform.gameObject);
-            }
-            else
-            {
-                targeter.clearTarget();
             }
         }
+        
     }
 
-    public Vector3 closestPoint(GameObject target)
+    //move to the point
+    public void move(Vector3 point)
     {
-        var distance = Vector3.Distance(transform.position, target.transform.position);
+        agentNM.SetDestination(point);
+    }
 
-        if (distance <= agent.damage_range)
+    public bool isTargetInRange()
+    {
+        return isInRange;
+    }
+
+    //move to the closest point
+    public void move(GameObject target)
+    {
+        if (isTargetInRange())
         {
-            return transform.position;
+            behaviour.makeanAttack(gameObject, target);
         }
         else
         {
-            var closestPoint = target.transform.position + (transform.position - target.transform.position).normalized * agent.damage_range;
+            agentNM.SetDestination(closestPoint(isInRange));
+        }
+            closestPoint(isInRange);
+        
+    }
+
+    //get the closest point to the target
+    public Vector3 closestPoint(bool isTargetInRange)
+    {
+            
+        float distance = Vector3.Distance(transform.position, target.transform.position);    
+        Vector3 closestPoint = target.GetComponent<Collider>().ClosestPoint(transform.position);
+        Vector3 offset = closestPoint - transform.position;
+        offset = offset.normalized * agent.damage_range;
+        closestPoint = transform.position + offset;
+        if (distance <= agent.damage_range - .5f && !isTargetInRange)
+        {
+            isInRange = true;
+            return transform.position;
+        }
+        else if (distance > agent.damage_range && isInRange)
+        {
+            isInRange = false;
             return closestPoint;
         }
+        else
+        {
+            return closestPoint;
+        }       
     }
 
     public GameObject getTarget()
@@ -115,27 +152,9 @@ public class Controller_ClicktoMove : MonoBehaviour
         return target;
     }
 
-    public void setTarget(GameObject target)
+    Vector3 getTargetPosition()
     {
-        targeter.setTarget(target);
+        return target.transform.position;
     }
-
-    public bool isClosestPoint(GameObject target)
-    {
-        if (target == null)
-        {
-            return false;
-        }
-        var distance = Vector3.Distance(transform.position, target.transform.position);
-
-        if (distance <= agent.damage_range + .1f)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }        
 
 }

@@ -14,18 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Troll
-  ID: 2002
+  ID: 1003
   type: 1
   description: 
   enemyTarget: {fileID: 0}
   allyTarget: {fileID: 0}
+  damageCalculations: {fileID: 0}
   level: 0
   modifier: 0
   experience: 0
   damage_Physical: 45
   damage_range: 40
   damage_Magical: 0
-  hitPoint: 300
+  damage_True: 0
+  hitPoint: 3000
   hitPointCurrent: 0
   regen_hitPoint: 0
   manaPoint: 0
@@ -34,8 +36,8 @@ MonoBehaviour:
   regen_wildPoint: 0
   energyPoint: 0
   regen_energyPoint: 0
-  armor_Physical: 0
-  armor_Magical: 0
+  armor_Physical: 223
+  armor_Magical: 175
   speed_Movement: 0
   speed_Attack: 0
   penetration_Physical: 0

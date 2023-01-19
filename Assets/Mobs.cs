@@ -34,9 +34,9 @@ public class Mobs : MonoBehaviour
         
         agentStats.setnotplayableagentStats(agent);
         
-        targeter = new Targeter(null,agent,null);
+        //targeter = new Targeter(null,agent,null);
 
-        behaviour =  new MakeAnBehaviour(null,agent,null);
+        //behaviour =  new MakeAnBehaviour(null,agent,null);
 
        
     }
