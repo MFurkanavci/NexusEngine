@@ -23,7 +23,7 @@ Contributions to NexusEngine are welcome and encouraged! To contribute, please f
 NexusEngine is released under the [MIT](https://opensource.org/license/mit/) License. See the [LICENSE](https://github.com/MFurkanavci/NexusEngine/blob/main/LICENSE) file for more details.
 
 # <center> Author </center>
-NexusEngine is currently being developed solo by [AUTHOR](https://github.com/MFurkanavci).
+NexusEngine is currently being developed solo by [Muhammet Furkan AVCI](https://github.com/MFurkanavci).
 
 # <center> Contact </center>
 If you have any questions or feedback, please feel free to contact me through [LinkedIn](https://www.linkedin.com/in/mfavci/) or by opening an issue on the [Issues](https://github.com/MFurkanavci/NexusEngine/issues) repository.
