@@ -45,6 +45,10 @@ public class SpellArchitecture : ScriptableObject
         maxlenght,
         width,
         maxwidth,
+        height,
+        maxheight,
+        depth,
+        maxdepth,
         speed,
         maxspeed,
         wayEffectTime,
@@ -52,6 +56,8 @@ public class SpellArchitecture : ScriptableObject
         stayTime,
         returnSpeed,
         maxreturnSpeed;
+
+    public Color color;
 
 
     public bool
@@ -65,7 +71,8 @@ public class SpellArchitecture : ScriptableObject
         wayEffect,
         stay,
         Return,
-        targetable;
+        targetable,
+        havecolor;
 
     public Effects 
         effect,
@@ -76,7 +83,10 @@ public class SpellArchitecture : ScriptableObject
         way,
         hitArea;
 
-    public GameObject target;
+    public GameObject
+
+    player, 
+    target;
 
     public Vector3
         direction,
@@ -102,7 +112,7 @@ public class SpellArchitecture : ScriptableObject
     }
     public void ProjectileSpawn()
     {  
-        Debug.Log("Projectile");
+        
     }
 
     public void SelfSpawn()

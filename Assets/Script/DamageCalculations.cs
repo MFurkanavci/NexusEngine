@@ -25,7 +25,7 @@ public class DamageCalculations : MonoBehaviour
         {
             agent = GetComponent<Mobs>().agent as notPlayableAgent;
         }
-        Debug.Log(agent.GetType());
+//        Debug.Log(agent.GetType());
         
         agent.damageCalculations = this;
     }

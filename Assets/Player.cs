@@ -17,12 +17,11 @@ public class Player : MonoBehaviour
     public PlayableAgent agent;
 
     public Item[] inventory = new Item[6];
-
-    
     public dictionary agentStats;
 
     public Player()
     {
+        
     }
 
     public void Awake()
@@ -39,9 +38,21 @@ public class Player : MonoBehaviour
         
         agentStats.setplayableagentBaseStats(agent);
 
+
         //create a new instance of the makeanattack class
         //add the agent to the makeanattack class
     }
 
+    public void Update()
+    {
+        //if the player press q then call spellCreater.createaNewSpell();
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SpellCreater spellCreater = new SpellCreater(agent.activeSpells[0]);
+            spellCreater.spellchecker.SetPlayer(this.gameObject);
+            spellCreater.createaNewSpell();
+        }
+    }
+    
 }

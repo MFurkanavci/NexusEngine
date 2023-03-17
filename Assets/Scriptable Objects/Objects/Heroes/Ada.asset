@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Ada The Lost One
-  ID: 1001
+  ID: 1004
   type: 0
   description: 
   enemyTarget: {fileID: 0}
@@ -70,6 +70,6 @@ MonoBehaviour:
   isFriend: 0
   isEnemy: 0
   activeSpells:
-  - {fileID: 11400000, guid: 9059678d2be64ac4389e77bb3fc1c47a, type: 2}
+  - {fileID: 11400000, guid: c33c28a4b46931942a3c973e601eaffb, type: 2}
   passiveSpells: []
   classes: 0

@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29b44b36456ca5143ba43790dba417e8, type: 3}
-  m_Name: AdaBasic
+  m_Name: New Default Spell 1
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
+  spellCreater: {fileID: 0}
   damageType: 0
-  ID: 2000
+  ID: 2001
   Name: 
   SplashArt: {fileID: 0}
   description: 
-  architectureCount: 0
+  architectureCount: 1
   count:
   - {fileID: 0}
   - {fileID: 0}
@@ -270,123 +271,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   missleCount: []
-  delayTime: 0.5
+  delayTime: 0
   castTime: 0
   lenght: 0
   maxlenght: 0
   width: 0
   maxwidth: 0
+  height: 0
+  maxheight: 0
+  depth: 0
+  maxdepth: 0
   speed: 0
   maxspeed: 0
   wayEffectTime: 0
@@ -395,8 +290,8 @@ MonoBehaviour:
   returnSpeed: 0
   maxreturnSpeed: 0
   cast: 0
-  delay: 1
-  defaultHitArea: 1
+  delay: 0
+  defaultHitArea: 0
   uniqueShot: 0
   spriteHitArea: 0
   uniqueBehaviour: 0
@@ -411,5 +306,5 @@ MonoBehaviour:
   way: {fileID: 0}
   hitArea: {fileID: 0}
   target: {fileID: 0}
-  direction: {x: 2446.814, y: -693.394, z: 0}
+  direction: {x: -5.526589, y: 0.2, z: 30.401783}
   position: {x: 0, y: 0, z: 0}

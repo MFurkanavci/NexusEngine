@@ -21,7 +21,6 @@ public class Agent : MonoBehaviour
 
     public void Awake()
     {
-        
         agentStats = new dictionary();
         itemStats = new dictionary();
     }

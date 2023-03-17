@@ -169,6 +169,30 @@ public class Spell : MonoBehaviour
         return spellArch.maxwidth;
     }
 
+    //check the height of the spell
+    public float CheckHeight()
+    {
+        return spellArch.height;
+    }
+
+    //check the max height of the spell
+    public float CheckMaxHeight()
+    {
+        return spellArch.maxheight;
+    }
+
+    //check the depth of the spell
+    public float CheckDepth()
+    {
+        return spellArch.depth;
+    }
+
+    //check the max depth of the spell
+    public float CheckMaxDepth()
+    {
+        return spellArch.maxdepth;
+    }
+
     //check the speed of the spell
     public float CheckSpeed()
     {
@@ -233,6 +257,18 @@ public class Spell : MonoBehaviour
     public Sprite CheckSplashArt()
     {
         return spellArch.SplashArt;
+    }
+
+    //set the player of the spell
+    public void SetPlayer(GameObject player)
+    {
+        spellArch.player = player;
+    }
+
+    //check the playerPosition of the spell
+    public GameObject CheckPlayer()
+    {
+        return spellArch.player;
     }
 
     //check direction of the spell

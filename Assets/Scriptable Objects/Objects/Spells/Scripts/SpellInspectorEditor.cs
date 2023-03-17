@@ -65,8 +65,23 @@ public class SpellInspectorEditor : Editor
             arcitecture.lenght = EditorGUILayout.FloatField("Lenght", arcitecture.lenght);
             arcitecture.maxwidth = EditorGUILayout.FloatField("Max Width", arcitecture.maxwidth);
             arcitecture.width = EditorGUILayout.FloatField("Width", arcitecture.width);
+            arcitecture.maxheight = EditorGUILayout.FloatField("Max Height", arcitecture.maxheight);
+            arcitecture.height = EditorGUILayout.FloatField("Height", arcitecture.height);
+            arcitecture.maxdepth = EditorGUILayout.FloatField("Max Depth", arcitecture.maxdepth);
+            arcitecture.depth = EditorGUILayout.FloatField("Depth", arcitecture.depth);
             arcitecture.maxspeed = EditorGUILayout.FloatField("Max Speed", arcitecture.maxspeed);
             arcitecture.speed = EditorGUILayout.FloatField("Speed", arcitecture.speed);
+            
+            arcitecture.havecolor = EditorGUILayout.Toggle("Have Color", arcitecture.havecolor);
+
+            if(arcitecture.havecolor)
+            {
+                arcitecture.color = EditorGUILayout.ColorField("Color", arcitecture.color);
+            }
+            else
+            {
+                arcitecture.color = Color.white;
+            }
         }
         else
         {
@@ -151,6 +166,10 @@ public class SpellInspectorEditor : Editor
             arcitecture.maxreturnSpeed = 0;
             arcitecture.returnSpeed = 0;
         }
+
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Player", EditorStyles.boldLabel);
+        arcitecture.player = (GameObject)EditorGUILayout.ObjectField("Player", arcitecture.player, typeof(GameObject), allowSceneObjects: true);
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Shot Targetable?", EditorStyles.boldLabel);

@@ -10,6 +10,5 @@ public class Spells : SpellArchitecture
     {
         ID = 2000;
     }
-
 }
 
