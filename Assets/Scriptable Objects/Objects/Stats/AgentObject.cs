@@ -28,6 +28,8 @@ public class AgentObject : ScriptableObject
     public notPlayableAgent enemyTarget;
     public PlayableAgent allyTarget;
 
+    public GameObject spellTarget;
+
     public DamageCalculations damageCalculations;
 
 

@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Terrain
   - Ground
+  - Spell
   layers:
   - Default
   - TransparentFX

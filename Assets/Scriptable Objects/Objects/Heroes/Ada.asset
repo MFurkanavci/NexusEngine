@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Ada The Lost One
-  ID: 1004
+  ID: 1001
   type: 0
   description: 
   enemyTarget: {fileID: 0}
   allyTarget: {fileID: 0}
+  spellTarget: {fileID: 0}
   damageCalculations: {fileID: 0}
   level: 5
   modifier: 1.2
@@ -71,5 +72,6 @@ MonoBehaviour:
   isEnemy: 0
   activeSpells:
   - {fileID: 11400000, guid: c33c28a4b46931942a3c973e601eaffb, type: 2}
+  - {fileID: 11400000, guid: b622743912075984bac5e11405fe4fac, type: 2}
   passiveSpells: []
   classes: 0

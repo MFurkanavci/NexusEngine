@@ -18,7 +18,9 @@ public class Controller_ClicktoMove : MonoBehaviour
 
     private Targeter targeter;
 
-    public GameObject target;
+    public GameObject 
+        target,
+        spellTarget;
 
     public TMP_Text text;
 
@@ -40,7 +42,20 @@ public class Controller_ClicktoMove : MonoBehaviour
     {
         if(Input.GetMouseButton(1))
         {
-            calculateRaycast();
+            //check if the mouse is over the UI
+            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                calculateRaycast();
+            }
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            //check if the mouse is over the UI
+            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                setSpellTarget(getTarget());
+            }
         }
 
         agentNM.speed = agent.speed_Movement;
@@ -60,12 +75,19 @@ public class Controller_ClicktoMove : MonoBehaviour
             isInRange = false;
         }
 
-    }
+        if(spellTarget != null)
+        {
+            agent.spellTarget = spellTarget;
+        }
+        else
+        {
+            agent.spellTarget = null;
+        }
 
-    private void LateUpdate()
-    {
-    }
+        
+        
 
+    }
     //draw range of the agent
     private void OnDrawGizmos()
     {
@@ -74,6 +96,8 @@ public class Controller_ClicktoMove : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, agent.damage_range);
     }
+
+
 
     public void calculateRaycast()
     {
@@ -149,7 +173,31 @@ public class Controller_ClicktoMove : MonoBehaviour
 
     public GameObject getTarget()
     {
-        return target;
+        Ray _Ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit _isHit;
+        if (Physics.Raycast(_Ray, out _isHit, 100))
+        {
+            if (_isHit.transform.tag == "Ground")
+            {
+                spellTarget = null;
+                targeter.clearTarget();
+            }
+            else if (_isHit.transform.tag == "Mob")
+            {
+                spellTarget = _isHit.transform.gameObject;
+            }
+        }
+        return spellTarget;
+    }
+
+    public void setTarget(GameObject target)
+    {
+        this.target = target;
+    }
+
+    public void setSpellTarget(GameObject target)
+    {
+        this.spellTarget = target;
     }
 
     Vector3 getTargetPosition()

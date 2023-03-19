@@ -11,6 +11,19 @@ public enum SpellArcType
     Area
 }
 
+public enum SpellObjectType
+{
+    Sphere,
+    Cube,
+    Capsule,
+    Cylinder,
+    Cone,
+    Plane,
+    Quad,
+    Sprite,
+    Unique
+}
+
 public enum DamageType
 {
     Physical,
@@ -23,6 +36,8 @@ public class SpellArchitecture : ScriptableObject
     public SpellArcType type;
 
     public DamageType damageType;
+
+    public SpellObjectType spellObjectType;
     public int ID;
     public string Name;
     public Sprite SplashArt;
@@ -86,7 +101,8 @@ public class SpellArchitecture : ScriptableObject
     public GameObject
 
     player, 
-    target;
+    target,
+    spellTarget;
 
     public Vector3
         direction,

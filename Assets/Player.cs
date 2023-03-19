@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     public PlayableAgent agent_base;
     public PlayableAgent agent;
+    public List<Spells> spells = new List<Spells>();
 
     public Item[] inventory = new Item[6];
     public dictionary agentStats;
@@ -33,6 +34,21 @@ public class Player : MonoBehaviour
         {
             item.SetValue(agent, item.GetValue(agent_base));
         }
+
+        foreach (var item in agent.activeSpells)
+        {
+            spells.Add(Spells.CreateInstance("Spells") as Spells);
+        }
+
+        for (int i = 0; i < agent.activeSpells.Count; i++)
+        {
+            foreach (var item in agent.activeSpells[i].GetType().GetFields())
+            {
+                item.SetValue(spells[i], item.GetValue(agent.activeSpells[i]));
+            }
+        }
+
+
         
         agentStats = new dictionary();
         
@@ -49,9 +65,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SpellCreater spellCreater = new SpellCreater(agent.activeSpells[0]);
-            spellCreater.spellchecker.SetPlayer(this.gameObject);
-            spellCreater.createaNewSpell();
+            spells[0].target = agent.spellTarget;
+            spells[0].player = this.gameObject;
+
+            SpellCreater createaNewSpell = new SpellCreater (spells[0], this.gameObject, agent.spellTarget);
         }
     }
     

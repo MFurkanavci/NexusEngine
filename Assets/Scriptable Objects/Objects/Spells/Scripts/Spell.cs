@@ -19,6 +19,12 @@ public class Spell : MonoBehaviour
         return spellArch.type;
     }
 
+    //check if the spell object type
+    public SpellObjectType CheckSpellObjectType()
+    {
+        return spellArch.spellObjectType;
+    }
+
     //check if the damage type
     public DamageType CheckDamageType()
     {
@@ -205,6 +211,11 @@ public class Spell : MonoBehaviour
         return spellArch.maxspeed;
     }
 
+    public Color CheckColor()
+    {
+        return spellArch.color;
+    }
+
     //check the way effect time of the spell
     public float CheckWayEffectTime()
     {
@@ -238,7 +249,7 @@ public class Spell : MonoBehaviour
     //check the name of the spell
     public string CheckName()
     {
-        return spellArch.Name;
+        return spellArch.name;
     }
 
     //check the id of the spell
@@ -287,6 +298,16 @@ public class Spell : MonoBehaviour
     public GameObject CheckTarget()
     {
         return spellArch.target;
+    }
+
+    public GameObject CheckSpellTarget()
+    {
+        return spellArch.spellTarget;
+    }
+
+    public void SetSpellTarget(GameObject target)
+    {
+        spellArch.spellTarget = target;
     }
 
 }

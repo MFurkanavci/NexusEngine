@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   damageType: 1
+  spellObjectType: 0
   ID: 2000
   Name: 
   SplashArt: {fileID: 0}
@@ -623,15 +624,15 @@ MonoBehaviour:
   missleCount: []
   delayTime: 0
   castTime: 0
-  lenght: 0.5
+  lenght: 1
   maxlenght: 0
-  width: 0.5
+  width: 1
   maxwidth: 0
-  height: 0.5
+  height: 1
   maxheight: 0
-  depth: 0.5
+  depth: 1
   maxdepth: 0
-  speed: 1
+  speed: 3
   maxspeed: 0
   wayEffectTime: 0
   afterEffectTime: 0
@@ -649,7 +650,7 @@ MonoBehaviour:
   wayEffect: 0
   stay: 0
   Return: 0
-  targetable: 0
+  targetable: 1
   havecolor: 1
   effect: {fileID: 0}
   afterEffect: {fileID: 0}
@@ -658,5 +659,6 @@ MonoBehaviour:
   hitArea: {fileID: 0}
   player: {fileID: 0}
   target: {fileID: 0}
-  direction: {x: -886.3256, y: -302.7907, z: 0}
+  spellTarget: {fileID: 0}
+  direction: {x: -9.737933, y: 0.2, z: 22.835474}
   position: {x: 0, y: 0, z: 0}

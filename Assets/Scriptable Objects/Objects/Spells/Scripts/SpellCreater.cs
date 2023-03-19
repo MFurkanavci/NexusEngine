@@ -4,46 +4,153 @@ using UnityEngine;
 
 public class SpellCreater : MonoBehaviour
 {
+    
     GameObject newSpell;
 
-    public SpellArchitecture spell;
+    public Spell spell;
 
-    public Spell spellchecker;
-
-    public SpellCreater(SpellArchitecture spell)
-    {
-        this.spell = spell;
-        spellchecker = new Spell(spell);
-    }
-
-    void setValues(GameObject newSpell)
+    public SpellCreater(SpellArchitecture spellArch, GameObject caster, GameObject target)
     {
         
-        newSpell.AddComponent<Spell>();
-        newSpell.GetComponent<Spell>().spellArch = spell;
-        Vector3 scale = new Vector3(spell.width, spell.height, spell.depth);
-        Vector3 position = newSpell.GetComponent<Spell>().CheckPlayer().transform.localPosition;
-        Vector3 direction = newSpell.GetComponent<Spell>().CheckDirection();
-        Color color = new Color(spell.color.r, spell.color.g, spell.color.b, spell.color.a);
-        float speed = spell.speed;
-
-
-
-        newSpell.AddComponent<Rigidbody>();
-
-        newSpell.transform.localScale = scale;
-        newSpell.transform.localPosition = position;
-        newSpell.GetComponent<Renderer>().material.color = color;
-        newSpell.GetComponent<Rigidbody>().useGravity = false;
-        newSpell.GetComponent<Rigidbody>().velocity = direction * speed;
-
+        spell =  new Spell(PlayableAgent.CreateInstance("Spells") as Spells);
+        spell.spellArch = spellArch;
+        spell.SetPlayer(caster);
+        spell.SetSpellTarget(target);
+        if (spellArch == null)
+        {
+            Debug.Log("SpellArch is null");
+            return;
+        }
+        if(CheckTargetable() && target == null)
+        {
+            Debug.Log("Target is null");
+            return;
+        }
+        else if (CheckTargetable() && target != null)
+        {
+            CreateSpellObject(spell.CheckSpellObjectType());
+        }
+        else if (!CheckTargetable())
+        {
+            
+        }
+        else
+        {
+        }
     }
 
-    public void createaNewSpell()
+    //check if the spell is targetable
+    public bool CheckTargetable()
     {
-        Debug.Log("Spell Created");
-        newSpell = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        newSpell.layer = 13;
-        setValues(newSpell);
+        return spell.spellArch.targetable;
     }
+
+    public void CreateSpell(SpellArcType type)
+    {
+
+        switch (type)
+        {
+            case SpellArcType.Projectile:
+                newSpell.AddComponent<ProjectileSpell>();
+                break;
+            case SpellArcType.Self:
+                newSpell.AddComponent<SelfSpell>();
+                break;
+            case SpellArcType.Target:
+                newSpell.AddComponent<TargetSpell>();
+                break;
+            case SpellArcType.Area:
+                newSpell.AddComponent<AreaSpell>();
+                break;
+        }
+    }
+
+    public void CreateSpellObject(SpellObjectType type)
+    {
+        
+        switch (type)
+        {
+            case SpellObjectType.Sphere:
+                newSpell = createSphere(newSpell);
+                break;
+            case SpellObjectType.Cube:
+                newSpell = createCube(newSpell);
+                break;
+            case SpellObjectType.Capsule:
+                newSpell = createCapsule(newSpell);
+                break;
+            case SpellObjectType.Cylinder:
+                newSpell = createCylinder(newSpell);
+                break;
+            case SpellObjectType.Cone:
+                newSpell = createCone(newSpell);
+                break;
+            case SpellObjectType.Plane:
+                newSpell = createPlane(newSpell);
+                break;
+            case SpellObjectType.Quad:
+                newSpell = createQuad(newSpell);
+                break;
+            case SpellObjectType.Sprite:
+                //newSpell = createSprite(newSpell);
+                break;
+            case SpellObjectType.Unique:
+                //newSpell = createUnique(newSpell);
+                break;
+        }
+        newSpell.AddComponent<Spell>();
+        newSpell.GetComponent<Spell>().spellArch = spell.spellArch;
+        
+        CreateSpell(spell.CheckSpellType());
+    }
+
+    public GameObject createSphere(GameObject newSpell)
+    {
+        newSpell = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+        return newSpell;
+    }
+
+    public GameObject createCube(GameObject newSpell)
+    {
+        newSpell = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        return newSpell;
+    }
+
+    public GameObject createCapsule(GameObject newSpell)
+    {
+        newSpell = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+
+        return newSpell;
+    }
+
+    public GameObject createCylinder(GameObject newSpell)
+    {
+        newSpell = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+
+        return newSpell;
+    }
+
+    public GameObject createCone(GameObject newSpell)
+    {
+        //newSpell = GameObject.CreatePrimitive(PrimitiveType.Cone);
+
+        return newSpell;
+    }
+
+    public GameObject createPlane(GameObject newSpell)
+    {
+        newSpell = GameObject.CreatePrimitive(PrimitiveType.Plane);
+
+        return newSpell;
+    }
+
+    public GameObject createQuad(GameObject newSpell)
+    {
+        newSpell = GameObject.CreatePrimitive(PrimitiveType.Quad);
+
+        return newSpell;
+    }
+
 }

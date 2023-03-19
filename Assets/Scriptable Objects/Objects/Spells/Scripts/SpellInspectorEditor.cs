@@ -54,6 +54,10 @@ public class SpellInspectorEditor : Editor
             arcitecture.castTime = 0;
         }
 
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Spell Object Type", EditorStyles.boldLabel);
+        arcitecture.spellObjectType = (SpellObjectType)EditorGUILayout.EnumPopup("Object Type", arcitecture.spellObjectType);
+
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Adjustable Area", EditorStyles.boldLabel);

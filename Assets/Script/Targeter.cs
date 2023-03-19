@@ -106,6 +106,7 @@ public class Targeter : MakeAnBehaviour
     {
         agent.enemyTarget = null;
         agent.allyTarget = null;
+        agent.spellTarget = null;
     }
 
     public GameObject _isHit()
