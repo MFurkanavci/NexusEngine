@@ -57,6 +57,32 @@ public class DamageCalculations : MonoBehaviour
 
     public float DealDamage(Dictionary<DamageType, float> damageTypeandvalue)
     {
+        float totalDamage = 0;
+        float dealedDamage = 0;
+        foreach (KeyValuePair<DamageType, float> damageType in damageTypeandvalue)
+        {
+            print("Damage type: " + damageType.Key);
+            print("Damage value: " + damageType.Value);
+            switch (damageType.Key)
+            {
+                case DamageType.Physical:
+                    totalDamage = damageType.Value;
+                    break;
+                case DamageType.Magical:
+                    totalDamage = damageType.Value;
+                    break;
+                case DamageType.True:
+                    totalDamage = damageType.Value;
+                    break;
+            }
+            
+           dealedDamage += agent.enemyTarget.damageCalculations.RecieveDamage(totalDamage, damageType.Key);
+            
+        }
+        return dealedDamage;
+    }
+    public float DealDamage(GameObject target, Dictionary<DamageType, float> damageTypeandvalue)
+    {
         
         float totalDamage = 0;
         float dealedDamage = 0;
@@ -80,6 +106,8 @@ public class DamageCalculations : MonoBehaviour
         }
         return dealedDamage;
     }
+
+    
 
     //create a dictionary for the damage types and their values
     //will recieve the damage type and the value

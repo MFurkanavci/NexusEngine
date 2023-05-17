@@ -95,4 +95,19 @@ public class AgentObject : ScriptableObject
         activeSpells,
         passiveSpells;
 
+
+    public void CopyFrom(AgentObject agent)
+    {
+        foreach (var item in agent.GetType().GetFields())
+        {
+            item.SetValue(this, item.GetValue(agent));
+        }
+
+        foreach (var item in agent.GetType().GetProperties())
+        {
+            item.SetValue(this, item.GetValue(agent));
+        }
+    }
 }
+
+    

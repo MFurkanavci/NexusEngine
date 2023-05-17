@@ -10,46 +10,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ec3e985950f4346899b81aa3b6bc99, type: 3}
-  m_Name: Ada
+  m_Name: "Konyal\u0131"
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  Name: Ada The Lost One
-  ID: 1001
+  Name: "Konyal\u0131"
+  ID: 1005
   type: 0
   description: 
   enemyTarget: {fileID: 0}
   allyTarget: {fileID: 0}
   spellTarget: {fileID: 0}
   damageCalculations: {fileID: 0}
-  level: 5
-  modifier: 1.2
-  experience: 450
-  damage_Physical: 100
-  damage_range: 3
+  level: 10
+  modifier: 1.3
+  experience: 0
+  damage_Physical: 35
+  damage_range: 15
   damage_Magical: 0
   damage_True: 0
-  hitPoint: 100
-  hitPointCurrent: 2
-  regen_hitPoint: 10
+  hitPoint: 500
+  hitPointCurrent: 300
+  regen_hitPoint: 0
   manaPoint: 0
   regen_manaPoint: 0
-  wildPoint: 100
-  regen_wildPoint: 5
+  wildPoint: 0
+  regen_wildPoint: 0
   energyPoint: 0
   regen_energyPoint: 0
-  armor_Physical: 15
-  armor_Magical: 10
-  speed_Movement: 25
-  speed_Attack: 0.7
-  penetration_Physical: 5
-  penetration_Magical: 5
-  criticalchance_Physical: 30
-  criticaldamage_Physical: 150
-  criticalcahnce_Magical: 30
-  criticaldamage_Magical: 150
+  armor_Physical: 0
+  armor_Magical: 0
+  speed_Movement: 0
+  speed_Attack: 0.75
+  penetration_Physical: 0
+  penetration_Magical: 0
+  criticalchance_Physical: 0
+  criticaldamage_Physical: 0
+  criticalcahnce_Magical: 0
+  criticaldamage_Magical: 0
   rate_Block: 0
-  rate_Parry: 20
-  rate_Dodge: 10
+  rate_Parry: 0
+  rate_Dodge: 0
   accuracy: 0
   tenacity: 0
   penetration_Tenacity: 0
@@ -58,10 +58,10 @@ MonoBehaviour:
   leech: 0
   drop_Gold: 0
   drop_Experience: 0
-  gold: 1000
+  gold: 0
   vaskaPoint: 0
   isAlive: 0
-  isCritible: 1
+  isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
   isPushable: 0
@@ -71,6 +71,6 @@ MonoBehaviour:
   isFriend: 0
   isEnemy: 0
   activeSpells:
-  - {fileID: 11400000, guid: 88a107d5a09788647b6f0951383cd170, type: 2}
+  - {fileID: 0}
   passiveSpells: []
   classes: 0

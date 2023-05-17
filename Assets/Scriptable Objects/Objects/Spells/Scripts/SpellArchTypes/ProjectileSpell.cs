@@ -8,13 +8,27 @@ public class ProjectileSpell : MonoBehaviour
 
     public GameObject spellTarget;
 
+    public GameObject fireBall;
+
+    public DamageCalculations damageCalculations;
+
     public ProjectileSpell()
-    {
-    }
-    public void Start() 
     { 
+    }
+
+    private void Start() {
         
-        spell = gameObject.GetComponent<Spell>();
+        fireBall = spell.CheckPlayer().GetComponent<Player>().fireBall;
+        damageCalculations = spell.CheckPlayer().GetComponent<Player>().GetComponent<DamageCalculations>();
+        
+        var fire = Instantiate(fireBall, gameObject.transform.position, gameObject.transform.rotation);
+        fire.transform.parent = gameObject.transform;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void SetSpell(Spell spell)
+    {
+        this.spell = spell;
         spellTarget = spell.CheckSpellTarget();
         gameObject.layer = 13;
         gameObject.tag = "Spell";
@@ -31,7 +45,8 @@ public class ProjectileSpell : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
         gameObject.GetComponent<Rigidbody>().mass = 1f;
         gameObject.GetComponent<Collider>().isTrigger = true;
-
+        
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         CastSpell(spell.CheckSpellTarget());
     }
 
@@ -54,11 +69,14 @@ public class ProjectileSpell : MonoBehaviour
     {
         if (other.gameObject.tag == "Mob")
         {
+            float damage = 50;
+            print("Hit");
+            //deal damage cs is taking gameobject and not spelltarget
+            
+            print("Damage: " + damage);
+            
             Destroy(gameObject);
-            float damage = 0;
-            damage += spell.CheckPlayer().GetComponent<Player>().agent.damageCalculations.DealDamage(spell.CheckPlayer().GetComponent<Player>().agent.damageCalculations.damageTypeandValue(spell.CheckPlayer().GetComponent<Player>().agent.damageCalculations.GetDamageType(), spell.CheckPlayer().GetComponent<Player>().agent.damage_Physical));
-
-            other.gameObject.GetComponent<Mobs>().agent.damageCalculations.RecieveDamage(damage, spell.CheckPlayer().GetComponent<Player>().agent.damageCalculations.GetDamageType());
+            
         }
     }
 
@@ -66,8 +84,12 @@ public class ProjectileSpell : MonoBehaviour
     {
         if(spellTarget != null)
         {
-            gameObject.transform.LookAt(spellTarget.transform);
-            gameObject.transform.Translate(spellTarget.transform.localPosition * spell.CheckSpeed() * Time.deltaTime);
+            gameObject.transform.Translate(GetSpellTarget() * Time.deltaTime * spell.CheckSpeed());
         }
+    }
+
+    public Vector3 GetSpellTarget()
+    {
+        return (spellTarget.transform.position - gameObject.transform.position).normalized;
     }
 }

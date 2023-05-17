@@ -34,7 +34,6 @@ public enum DamageType
 public class SpellArchitecture : ScriptableObject
 {
     public SpellArcType type;
-
     public DamageType damageType;
 
     public SpellObjectType spellObjectType;
@@ -145,5 +144,19 @@ public class SpellArchitecture : ScriptableObject
     {
         Debug.Log("Area");
     }
+
+    public void CopyFrom(SpellArchitecture source)
+    {
+        foreach (var item in source.GetType().GetFields())
+        {
+            this.GetType().GetField(item.Name).SetValue(this, item.GetValue(source));
+        }
+
+        foreach (var item in source.GetType().GetProperties())
+        {
+            this.GetType().GetProperty(item.Name).SetValue(this, item.GetValue(source));
+        }
+    }
+
 
 }

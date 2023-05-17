@@ -24,15 +24,11 @@ public class Mobs : MonoBehaviour
     {
         
         agent =  notPlayableAgent.CreateInstance("notPlayableAgent") as notPlayableAgent;
-
-        foreach (var item in agent_base.GetType().GetFields())
-        {
-            item.SetValue(agent, item.GetValue(agent_base));
-        }
+        agent.CopyFrom(agent_base);
         
-        agentStats = new dictionary();
+        //agentStats = new dictionary();
         
-        agentStats.setnotplayableagentStats(agent);
+        //agentStats.setnotplayableagentStats(agent);
         
         //targeter = new Targeter(null,agent,null);
 

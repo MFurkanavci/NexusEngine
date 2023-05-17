@@ -2,15 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell : MonoBehaviour
+public class Spell
 {
     //this will be the spell object that will be used to create spells
 
-    public SpellArchitecture spellArch;
+    public Spells spellArch;
+    SpellCreater spellCreater;
 
-    public Spell(SpellArchitecture spellArch)
+    private void OnEnable() {
+        spellArch = ScriptableObject.CreateInstance<Spells>();
+
+    }
+
+    public void CreateSpell(Spells spellArch, GameObject caster, GameObject target)
     {
-        this.spellArch = spellArch;
+        if (spellArch == null)
+        {
+            Debug.Log("SpellArch is null");
+            return;
+        }
+        if (caster.GetComponent<SpellCreater>() != null)
+        {
+            spellCreater = caster.GetComponent<SpellCreater>();
+        }
+        else
+        {
+            spellCreater = caster.AddComponent<SpellCreater>();
+        }
+
+        spellCreater.CreateSpell(spellArch, caster, target);
     }
 
     //check if the spell type
@@ -308,6 +328,19 @@ public class Spell : MonoBehaviour
     public void SetSpellTarget(GameObject target)
     {
         spellArch.spellTarget = target;
+    }
+
+    public DamageCalculations.DamageType getDamageType(DamageType type)
+    {
+        switch (type)
+        {
+            case DamageType.Physical:
+                return DamageCalculations.DamageType.Physical;
+            case DamageType.Magical:
+                return DamageCalculations.DamageType.Magical;
+        }
+        
+        return DamageCalculations.DamageType.True;
     }
 
 }

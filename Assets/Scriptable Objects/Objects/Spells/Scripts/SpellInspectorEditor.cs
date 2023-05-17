@@ -13,7 +13,7 @@ public class SpellInspectorEditor : Editor
 
 
         EditorGUILayout.Space(30);
-        arcitecture.ID = EditorGUILayout.IntField("ID", arcitecture.ID);
+        EditorGUILayout.LabelField("ID                                     " + arcitecture.ID.ToString());
         arcitecture.name = EditorGUILayout.TextField("Name", arcitecture.name);
         arcitecture.SplashArt = (Sprite)EditorGUILayout.ObjectField("Spalsh Art",arcitecture.SplashArt,typeof(Sprite),allowSceneObjects:true);
         EditorGUILayout.LabelField("Description", EditorStyles.boldLabel);
@@ -191,9 +191,7 @@ public class SpellInspectorEditor : Editor
         
             arcitecture.direction = MousePosition.MousePosition.GetMousePosition();
             EditorGUILayout.Vector3Field("Direction", arcitecture.direction);
-        }
-
-        
+        }    
 
 
         EditorGUILayout.Space(10);

@@ -9,11 +9,15 @@ public class SpellCreater : MonoBehaviour
 
     public Spell spell;
 
-    public SpellCreater(SpellArchitecture spellArch, GameObject caster, GameObject target)
+    public SpellCreater()
     {
-        
-        spell =  new Spell(PlayableAgent.CreateInstance("Spells") as Spells);
-        spell.spellArch = spellArch;
+        spell = new Spell();
+    }
+
+    public void CreateSpell(SpellArchitecture spellArch, GameObject caster, GameObject target)
+    {
+        spell.spellArch = spellArch as Spells;
+        print(spell.CheckName());
         spell.SetPlayer(caster);
         spell.SetSpellTarget(target);
         if (spellArch == null)
@@ -32,7 +36,6 @@ public class SpellCreater : MonoBehaviour
         }
         else if (!CheckTargetable())
         {
-            
         }
         else
         {
@@ -45,13 +48,14 @@ public class SpellCreater : MonoBehaviour
         return spell.spellArch.targetable;
     }
 
-    public void CreateSpell(SpellArcType type)
+    public void AddSpellScript(SpellArcType type)
     {
 
         switch (type)
         {
             case SpellArcType.Projectile:
                 newSpell.AddComponent<ProjectileSpell>();
+                newSpell.GetComponent<ProjectileSpell>().SetSpell(spell);
                 break;
             case SpellArcType.Self:
                 newSpell.AddComponent<SelfSpell>();
@@ -98,10 +102,8 @@ public class SpellCreater : MonoBehaviour
                 //newSpell = createUnique(newSpell);
                 break;
         }
-        newSpell.AddComponent<Spell>();
-        newSpell.GetComponent<Spell>().spellArch = spell.spellArch;
         
-        CreateSpell(spell.CheckSpellType());
+        AddSpellScript(spell.CheckSpellType());
     }
 
     public GameObject createSphere(GameObject newSpell)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +17,11 @@ public class Player : MonoBehaviour
     public PlayableAgent agent_base;
     public PlayableAgent agent;
     public List<Spells> spells = new List<Spells>();
-
     public Item[] inventory = new Item[6];
     public dictionary agentStats;
+    public GameObject fireBall;
+
+    public SpellCreater spell;
 
     public Player()
     {
@@ -28,31 +31,22 @@ public class Player : MonoBehaviour
     public void Awake()
     {
         
-        agent =  PlayableAgent.CreateInstance("PlayableAgent") as PlayableAgent;
+        agent = ScriptableObject.CreateInstance<PlayableAgent>();
+        agent.CopyFrom(agent_base);
 
-        foreach (var item in agent_base.GetType().GetFields())
+        foreach (var item in agent_base.activeSpells)
         {
-            item.SetValue(agent, item.GetValue(agent_base));
+            Spells spell = ScriptableObject.CreateInstance<Spells>();
+            spell.CopyFrom(item);
+            spells.Add(spell);
         }
-
-        foreach (var item in agent.activeSpells)
-        {
-            spells.Add(Spells.CreateInstance("Spells") as Spells);
-        }
-
-        for (int i = 0; i < agent.activeSpells.Count; i++)
-        {
-            foreach (var item in agent.activeSpells[i].GetType().GetFields())
-            {
-                item.SetValue(spells[i], item.GetValue(agent.activeSpells[i]));
-            }
-        }
-
 
         
-        agentStats = new dictionary();
+        spell = this.gameObject.AddComponent<SpellCreater>();
         
-        agentStats.setplayableagentBaseStats(agent);
+        //agentStats = new dictionary();
+        
+        //agentStats.setplayableagentBaseStats(agent);
 
 
         //create a new instance of the makeanattack class
@@ -61,15 +55,19 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        //if the player press q then call spellCreater.createaNewSpell();
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            spells[0].target = agent.spellTarget;
-            spells[0].player = this.gameObject;
+            spell.CreateSpell(spells[0], this.gameObject, agent.spellTarget);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            var fireball = Instantiate(fireBall, this.gameObject.transform.position, this.gameObject.transform.rotation);
 
-            SpellCreater createaNewSpell = new SpellCreater (spells[0], this.gameObject, agent.spellTarget);
+            fireball.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 1000);
+
         }
     }
+
     
+ 
 }
