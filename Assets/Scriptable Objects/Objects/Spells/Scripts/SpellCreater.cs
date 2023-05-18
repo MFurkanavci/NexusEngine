@@ -17,7 +17,6 @@ public class SpellCreater : MonoBehaviour
     public void CreateSpell(SpellArchitecture spellArch, GameObject caster, GameObject target)
     {
         spell.spellArch = spellArch as Spells;
-        print(spell.CheckName());
         spell.SetPlayer(caster);
         spell.SetSpellTarget(target);
         if (spellArch == null)
@@ -53,6 +52,10 @@ public class SpellCreater : MonoBehaviour
 
         switch (type)
         {
+            case SpellArcType.Basic:
+                newSpell.AddComponent<BasicSpell>();
+                newSpell.GetComponent<BasicSpell>().SetSpell(spell);
+                break;
             case SpellArcType.Projectile:
                 newSpell.AddComponent<ProjectileSpell>();
                 newSpell.GetComponent<ProjectileSpell>().SetSpell(spell);

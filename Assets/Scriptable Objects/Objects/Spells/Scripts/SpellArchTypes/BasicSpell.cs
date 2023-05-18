@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileSpell : MonoBehaviour
+public class BasicSpell : MonoBehaviour
 {
     public Spell spell;
 
@@ -10,19 +10,13 @@ public class ProjectileSpell : MonoBehaviour
 
     public DamageCalculations damageCalculations;
 
-    public ProjectileSpell()
-    { 
-    }
-
-    private void Start() {
-        
+    void Start()
+    {
         damageCalculations = spell.CheckPlayer().GetComponent<Player>().GetComponent<DamageCalculations>();
-        var fire = Instantiate(spell.spellArch.model, gameObject.transform.position, gameObject.transform.rotation);
-        fire.transform.parent = gameObject.transform;
+        
         gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
-
-    public void SetSpell(Spell spell)
+public void SetSpell(Spell spell)
     {
         this.spell = spell;
         spellTarget = spell.CheckSpellTarget();
@@ -65,10 +59,10 @@ public class ProjectileSpell : MonoBehaviour
     {
         if (other.gameObject.tag == "Mob")
         {
-            float damage = 50;
-            damage = damageCalculations.DealDamage(other.gameObject,damageCalculations.damageTypeandValue(spell.getDamageType(spell.spellArch.damageType),damage));
-            
-            other.gameObject.GetComponent<Mobs>().agent.hitPoint -= damage;
+            var agent = spell.CheckPlayer().GetComponent<Player>().agent;
+            float damage = 0;
+            damage += agent.damageCalculations.DealDamage(other.gameObject, damageCalculations.damageTypeandValue(spell.getDamageType(spell.spellArch.damageType),agent.damage_Physical));
+            agent.enemyTarget.hitPoint -= damage;
             
             Destroy(gameObject);
             

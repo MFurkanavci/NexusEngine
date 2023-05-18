@@ -10,7 +10,7 @@ public abstract class BasicBehaviour
 
     public AgentObject agent { get; set; }
     public abstract void makeanAttack(GameObject player, GameObject enemy);
-    public abstract void makeanAbility(GameObject player, Vector3 position);
+    public abstract void makeanAbility(GameObject player, GameObject enemy,SpellArchitecture spell);
     public abstract void makeaDesicion();
 
     public BasicBehaviour(PlayableAgent playableAgent, notPlayableAgent notPlayableAgent, AgentObject agent)

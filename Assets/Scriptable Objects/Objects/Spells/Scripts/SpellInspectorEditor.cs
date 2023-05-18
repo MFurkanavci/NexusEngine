@@ -20,6 +20,11 @@ public class SpellInspectorEditor : Editor
         arcitecture.description = EditorGUILayout.TextArea(arcitecture.description, GUILayout.Height(100));
 
         EditorGUILayout.Space(10);
+        arcitecture.model = (GameObject)EditorGUILayout.ObjectField("Model", arcitecture.model, typeof(GameObject), allowSceneObjects: false);
+        
+
+
+        EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Spell Architecture", EditorStyles.boldLabel);
         arcitecture.type = (SpellArcType)EditorGUILayout.EnumPopup("Type", arcitecture.type);
 

@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     public List<Spells> spells = new List<Spells>();
     public Item[] inventory = new Item[6];
     public dictionary agentStats;
-    public GameObject fireBall;
 
     public SpellCreater spell;
 
@@ -57,13 +56,22 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            spell.CreateSpell(spells[0], this.gameObject, agent.spellTarget);
+            if (agent.spellTarget == null)
+            {
+                Debug.Log("Target is null");
+                return;
+            }
+            BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
+            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[1]);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            var fireball = Instantiate(fireBall, this.gameObject.transform.position, this.gameObject.transform.rotation);
-
-            fireball.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 1000);
+            if (agent.spellTarget == null)
+            {
+                Debug.Log("Target is null");
+                return;
+            }
+            spell.CreateSpell(spells[2], this.gameObject, agent.spellTarget);
 
         }
     }

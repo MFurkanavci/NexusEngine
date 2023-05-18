@@ -4327,8 +4327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae07848ff768034286d7563d11ffa9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mob: {fileID: 454884307194536517, guid: 9b04ea9bb4a5bb546ab86b04ecb2cf3c, type: 3}
-  _boss: {fileID: 454884307194536517, guid: 4bcb4cc16a2894d4584d543ef49f23c4, type: 3}
+  _mob: {fileID: 3122302233293948080, guid: 934e9e50475fe5a45a33dec0738209fe, type: 3}
+  _boss: {fileID: 3122302233293948080, guid: cab5c5258a3565143983b9d61f022711, type: 3}
   _poolMob: {fileID: 766362943}
   _poolBoss: {fileID: 2012491407}
   _spawnable: 0
@@ -7399,8 +7399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae07848ff768034286d7563d11ffa9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mob: {fileID: 454884307194536517, guid: 9b04ea9bb4a5bb546ab86b04ecb2cf3c, type: 3}
-  _boss: {fileID: 454884307194536517, guid: 4bcb4cc16a2894d4584d543ef49f23c4, type: 3}
+  _mob: {fileID: 3122302233293948080, guid: 13d8ea316331d9c4a94218480a0b369e, type: 3}
+  _boss: {fileID: 3122302233293948080, guid: cab5c5258a3565143983b9d61f022711, type: 3}
   _poolMob: {fileID: 2047216917}
   _poolBoss: {fileID: 119006746}
   _spawnable: 0

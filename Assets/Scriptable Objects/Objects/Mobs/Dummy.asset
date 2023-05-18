@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1981f4c669022504685c948c20d28bf5, type: 3}
+  m_Name: Dummy
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  Name: Dummy
+  ID: 1000
+  type: 1
+  description: This is Dummy.
+  enemyTarget: {fileID: 0}
+  allyTarget: {fileID: 0}
+  spellTarget: {fileID: 0}
+  damageCalculations: {fileID: 0}
+  level: 99
+  modifier: 99
+  experience: 99
+  damage_Physical: 99
+  damage_range: 99
+  damage_Magical: 99
+  damage_True: 99
+  hitPoint: 1000
+  hitPointCurrent: 999
+  regen_hitPoint: 999
+  manaPoint: 999
+  regen_manaPoint: 999
+  wildPoint: 999
+  regen_wildPoint: 999
+  energyPoint: 999
+  regen_energyPoint: 999
+  armor_Physical: 999
+  armor_Magical: 999
+  speed_Movement: 999
+  speed_Attack: 999
+  penetration_Physical: 999
+  penetration_Magical: 999
+  criticalchance_Physical: 999
+  criticaldamage_Physical: 999
+  criticalcahnce_Magical: 999
+  criticaldamage_Magical: 999
+  rate_Block: 999
+  rate_Parry: 999
+  rate_Dodge: 999
+  accuracy: 999
+  tenacity: 999
+  penetration_Tenacity: 999
+  speed_Jump: 999
+  speed_Fly: 999
+  leech: 999
+  drop_Gold: 999
+  drop_Experience: 999
+  gold: 999
+  vaskaPoint: 999
+  isAlive: 0
+  isCritible: 0
+  isImmuneCriticalHit: 0
+  isInvisible: 0
+  isPushable: 0
+  canJump: 0
+  canFly: 0
+  canMoveThroughOthers: 0
+  isFriend: 0
+  isEnemy: 0
+  activeSpells: []
+  passiveSpells: []
+  mobType: 3

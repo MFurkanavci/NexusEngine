@@ -29,22 +29,22 @@ public class Targeter : MakeAnBehaviour
             //check _ishit is an enemy
             if(targetTag(_isHit()) == "Mob")
             {
-                agent.enemyTarget = _isHit().transform.parent.GetComponent<Mobs>().agent;
+                agent.enemyTarget = _isHit().transform.GetComponent<Mobs>().agent;
                 //Debug.Log("Target is an Enemy");
             }
             else if(targetTag(_isHit()) == "Player")
             {
-                agent.allyTarget = _isHit().transform.parent.GetComponent<Player>().agent;
+                agent.allyTarget = _isHit().transform.GetComponent<Player>().agent;
                 //Debug.Log("Target is an Player");
             }
             else if(targetTag(_isHit()) == "Ally")
             {
-                agent.allyTarget = _isHit().transform.parent.GetComponent<Player>().agent;
+                agent.allyTarget = _isHit().transform.GetComponent<Player>().agent;
                 //Debug.Log("Target is an Player");
             }
             else
             {
-                
+                Debug.Log("Target is null");
             }
 
         }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1575636296}
   - component: {fileID: 1575636298}
   - component: {fileID: 1575636299}
+  - component: {fileID: 1986972944}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent_base: {fileID: 11400000, guid: 2dcf850b7af27064e8a034b659befbef, type: 2}
   agent: {fileID: 0}
+  spells: []
   inventory:
   - {fileID: 0}
   - {fileID: 0}
@@ -57,6 +59,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  spell: {fileID: 0}
 --- !u!114 &1575636296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +87,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 0}
   click: {fileID: 7537011028512191505, guid: 65ee98d3627051b44b8a76122a53ce80, type: 3}
+  agent: {fileID: 0}
   target: {fileID: 0}
+  spellTarget: {fileID: 0}
+  text: {fileID: 0}
+  isInRange: 0
 --- !u!195 &1575636299
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -107,6 +114,20 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1986972944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096707195633766455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3c02c7b9ca3d24eb779cfb94af1685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  agent: {fileID: 0}
 --- !u!1 &6096707196104098560
 GameObject:
   m_ObjectHideFlags: 0

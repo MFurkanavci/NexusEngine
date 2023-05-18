@@ -24,7 +24,7 @@ MonoBehaviour:
   level: 5
   modifier: 1.2
   experience: 450
-  damage_Physical: 100
+  damage_Physical: 250
   damage_range: 3
   damage_Magical: 0
   damage_True: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
   isFriend: 0
   isEnemy: 0
   activeSpells:
+  - {fileID: 11400000, guid: 7004275e3f211f942a5e5d3d4452a1cf, type: 2}
   - {fileID: 11400000, guid: 88a107d5a09788647b6f0951383cd170, type: 2}
   passiveSpells: []
   classes: 0

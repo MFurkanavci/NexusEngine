@@ -20,10 +20,6 @@ public class DPS : MonoBehaviour
 
     private void Update()
     {
-        attackSpeed = GCD.GCD.Get();
-        //calculate the dps with the damage taken from agent.enemyTarget and the attack speed with every second
-        dps = damage / attackSpeed;
-        
     }
 
 

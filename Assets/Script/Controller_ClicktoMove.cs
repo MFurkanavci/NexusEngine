@@ -24,6 +24,8 @@ public class Controller_ClicktoMove : MonoBehaviour
 
     public TMP_Text text;
 
+    public GCD.GCD gCD;
+
     public bool isInRange = false;
 
     private void Start()
@@ -32,6 +34,7 @@ public class Controller_ClicktoMove : MonoBehaviour
         agent = this.gameObject.GetComponent<Player>().agent;
         targeter = new Targeter(agent, null, null);
         behaviour = new MakeAnBehaviour(agent, null, null);
+        gCD = new GCD.GCD();
 
         Debug.Log(agent.Name);
         
@@ -45,6 +48,7 @@ public class Controller_ClicktoMove : MonoBehaviour
             //check if the mouse is over the UI
             if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
+                setSpellTarget(getTarget());
                 calculateRaycast();
             }
         }
@@ -60,8 +64,8 @@ public class Controller_ClicktoMove : MonoBehaviour
 
         agentNM.speed = agent.speed_Movement;
 
-        GCD.GCD.Update(agent.speed_Attack);
-        text.text = GCD.GCD.TimeLeft().ToString("F2");
+        gCD.Update(agent.speed_Attack);
+        text.text = gCD.TimeLeft().ToString("F2");
         
             
         

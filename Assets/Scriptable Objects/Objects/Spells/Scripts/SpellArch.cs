@@ -5,6 +5,7 @@ using GlobalCooldown;
 
 public enum SpellArcType
 {
+    Basic,
     Projectile,
     Self,
     Target,
@@ -42,6 +43,8 @@ public class SpellArchitecture : ScriptableObject
     public Sprite SplashArt;
     [TextArea(15, 20)]
     public string description;
+
+    public GameObject model;
 
     public int architectureCount = 1;
 
@@ -111,6 +114,8 @@ public class SpellArchitecture : ScriptableObject
     {
         switch (type)
         {
+            case SpellArcType.Basic:
+                break;
             case SpellArcType.Projectile:
                 ProjectileSpawn();
                 break;

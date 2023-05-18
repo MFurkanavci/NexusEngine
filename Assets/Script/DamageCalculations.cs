@@ -76,7 +76,14 @@ public class DamageCalculations : MonoBehaviour
                     break;
             }
             
-           dealedDamage += agent.enemyTarget.damageCalculations.RecieveDamage(totalDamage, damageType.Key);
+            if (agent.enemyTarget != null)
+            {
+                dealedDamage += agent.enemyTarget.damageCalculations.RecieveDamage(totalDamage, damageType.Key);
+            }
+            else
+            {
+                return 0;
+            }
             
         }
         return dealedDamage;
@@ -101,7 +108,11 @@ public class DamageCalculations : MonoBehaviour
                     break;
             }
             
-           dealedDamage += agent.enemyTarget.damageCalculations.RecieveDamage(totalDamage, damageType.Key);
+            if (target == null)
+            {
+                return 0;
+            }
+           dealedDamage += target.GetComponent<DamageCalculations>().RecieveDamage(totalDamage, damageType.Key);
             
         }
         return dealedDamage;
@@ -120,6 +131,7 @@ public class DamageCalculations : MonoBehaviour
 
     public DamageType GetDamageType()
     {
+        print(damageType);
         return damageType;
     }
 
