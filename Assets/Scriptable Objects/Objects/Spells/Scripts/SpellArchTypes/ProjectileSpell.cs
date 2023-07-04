@@ -5,21 +5,22 @@ using UnityEngine;
 public class ProjectileSpell : MonoBehaviour
 {
     public Spell spell;
-
     public GameObject spellTarget;
-
     public DamageCalculations damageCalculations;
 
-    public ProjectileSpell()
-    { 
-    }
-
-    private void Start() {
-        
+    private void Start()
+    {
         damageCalculations = spell.CheckPlayer().GetComponent<Player>().GetComponent<DamageCalculations>();
-        var fire = Instantiate(spell.spellArch.model, gameObject.transform.position, gameObject.transform.rotation);
-        fire.transform.parent = gameObject.transform;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        GameObject model = spell.spellArch.model;
+        if (model != null)
+        {
+            var fire = Instantiate(model, transform.position, transform.rotation, transform);
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            GetComponent<Renderer>().material.color = spell.CheckColor();
+        }
     }
 
     public void SetSpell(Spell spell)
@@ -29,62 +30,50 @@ public class ProjectileSpell : MonoBehaviour
         gameObject.layer = 13;
         gameObject.tag = "Spell";
         gameObject.name = spell.CheckName();
-        gameObject.transform.position = spell.CheckPlayer().transform.localPosition;
-        gameObject.transform.localScale = new Vector3(spell.CheckWidth(), spell.CheckHeight(), spell.CheckDepth());
-        gameObject.transform.rotation = transform.rotation;
-        gameObject.AddComponent<Rigidbody>();
-        gameObject.GetComponent<Renderer>().material.color = spell.CheckColor();
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
-        gameObject.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-        gameObject.GetComponent<Rigidbody>().mass = 1f;
-        gameObject.GetComponent<Collider>().isTrigger = true;
-        
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        transform.position = spell.CheckPlayer().transform.localPosition;
+        transform.localScale = new Vector3(spell.CheckWidth(), spell.CheckHeight(), spell.CheckDepth());
+        transform.rotation = transform.rotation;
+        var rb = gameObject.AddComponent<Rigidbody>();
+        var rd = GetComponent<Renderer>();
+        var rbConstraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        var rbInterpolation = RigidbodyInterpolation.Interpolate;
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        rb.freezeRotation = true;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        rb.interpolation = rbInterpolation;
+        rb.mass = 1f;
+        GetComponent<Collider>().isTrigger = true;
+        rb.constraints = rbConstraints;
         CastSpell(spell.CheckSpellTarget());
     }
 
-    //cast the spell to the target
     public void CastSpell(GameObject target)
     {
-        if (spell.CheckTarget())
-        {
-            gameObject.transform.LookAt(target.transform);
-            gameObject.GetComponent<Rigidbody>().isKinematic = false;
-        }
-        else
-        {
-            return;
-        }
+            transform.LookAt(target.transform);
+            GetComponent<Rigidbody>().isKinematic = false;
+
     }
 
-    //check if the spell hit the target
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Mob")
+        if (other.gameObject.CompareTag("Mob"))
         {
             float damage = 50;
-            damage = damageCalculations.DealDamage(other.gameObject,damageCalculations.damageTypeandValue(spell.getDamageType(spell.spellArch.damageType),damage));
-            
+            damage = damageCalculations.DealDamage(other.gameObject, damageCalculations.damageTypeandValue(spell.getDamageType(spell.spellArch.damageType), damage));
             other.gameObject.GetComponent<Mobs>().agent.hitPoint -= damage;
-            
             Destroy(gameObject);
-            
         }
     }
 
     public void FixedUpdate()
     {
-        if(spellTarget != null)
-        {
-            gameObject.transform.Translate(GetSpellTarget() * Time.deltaTime * spell.CheckSpeed());
-        }
+        if (spellTarget != null)
+            transform.Translate(GetSpellTarget() * Time.deltaTime * spell.CheckSpeed());
     }
 
     public Vector3 GetSpellTarget()
     {
-        return (spellTarget.transform.position - gameObject.transform.position).normalized;
+        return (spellTarget.transform.position - transform.position).normalized;
     }
 }

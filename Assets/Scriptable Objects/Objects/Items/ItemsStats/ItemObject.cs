@@ -70,7 +70,7 @@ public class ItemObject : ScriptableObject
       canFly = false,
       canMoveThroughOthers = false,
       isStackable = false,
-      isMergeable = false,
+      isMergable = false,
       isEquipable = false,
       isEquipped = false;
 

@@ -9,20 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a59b3b15ed1bd49a2c103bc6a36261, type: 3}
-  m_Name: Default
+  m_Script: {fileID: 11500000, guid: 1981f4c669022504685c948c20d28bf5, type: 3}
+  m_Name: DireWolf
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  Name: 
-  ID: 1000
-  type: 2
+  Name: DireWolf
+  ID: 1011
+  type: 1
   description: 
+  enemyTarget: {fileID: 0}
+  allyTarget: {fileID: 0}
+  spellTarget: {fileID: 0}
+  damageCalculations: {fileID: 0}
   level: 0
   modifier: 0
   experience: 0
-  damage_Physical: 0
+  damage_Physical: 5
+  damage_range: 40
   damage_Magical: 0
-  hitPoint: 0
+  damage_True: 0
+  hitPoint: 25
+  hitPointCurrent: 0
   regen_hitPoint: 0
   manaPoint: 0
   regen_manaPoint: 0
@@ -30,17 +37,16 @@ MonoBehaviour:
   regen_wildPoint: 0
   energyPoint: 0
   regen_energyPoint: 0
-  armor_Physical: 0
+  armor_Physical: 5
   armor_Magical: 0
-  speed_Movement: 0
+  speed_Movement: 5
   speed_Attack: 0
-  drop_Gold: 0
-  drop_Experience: 0
+  speed_Cast: 0
   penetration_Physical: 0
   penetration_Magical: 0
   criticalchance_Physical: 0
   criticaldamage_Physical: 0
-  criticalcahnce_Magical: 0
+  criticalchance_Magical: 0
   criticaldamage_Magical: 0
   rate_Block: 0
   rate_Parry: 0
@@ -51,16 +57,20 @@ MonoBehaviour:
   speed_Jump: 0
   speed_Fly: 0
   leech: 0
+  drop_Gold: 0
+  drop_Experience: 0
   gold: 0
   vaskaPoint: 0
+  isAlive: 0
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
   isPushable: 0
-  canJumpable: 0
-  canFlyable: 0
+  canJump: 0
+  canFly: 0
   canMoveThroughOthers: 0
-  ifFriend: 0
+  isFriendly: 0
   isEnemy: 0
   activeSpells: []
   passiveSpells: []
+  mobType: 0

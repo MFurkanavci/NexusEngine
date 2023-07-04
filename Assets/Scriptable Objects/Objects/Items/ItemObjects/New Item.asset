@@ -9,27 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1981f4c669022504685c948c20d28bf5, type: 3}
-  m_Name: Dire Wolf
+  m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
+  m_Name: New Item
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  ID: 3001
   Name: 
-  ID: 1005
-  type: 1
+  SplashArt: {fileID: 0}
+  type: 0
   description: 
-  enemyTarget: {fileID: 0}
-  allyTarget: {fileID: 0}
-  spellTarget: {fileID: 0}
-  damageCalculations: {fileID: 0}
-  level: 0
-  modifier: 0
-  experience: 0
-  damage_Physical: 5
-  damage_range: 40
+  damage_Physical: 0
   damage_Magical: 0
-  damage_True: 0
-  hitPoint: 25
-  hitPointCurrent: 0
+  hitPoint: 0
   regen_hitPoint: 0
   manaPoint: 0
   regen_manaPoint: 0
@@ -37,9 +27,9 @@ MonoBehaviour:
   regen_wildPoint: 0
   energyPoint: 0
   regen_energyPoint: 0
-  armor_Physical: 5
+  armor_Physical: 0
   armor_Magical: 0
-  speed_Movement: 5
+  speed_Movement: 0
   speed_Attack: 0
   penetration_Physical: 0
   penetration_Magical: 0
@@ -56,11 +46,11 @@ MonoBehaviour:
   speed_Jump: 0
   speed_Fly: 0
   leech: 0
-  drop_Gold: 0
-  drop_Experience: 0
-  gold: 0
-  vaskaPoint: 0
-  isAlive: 0
+  time: 0
+  cost_Buy: 0
+  cost_Sell: 0
+  stack_Count: 0
+  merge_Count: 0
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
@@ -68,8 +58,10 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
-  isFriend: 0
-  isEnemy: 0
+  isStackable: 0
+  isMergable: 0
+  isEquipable: 0
+  isEquipped: 0
   activeSpells: []
   passiveSpells: []
-  mobType: 0
+  recipe: []

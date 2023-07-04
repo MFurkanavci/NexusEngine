@@ -19,32 +19,32 @@ public class SpellCreater : MonoBehaviour
         spell.spellArch = spellArch as Spells;
         spell.SetPlayer(caster);
         spell.SetSpellTarget(target);
+        bool targetable = spell.CheckTargetable();
         if (spellArch == null)
         {
             Debug.Log("SpellArch is null");
             return;
         }
-        if(CheckTargetable() && target == null)
+            
+        if(targetable && target == null)
         {
             Debug.Log("Target is null");
             return;
         }
-        else if (CheckTargetable() && target != null)
+        else if (targetable && target != null)
         {
             CreateSpellObject(spell.CheckSpellObjectType());
         }
-        else if (!CheckTargetable())
+        else if (!targetable && target == null)
+        {
+            CreateSpellObject(spell.CheckSpellObjectType());
+        }
+        else if (!targetable && target != null)
         {
         }
         else
         {
         }
-    }
-
-    //check if the spell is targetable
-    public bool CheckTargetable()
-    {
-        return spell.spellArch.targetable;
     }
 
     public void AddSpellScript(SpellArcType type)
@@ -73,8 +73,7 @@ public class SpellCreater : MonoBehaviour
     }
 
     public void CreateSpellObject(SpellObjectType type)
-    {
-        
+    {        
         switch (type)
         {
             case SpellObjectType.Sphere:

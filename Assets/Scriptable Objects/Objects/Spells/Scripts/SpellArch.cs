@@ -57,6 +57,8 @@ public class SpellArchitecture : ScriptableObject
 
     public float
         delayTime,
+        CD,
+        maxCooldown,
         castTime,
         lenght,
         maxlenght,
@@ -79,6 +81,8 @@ public class SpellArchitecture : ScriptableObject
 
     public bool
         cast,
+        cooldown,
+        active = true,
         delay,
         defaultHitArea,
         uniqueShot,
@@ -130,6 +134,7 @@ public class SpellArchitecture : ScriptableObject
                 break;
         }
     }
+
     public void ProjectileSpawn()
     {  
         

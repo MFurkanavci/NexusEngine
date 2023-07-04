@@ -84,7 +84,7 @@ public class dictionary {
         setStat("penetration_Magical", agent.penetration_Magical);
         setStat("criticalchance_Physical", agent.criticalchance_Physical);
         setStat("criticaldamage_Physical", agent.criticaldamage_Physical);
-        setStat("criticalcahnce_Magical", agent.criticalcahnce_Magical);
+        setStat("criticalcahnce_Magical", agent.criticalchance_Magical);
         setStat("criticaldamage_Magical", agent.criticaldamage_Magical);
         setStat("rate_Block", agent.rate_Block);
         setStat("rate_Parry", agent.rate_Parry);
@@ -117,7 +117,7 @@ public class dictionary {
         setStat("penetration_Magical", agent.penetration_Magical);
         setStat("criticalchance_Physical", agent.criticalchance_Physical);
         setStat("criticaldamage_Physical", agent.criticaldamage_Physical);
-        setStat("criticalcahnce_Magical", agent.criticalcahnce_Magical);
+        setStat("criticalcahnce_Magical", agent.criticalchance_Magical);
         setStat("criticaldamage_Magical", agent.criticaldamage_Magical);
         setStat("rate_Block", agent.rate_Block);
         setStat("rate_Parry", agent.rate_Parry);

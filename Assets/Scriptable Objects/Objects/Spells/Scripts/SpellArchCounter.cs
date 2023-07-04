@@ -7,24 +7,25 @@ namespace InstanceCounter
 [ExecuteInEditMode]
 public class SpellArchCounter
 {
-    public static int count = 0;
+    public static int count;
 
     public static int CountSpellArchInstances()
-    {
-        int count_temp = 0;
+{
+    count = 0;
+    var spellArchetypes = Resources.LoadAll<SpellArchitecture>("");
 
-        string[] guids = AssetDatabase.FindAssets("t:SpellArchitecture");
-        foreach (string guid in guids)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            SpellArchitecture spellArch = AssetDatabase.LoadAssetAtPath<SpellArchitecture>(path);
-            if (spellArch != null)
-            {
-                count_temp++;
-            }
-        }
-        count = count_temp;
-        return count;
+    foreach (var spellArchetype in spellArchetypes)
+    {
+        if (spellArchetype.hideFlags == HideFlags.NotEditable || spellArchetype.hideFlags == HideFlags.HideAndDontSave)
+            continue;
+
+        count++;
     }
+
+    return count;
+}
+
+
+
 }
 }

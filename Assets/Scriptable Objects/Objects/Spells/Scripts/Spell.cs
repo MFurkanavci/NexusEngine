@@ -39,10 +39,26 @@ public class Spell
         return spellArch.type;
     }
 
+    public bool CheckTargetable()
+    {
+        return spellArch.targetable;
+    }
+
+    public void SetTargetable(GameObject target)
+    {
+        spellArch.targetable = true;
+        spellArch.target = target;
+    }
+
     //check if the spell object type
     public SpellObjectType CheckSpellObjectType()
     {
         return spellArch.spellObjectType;
+    }
+
+    public GameObject CheckSpellModel()
+    {
+        return spellArch.model;
     }
 
     //check if the damage type

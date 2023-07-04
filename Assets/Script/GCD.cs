@@ -4,17 +4,16 @@ using UnityEngine;
 
 namespace GCD
 {
-    public class GCD{
+    public static class GCD{
 
-        //this is the global cooldown for all the abilities(attack, ability, etc)
-        public float globalCooldown = 0;
+        public static float globalCooldown = 0;
         
         //this is the delta time for the global cooldown
-        public float deltaTime = 0;
+        public static float deltaTime = 0;
 
         //this is the update method for the global cooldown
 
-        public void Update(float speed)
+        public static void Update(float speed)
         {
             if (globalCooldown > 0)
             {
@@ -26,7 +25,7 @@ namespace GCD
 
         //this is the set method for the global cooldown
 
-        public void Set(float speed)
+        public static void Set(float speed)
         {
             globalCooldown = speed;
             deltaTime = 0;
@@ -34,14 +33,14 @@ namespace GCD
 
         //this is the get method for the global cooldown
 
-        public float Get()
+        public static float Get()
         {
             return globalCooldown;
         }
 
         //this is the method to check if the global cooldown is ready
 
-        public bool gcdReady()
+        public static bool gcdReady()
         {
             if(globalCooldown <= 0)
             {
@@ -54,9 +53,9 @@ namespace GCD
         }
 
         //this is the method to get the time left for the global cooldown
-        public float TimeLeft()
+        public static float TimeLeft()
         {
-            return globalCooldown;
+            return globalCooldown * 1 + deltaTime;
         }
     }
 }

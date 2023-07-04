@@ -21,6 +21,7 @@ public class AgentObject : ScriptableObject
     public GameObject prefab;
     public string Name;
     public int ID = 1000;
+    
     public agentType type;
     [TextArea(15, 20)]
     public string description;
@@ -56,11 +57,12 @@ public class AgentObject : ScriptableObject
         armor_Magical = 0,
         speed_Movement = 0,
         speed_Attack = 0,
+        speed_Cast = 0,
         penetration_Physical = 0,
         penetration_Magical = 0,
         criticalchance_Physical = 0,
         criticaldamage_Physical = 0,
-        criticalcahnce_Magical = 0,
+        criticalchance_Magical = 0,
         criticaldamage_Magical = 0,
         rate_Block = 0,
         rate_Parry = 0,
@@ -88,7 +90,7 @@ public class AgentObject : ScriptableObject
         canJump = false,
         canFly = false,
         canMoveThroughOthers = false,
-        isFriend = false,
+        isFriendly = false,
         isEnemy = false;
 
     public List<SpellArchitecture> 

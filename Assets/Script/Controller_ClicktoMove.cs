@@ -24,8 +24,6 @@ public class Controller_ClicktoMove : MonoBehaviour
 
     public TMP_Text text;
 
-    public GCD.GCD gCD;
-
     public bool isInRange = false;
 
     private void Start()
@@ -34,7 +32,6 @@ public class Controller_ClicktoMove : MonoBehaviour
         agent = this.gameObject.GetComponent<Player>().agent;
         targeter = new Targeter(agent, null, null);
         behaviour = new MakeAnBehaviour(agent, null, null);
-        gCD = new GCD.GCD();
 
         Debug.Log(agent.Name);
         
@@ -63,10 +60,9 @@ public class Controller_ClicktoMove : MonoBehaviour
         }
 
         agentNM.speed = agent.speed_Movement;
-
-        gCD.Update(agent.speed_Attack);
-        text.text = gCD.TimeLeft().ToString("F2");
         
+        GCD.GCD.Update(agent.speed_Attack);
+        text.text = GCD.GCD.Get().ToString("F2");
             
         
         if(target != null)
@@ -146,7 +142,7 @@ public class Controller_ClicktoMove : MonoBehaviour
         {
             agentNM.SetDestination(closestPoint(isInRange));
         }
-            closestPoint(isInRange);
+        closestPoint(isInRange);
         
     }
 

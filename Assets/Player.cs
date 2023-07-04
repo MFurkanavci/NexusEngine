@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
 
     public SpellCreater spell;
 
+    public SpellBarManager spellBarManager;
+
+    public CooldownCalculator cooldownCalculator;
+
     public Player()
     {
         
@@ -42,6 +46,9 @@ public class Player : MonoBehaviour
 
         
         spell = this.gameObject.AddComponent<SpellCreater>();
+
+        cooldownCalculator = GetComponent<CooldownCalculator>();
+        cooldownCalculator.InitializeAbilityData(agent.activeSpells);
         
         //agentStats = new dictionary();
         
@@ -62,7 +69,7 @@ public class Player : MonoBehaviour
                 return;
             }
             BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
-            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[1]);
+            behaviour.makeanAbility(this.gameObject, null, spells[2], cooldownCalculator, 2);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -71,8 +78,8 @@ public class Player : MonoBehaviour
                 Debug.Log("Target is null");
                 return;
             }
-            spell.CreateSpell(spells[2], this.gameObject, agent.spellTarget);
-
+            spell.CreateSpell(spells[3], this.gameObject, agent.spellTarget);
+            spellBarManager.SpellCasted(3);
         }
     }
 

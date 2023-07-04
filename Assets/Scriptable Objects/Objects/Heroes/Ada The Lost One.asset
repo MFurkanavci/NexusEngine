@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ec3e985950f4346899b81aa3b6bc99, type: 3}
-  m_Name: Ada
+  m_Name: Ada The Lost One
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Ada The Lost One
@@ -41,11 +41,12 @@ MonoBehaviour:
   armor_Magical: 10
   speed_Movement: 25
   speed_Attack: 0.7
+  speed_Cast: 0
   penetration_Physical: 5
   penetration_Magical: 5
   criticalchance_Physical: 30
   criticaldamage_Physical: 150
-  criticalcahnce_Magical: 30
+  criticalchance_Magical: 0
   criticaldamage_Magical: 150
   rate_Block: 0
   rate_Parry: 20
@@ -68,10 +69,14 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
-  isFriend: 0
+  isFriendly: 0
   isEnemy: 0
   activeSpells:
-  - {fileID: 11400000, guid: 7004275e3f211f942a5e5d3d4452a1cf, type: 2}
+  - {fileID: 11400000, guid: 12fe4babf3d2ae94c832afb479331bf9, type: 2}
+  - {fileID: 11400000, guid: 2be7b55fb1378724e88b1c3b2ee0b6f4, type: 2}
   - {fileID: 11400000, guid: 88a107d5a09788647b6f0951383cd170, type: 2}
+  - {fileID: 11400000, guid: 6d81b5c11587ae547a11f60a0e720455, type: 2}
+  - {fileID: 11400000, guid: 3835196d7e2e91645b3dc85aacc48648, type: 2}
+  - {fileID: 11400000, guid: 3fcc00173bdc7fc4c98d95d2f68bdcab, type: 2}
   passiveSpells: []
   classes: 0

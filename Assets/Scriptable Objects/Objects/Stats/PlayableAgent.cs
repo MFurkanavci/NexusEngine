@@ -19,6 +19,7 @@ public class PlayableAgent : AgentObject
 
     public void Awake()
     {
+        name = Name;
         type = agentType.Playable;
         ID = 1001 + uniqueID.nextagent++;
     }

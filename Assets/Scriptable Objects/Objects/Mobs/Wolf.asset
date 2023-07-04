@@ -13,16 +13,23 @@ MonoBehaviour:
   m_Name: Wolf
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  Name: 
-  ID: 2001
+  Name: Wolf
+  ID: 1003
   type: 1
   description: 
+  enemyTarget: {fileID: 0}
+  allyTarget: {fileID: 0}
+  spellTarget: {fileID: 0}
+  damageCalculations: {fileID: 0}
   level: 0
   modifier: 0
   experience: 0
   damage_Physical: 0
+  damage_range: 0
   damage_Magical: 0
+  damage_True: 0
   hitPoint: 0
+  hitPointCurrent: 0
   regen_hitPoint: 0
   manaPoint: 0
   regen_manaPoint: 0
@@ -34,11 +41,12 @@ MonoBehaviour:
   armor_Magical: 0
   speed_Movement: 0
   speed_Attack: 0
+  speed_Cast: 0
   penetration_Physical: 0
   penetration_Magical: 0
   criticalchance_Physical: 0
   criticaldamage_Physical: 0
-  criticalcahnce_Magical: 0
+  criticalchance_Magical: 0
   criticaldamage_Magical: 0
   rate_Block: 0
   rate_Parry: 0
@@ -53,6 +61,7 @@ MonoBehaviour:
   drop_Experience: 0
   gold: 0
   vaskaPoint: 0
+  isAlive: 0
   isCritible: 0
   isImmuneCriticalHit: 0
   isInvisible: 0
@@ -60,7 +69,7 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
-  isFriend: 0
+  isFriendly: 0
   isEnemy: 0
   activeSpells: []
   passiveSpells: []

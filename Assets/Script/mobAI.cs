@@ -14,7 +14,7 @@ public class mobAI : MonoBehaviour
 
     
 
-    private void Awake()
+    private void Start()
     {
         _agentObject = GetComponent<Mobs>().agent;
         _agent = GetComponent<NavMeshAgent>();

@@ -44,6 +44,27 @@ public class SpellInspectorEditor : Editor
         {
             arcitecture.delayTime = 0;
         }
+        
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Cooldown", EditorStyles.boldLabel);
+        arcitecture.cooldown = EditorGUILayout.Toggle("Has Cooldown ?", arcitecture.cooldown);
+
+        if (arcitecture.cooldown)
+        {
+            arcitecture.CD = EditorGUILayout.FloatField("Cooldown", arcitecture.CD);
+        }
+        else
+        {
+            arcitecture.CD = 0;
+        }
+        if (arcitecture.cooldown)
+        {
+            arcitecture.maxCooldown = EditorGUILayout.FloatField("Max Cooldown", arcitecture.maxCooldown);
+        }
+        else
+        {
+            arcitecture.maxCooldown = 0;
+        }
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Cast Time", EditorStyles.boldLabel);

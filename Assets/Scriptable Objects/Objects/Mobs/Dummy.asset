@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Dummy
-  ID: 1000
+  ID: 1002
   type: 1
   description: This is Dummy.
   enemyTarget: {fileID: 0}
@@ -41,11 +41,12 @@ MonoBehaviour:
   armor_Magical: 999
   speed_Movement: 999
   speed_Attack: 999
+  speed_Cast: 999
   penetration_Physical: 999
   penetration_Magical: 999
   criticalchance_Physical: 999
   criticaldamage_Physical: 999
-  criticalcahnce_Magical: 999
+  criticalchance_Magical: 999
   criticaldamage_Magical: 999
   rate_Block: 999
   rate_Parry: 999
@@ -68,7 +69,7 @@ MonoBehaviour:
   canJump: 0
   canFly: 0
   canMoveThroughOthers: 0
-  isFriend: 0
+  isFriendly: 0
   isEnemy: 0
   activeSpells: []
   passiveSpells: []

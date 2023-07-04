@@ -62,6 +62,7 @@ public void SetSpell(Spell spell)
             var agent = spell.CheckPlayer().GetComponent<Player>().agent;
             float damage = 0;
             damage += agent.damageCalculations.DealDamage(other.gameObject, damageCalculations.damageTypeandValue(spell.getDamageType(spell.spellArch.damageType),agent.damage_Physical));
+            print("fix this");
             agent.enemyTarget.hitPoint -= damage;
             
             Destroy(gameObject);
