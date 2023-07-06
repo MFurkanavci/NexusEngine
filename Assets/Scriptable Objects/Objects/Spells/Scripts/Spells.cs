@@ -4,14 +4,11 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "New Default Spell", menuName = "Spell System/Spells/Spell")]
 public class Spells : SpellArchitecture
 {
-    private static int nextSpellID = 2000;
+    private static int nextSpellID = 3000;
 
     private void OnEnable()
     {
-        if (ID == 0)
-        {
-            ID = GenerateSpellID();
-        }
+        ID = GenerateSpellID();
     }
 
     private static int GenerateSpellID()

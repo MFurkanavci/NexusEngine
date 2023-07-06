@@ -22,8 +22,9 @@ public class AgentInspector : Editor
                 AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(agent), agent.Name);
             };
         }
-        agent.ID = EditorGUILayout.IntField("ID", agent.ID);
+        EditorGUILayout.LabelField("ID                                     " + agent.ID.ToString());
         agent.type = (agentType)EditorGUILayout.EnumPopup("Type", agent.type);
+        agent.mobtype = (mobType)EditorGUILayout.EnumPopup("Mob Type", agent.mobtype);
         agent.description = EditorGUILayout.TextArea(agent.description, GUILayout.Height(100));
 
         EditorGUILayout.Space(10);
@@ -52,6 +53,7 @@ public class AgentInspector : Editor
         agent.hitPointCurrent = EditorGUILayout.FloatField("Current Hit Points", agent.hitPointCurrent);
         agent.regen_hitPoint = EditorGUILayout.FloatField("HP Regeneration", agent.regen_hitPoint);
         agent.manaPoint = EditorGUILayout.FloatField("Mana Points", agent.manaPoint);
+        agent.manaPointCurrent = EditorGUILayout.FloatField("Current Mana Points", agent.manaPointCurrent);
         agent.regen_manaPoint = EditorGUILayout.FloatField("Mana Regeneration", agent.regen_manaPoint);
         agent.wildPoint = EditorGUILayout.FloatField("Wild Points", agent.wildPoint);
         agent.regen_wildPoint = EditorGUILayout.FloatField("Wild Regeneration", agent.regen_wildPoint);

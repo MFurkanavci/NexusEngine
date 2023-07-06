@@ -37,8 +37,6 @@ public class SpellBarManager : MonoBehaviour
             GameObject spell = Instantiate(Spell, SpellBar.transform);
             spell.GetComponent<Image>().sprite = playableAgent.activeSpells[i].SplashArt;
             Spells.Add(spell);
-
-            //we will loop all the child objects of the spell and first one will be the keybind and the second one will be the spell name and the third one will be the spell cooldown
             spell.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = keybinds[i].ToString();
             spell.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = playableAgent.activeSpells[i].name;
             spell.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = playableAgent.activeSpells[i].maxCooldown.ToString("F2");

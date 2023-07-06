@@ -60,9 +60,6 @@ public class Controller_ClicktoMove : MonoBehaviour
         }
 
         agentNM.speed = agent.speed_Movement;
-        
-        GCD.GCD.Update(agent.speed_Attack);
-        text.text = GCD.GCD.Get().ToString("F2");
             
         
         if(target != null)

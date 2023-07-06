@@ -20,28 +20,43 @@ public class MakeAnBehaviour : BasicBehaviour
     }
     public override void makeanAttack(GameObject player, GameObject enemy)
     {
-        
-        
-        if (GCD.GCD.gcdReady())
+        CooldownCalculator cooldownCalculator = player.GetComponent<CooldownCalculator>();
+        if (!cooldownCalculator.IsAbilityOnCooldown(agent.activeSpells[0]))
         {
             player.GetComponent<SpellCreater>().CreateSpell(agent.activeSpells[0], player, enemy);
-            GCD.GCD.Set(agent.speed_Attack);
+            cooldownCalculator.StartCooldown(agent.activeSpells[0]);
             player.GetComponent<Player>().spellBarManager.SpellCasted(0);
-
-        }
-        
+        }        
     }
 
-    public override void makeanAbility(GameObject player, GameObject enemy,SpellArchitecture spell,CooldownCalculator cooldownCalculator, int spellIndex)
+    public override void makeanAbility(GameObject player, GameObject enemy, SpellArchitecture spell, CooldownCalculator cooldownCalculator, int spellIndex)
     {
-        
-        if(!cooldownCalculator.IsAbilityOnCooldown(spell))
+        SpellCreater spellCreater = player.GetComponent<SpellCreater>();
+        Player playerComponent = player.GetComponent<Player>();
+        SpellBarManager spellBarManager = playerComponent.spellBarManager;
+
+        if (cooldownCalculator.IsAbilityOnCooldown(spell))
+            return;
+
+        if (agent.manaPointCurrent < spell.manaCost)
+            return;
+
+        if (spell.targetable)
         {
-            player.GetComponent<SpellCreater>().CreateSpell(spell, player, agent.spellTarget);
-            cooldownCalculator.StartCooldown(spell);
-            player.GetComponent<Player>().spellBarManager.SpellCasted(spellIndex);
+            if (enemy == null)
+                return;
+
+            if (Vector3.Distance(player.transform.position, enemy.transform.position) > spell.maxlenght)
+                return;
         }
+
+        player.GetComponent<SpellCreater>().CreateSpell(spell, player, enemy);
+
+        cooldownCalculator.StartCooldown(spell);
+        agent.manaPointCurrent -= spell.manaCost;
+        spellBarManager.SpellCasted(spellIndex);
     }
+
     public override void makeaDesicion()
     {
         //Debug.Log("Desicion");

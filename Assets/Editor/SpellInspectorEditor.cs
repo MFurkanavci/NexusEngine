@@ -29,6 +29,10 @@ public class SpellInspectorEditor : Editor
         arcitecture.type = (SpellArcType)EditorGUILayout.EnumPopup("Type", arcitecture.type);
 
         EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Mana Cost", EditorStyles.boldLabel);
+        arcitecture.manaCost = EditorGUILayout.FloatField("Mana Cost", arcitecture.manaCost);
+
+        EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Damage Type", EditorStyles.boldLabel);
         arcitecture.damageType = (DamageType)EditorGUILayout.EnumPopup("Damage Type", arcitecture.damageType);
 

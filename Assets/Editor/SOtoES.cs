@@ -16,6 +16,8 @@ public class SOtoES : EditorWindow
 
     private Tab currentTab = Tab.Agents;
 
+    private string search = ""; // Search string
+
     private List<AgentObject> agentsList = new List<AgentObject>(); // List to store instances of AgentObject
     private List<SpellArchitecture> spellsList = new List<SpellArchitecture>(); // List to store instances of SpellArchitecture
 
@@ -44,6 +46,11 @@ public class SOtoES : EditorWindow
         // Tabs for agents and spells
         currentTab = (Tab)GUILayout.Toolbar((int)currentTab, new string[] { "Agents", "Spells", "Items" });
 
+        //search = EditorGUILayout.TextField(search); but add a info tooltip to the search bar to explain how to use it (search by name, ID)
+        GUILayout.BeginHorizontal("box");
+        search = EditorGUILayout.TextField(new GUIContent("Search by name, ID, etc."), search);
+        GUILayout.EndHorizontal();
+
         if (currentTab == Tab.Agents)
         {
             DisplayAgentsTab();
@@ -66,7 +73,14 @@ public class SOtoES : EditorWindow
         spellsList.Clear();
         itemsList.Clear();
 
-        string[] agentGuids = AssetDatabase.FindAssets("t:AgentObject", new[] { "Assets/Scriptable Objects/Objects" });
+        if(search == null)
+        {
+            search = "";
+        }
+
+        if(search == "")
+        {
+        string[] agentGuids = AssetDatabase.FindAssets("t:AgentObject", new[] { "Assets/Scriptable Objects/Objects/Agents" });
         foreach (string guid in agentGuids)
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
@@ -88,6 +102,52 @@ public class SOtoES : EditorWindow
             string path = AssetDatabase.GUIDToAssetPath(guid);
             ItemObject item = AssetDatabase.LoadAssetAtPath<ItemObject>(path);
             itemsList.Add(item);
+        }
+        }
+        else
+        {
+            string[] agentGuids = AssetDatabase.FindAssets("t:AgentObject", new[] { "Assets/Scriptable Objects/Objects/Agents" });
+            foreach (string guid in agentGuids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                AgentObject agent = AssetDatabase.LoadAssetAtPath<AgentObject>(path);
+                if(agent.name.ToLower().Contains(search.ToLower()) || agent.ID.ToString().ToLower().Contains(search.ToLower()) || agent.type.ToString().ToLower().Equals(search.ToLower())|| agent.mobtype.ToString().ToLower().Equals(search.ToLower()))
+                {
+                    agentsList.Add(agent);
+                }
+                {
+                    agentsList.Add(agent);
+                }
+            }
+
+            string[] spellGuids = AssetDatabase.FindAssets("t:SpellArchitecture", new[] { "Assets/Scriptable Objects/Objects/Spells" });
+            foreach (string guid in spellGuids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                SpellArchitecture spell = AssetDatabase.LoadAssetAtPath<SpellArchitecture>(path);
+                if (
+                    spell.name.ToLower().Contains(search.ToLower()) || 
+                    spell.ID.ToString().ToLower().Equals(search.ToLower()) ||
+                    spell.type.ToString().ToLower().Equals(search.ToLower()) ||
+                    spell.damageType.ToString().ToLower().Equals(search.ToLower())
+                    )
+                {
+                    spellsList.Add(spell);
+                }
+            }
+
+            string[] itemGuids = AssetDatabase.FindAssets("t:ItemObject", new[] { "Assets/Scriptable Objects/Objects/Items" });
+            foreach (string guid in itemGuids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                ItemObject item = AssetDatabase.LoadAssetAtPath<ItemObject>(path);
+                if (
+                    item.name.ToLower().Contains(search.ToLower()) || 
+                    item.ID.ToString().ToLower().Contains(search.ToLower()) || item.type.ToString().ToLower().Equals(search.ToLower()))
+                {
+                    itemsList.Add(item);
+                }
+            }
         }
 
         // Force the window to update regularly
@@ -287,7 +347,7 @@ public class SOtoES : EditorWindow
     private void CreateNewAgentObject()
     {
         // Create a new instance of the AgentObject
-        AgentObject newAgent = ScriptableObject.CreateInstance<AgentObject>();
+        PlayableAgent newAgent = ScriptableObject.CreateInstance<PlayableAgent>();
 
         // Set the name of the agent
         newAgent.name = "New Agent";
@@ -297,7 +357,7 @@ public class SOtoES : EditorWindow
         agentsList.Add(newAgent);
 
         // Create a new asset for the agent object
-        AssetDatabase.CreateAsset(newAgent, "Assets/Scriptable Objects/Objects/Heroes/" + newAgent.name + ".asset");
+        AssetDatabase.CreateAsset(newAgent, "Assets/Scriptable Objects/Objects/Agents/" + newAgent.name + ".asset");
 
         //Open the edit window for the agent object
         AgentEditorWindow.OpenWindow(newAgent);
@@ -355,7 +415,7 @@ public class SOtoES : EditorWindow
         itemsList.Add(newitem);
 
         // Create a new asset for the item object
-        AssetDatabase.CreateAsset(newitem, "Assets/Scriptable Objects/Objects/Items/ItemObjects/" + newitem.name + ".asset");
+        AssetDatabase.CreateAsset(newitem, "Assets/Scriptable Objects/Objects/Items/" + newitem.name + ".asset");
 
         //Open the edit window for the item object
         ItemEditorWindow.OpenWindow(newitem);
@@ -393,6 +453,12 @@ public class AgentEditorWindow : EditorWindow
 
     private void OnGUI()
     {
+
+        if (agent == null)
+        {
+            GUILayout.Label("No agent selected.");
+            return;
+        }
         EditorGUILayout.LabelField("Agent Editor("+agent.name+")", EditorStyles.boldLabel);
 
         if(agent != null)
@@ -410,8 +476,9 @@ public class AgentEditorWindow : EditorWindow
                 AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(agent), agent.Name);
             };
         }
-        agent.ID = EditorGUILayout.IntField("ID", agent.ID);
+        EditorGUILayout.LabelField("ID                                     " + agent.ID.ToString());
         agent.type = (agentType)EditorGUILayout.EnumPopup("Type", agent.type);
+        agent.mobtype = (mobType)EditorGUILayout.EnumPopup("Mob Type", agent.mobtype);
         agent.description = EditorGUILayout.TextArea(agent.description, GUILayout.Height(100));
 
         EditorGUILayout.Space(10);
@@ -440,6 +507,7 @@ public class AgentEditorWindow : EditorWindow
         agent.hitPointCurrent = EditorGUILayout.FloatField("Current Hit Points", agent.hitPointCurrent);
         agent.regen_hitPoint = EditorGUILayout.FloatField("HP Regeneration", agent.regen_hitPoint);
         agent.manaPoint = EditorGUILayout.FloatField("Mana Points", agent.manaPoint);
+        agent.manaPointCurrent = EditorGUILayout.FloatField("Current Mana Points", agent.manaPointCurrent);
         agent.regen_manaPoint = EditorGUILayout.FloatField("Mana Regeneration", agent.regen_manaPoint);
         agent.wildPoint = EditorGUILayout.FloatField("Wild Points", agent.wildPoint);
         agent.regen_wildPoint = EditorGUILayout.FloatField("Wild Regeneration", agent.regen_wildPoint);
@@ -550,6 +618,11 @@ public class SpellEditorWindow : EditorWindow
 
     private void OnGUI()
     {
+        if (spellObject == null)
+        {
+            EditorGUILayout.LabelField("No Spell Selected", EditorStyles.boldLabel);
+            return;
+        }
         EditorGUILayout.LabelField("Spell Editor("+spellObject.name+")", EditorStyles.boldLabel);
 
         if (spellObject != null)
@@ -557,7 +630,14 @@ public class SpellEditorWindow : EditorWindow
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         EditorGUILayout.Space(30);
         EditorGUILayout.LabelField("ID                                     " + spellObject.ID.ToString());
-        spellObject.name = EditorGUILayout.TextField("Name", spellObject.name);
+        spellObject.Name = EditorGUILayout.TextField("Name", spellObject.Name);
+        if (GUI.changed)
+        {
+            EditorApplication.delayCall += () =>
+            {
+                AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(spellObject), spellObject.Name);
+            };
+        }
         spellObject.SplashArt = (Sprite)EditorGUILayout.ObjectField("Spalsh Art",spellObject.SplashArt,typeof(Sprite),allowSceneObjects:true);
         EditorGUILayout.LabelField("Description", EditorStyles.boldLabel);
         spellObject.description = EditorGUILayout.TextArea(spellObject.description, GUILayout.Height(100));
@@ -574,6 +654,10 @@ public class SpellEditorWindow : EditorWindow
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Damage Type", EditorStyles.boldLabel);
         spellObject.damageType = (DamageType)EditorGUILayout.EnumPopup("Damage Type", spellObject.damageType);
+
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Mana Cost", EditorStyles.boldLabel);
+        spellObject.manaCost = EditorGUILayout.FloatField("Mana Cost", spellObject.manaCost);
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Delay Time", EditorStyles.boldLabel);
@@ -816,6 +900,11 @@ public class ItemEditorWindow : EditorWindow
 
     public void OnGUI()
     {
+        if (item == null)
+        {
+            EditorGUILayout.LabelField("No Item Selected", EditorStyles.boldLabel);
+            return;
+        }
         EditorGUILayout.LabelField("Item Editor("+item.name+")", EditorStyles.boldLabel);
 
         if( item != null)
@@ -824,8 +913,15 @@ public class ItemEditorWindow : EditorWindow
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("General Information", EditorStyles.boldLabel);
-        item.ID = EditorGUILayout.IntField("ID", item.ID);
+        EditorGUILayout.LabelField("ID                                     " + item.ID.ToString());
         item.Name = EditorGUILayout.TextField("Name", item.Name);
+        if (GUI.changed)
+        {
+            EditorApplication.delayCall += () =>
+            {
+                AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(item), item.Name);
+            };
+        }
         item.SplashArt = (Sprite)EditorGUILayout.ObjectField("Splash Art", item.SplashArt, typeof(Sprite), allowSceneObjects: true);
         item.type = (itemType)EditorGUILayout.EnumPopup("Type", item.type);
         item.description = EditorGUILayout.TextArea(item.description, GUILayout.Height(100));

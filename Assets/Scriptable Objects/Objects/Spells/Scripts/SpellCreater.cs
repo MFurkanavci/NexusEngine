@@ -16,6 +16,7 @@ public class SpellCreater : MonoBehaviour
 
     public void CreateSpell(SpellArchitecture spellArch, GameObject caster, GameObject target)
     {
+        Debug.Log("SpellCreater");
         spell.spellArch = spellArch as Spells;
         spell.SetPlayer(caster);
         spell.SetSpellTarget(target);
@@ -25,7 +26,6 @@ public class SpellCreater : MonoBehaviour
             Debug.Log("SpellArch is null");
             return;
         }
-            
         if(targetable && target == null)
         {
             Debug.Log("Target is null");
@@ -33,17 +33,17 @@ public class SpellCreater : MonoBehaviour
         }
         else if (targetable && target != null)
         {
-            CreateSpellObject(spell.CheckSpellObjectType());
+            Debug.Log("Targetable spell");
+            CreateSpellObject(spellArch.spellObjectType);
         }
-        else if (!targetable && target == null)
+        else if (!targetable)
         {
-            CreateSpellObject(spell.CheckSpellObjectType());
-        }
-        else if (!targetable && target != null)
-        {
+            spell.SetDirection(MousePosition.MousePosition.GetMousePosition() - caster.transform.position);
+            CreateSpellObject(spellArch.spellObjectType);
         }
         else
         {
+            Debug.Log("Target is not targetable");
         }
     }
 
@@ -62,6 +62,7 @@ public class SpellCreater : MonoBehaviour
                 break;
             case SpellArcType.Self:
                 newSpell.AddComponent<SelfSpell>();
+                newSpell.GetComponent<SelfSpell>().SetSpell(spell);
                 break;
             case SpellArcType.Target:
                 newSpell.AddComponent<TargetSpell>();

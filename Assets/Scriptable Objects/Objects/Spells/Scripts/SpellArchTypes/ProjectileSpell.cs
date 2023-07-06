@@ -31,7 +31,7 @@ public class ProjectileSpell : MonoBehaviour
         gameObject.tag = "Spell";
         gameObject.name = spell.CheckName();
         transform.position = spell.CheckPlayer().transform.localPosition;
-        transform.localScale = new Vector3(spell.CheckWidth(), spell.CheckHeight(), spell.CheckDepth());
+        transform.localScale = new Vector3(spell.CheckMaxWidth(), spell.CheckMaxHeight(), spell.CheckMaxDepth());
         transform.rotation = transform.rotation;
         var rb = gameObject.AddComponent<Rigidbody>();
         var rd = GetComponent<Renderer>();
@@ -45,14 +45,6 @@ public class ProjectileSpell : MonoBehaviour
         rb.mass = 1f;
         GetComponent<Collider>().isTrigger = true;
         rb.constraints = rbConstraints;
-        CastSpell(spell.CheckSpellTarget());
-    }
-
-    public void CastSpell(GameObject target)
-    {
-            transform.LookAt(target.transform);
-            GetComponent<Rigidbody>().isKinematic = false;
-
     }
 
     public void OnTriggerEnter(Collider other)
@@ -68,12 +60,20 @@ public class ProjectileSpell : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (spellTarget != null)
-            transform.Translate(GetSpellTarget() * Time.deltaTime * spell.CheckSpeed());
-    }
-
-    public Vector3 GetSpellTarget()
-    {
-        return (spellTarget.transform.position - transform.position).normalized;
+        if(spellTarget != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, spellTarget.transform.position, spell.spellArch.maxspeed);
+        }
+        else
+        {
+            //set direction to spell.checkdirection
+            transform.position += spell.CheckDirection() * spell.spellArch.maxspeed;
+            spell.SetLenght(spell.CheckLenght() + spell.spellArch.maxspeed);
+            if (spell.CheckLenght() >= spell.CheckMaxLenght())
+            {
+                Destroy(gameObject);
+                spell.SetLenght(0);
+            }
+        }
     }
 }

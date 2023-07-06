@@ -14,7 +14,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public PlayableAgent agent_base;
+    public AgentObject agent_base;
     public PlayableAgent agent;
     public List<Spells> spells = new List<Spells>();
     public Item[] inventory = new Item[6];
@@ -63,23 +63,18 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            if (agent.spellTarget == null)
-            {
-                Debug.Log("Target is null");
-                return;
-            }
             BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
-            behaviour.makeanAbility(this.gameObject, null, spells[2], cooldownCalculator, 2);
+            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[2], cooldownCalculator, 2);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (agent.spellTarget == null)
-            {
-                Debug.Log("Target is null");
-                return;
-            }
-            spell.CreateSpell(spells[3], this.gameObject, agent.spellTarget);
-            spellBarManager.SpellCasted(3);
+            BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
+            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[3], cooldownCalculator, 3);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
+            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[4], cooldownCalculator, 4);
         }
     }
 

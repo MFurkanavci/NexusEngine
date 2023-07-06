@@ -12,7 +12,7 @@ public class ItemInspector : Editor
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("General Information", EditorStyles.boldLabel);
-        item.ID = EditorGUILayout.IntField("ID", item.ID);
+        EditorGUILayout.LabelField("ID                                     " + item.ID.ToString());
         item.Name = EditorGUILayout.TextField("Name", item.Name);
         item.SplashArt = (Sprite)EditorGUILayout.ObjectField("Splash Art", item.SplashArt, typeof(Sprite), allowSceneObjects: true);
         item.type = (itemType)EditorGUILayout.EnumPopup("Type", item.type);

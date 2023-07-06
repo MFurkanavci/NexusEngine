@@ -11,6 +11,7 @@ TagManager:
   - Terrain
   - Ground
   - Spell
+  - TargetHolder
   layers:
   - Default
   - TransparentFX

@@ -193,6 +193,11 @@ public class Spell
         return spellArch.lenght;
     }
 
+    public void SetLenght(float lenght)
+    {
+        spellArch.lenght = lenght;
+    }
+
     //check the max lenght of the spell
     public float CheckMaxLenght()
     {
@@ -322,6 +327,13 @@ public class Spell
     public Vector3 CheckDirection()
     {
         return spellArch.direction;
+    }
+
+    public void SetDirection(Vector3 direction)
+    {
+        //make sure the y is not changed at all
+        direction.y = 0;
+        spellArch.direction = direction.normalized;
     }
 
     //check the position of the spell

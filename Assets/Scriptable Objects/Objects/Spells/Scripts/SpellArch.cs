@@ -48,6 +48,8 @@ public class SpellArchitecture : ScriptableObject
 
     public int architectureCount = 1;
 
+    public float manaCost;
+
 
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mobs : MonoBehaviour
 {
-    public notPlayableAgent agent_base;
+    public AgentObject agent_base;
     public notPlayableAgent agent;
 
     public Item[] inventory = new Item[6];
