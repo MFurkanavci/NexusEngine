@@ -16,8 +16,8 @@ public class HPandMPManager : MonoBehaviour
 
     public void Update()
     {
-        HPText.text = player.agent.hitPointCurrent.ToString();
-        MPText.text = player.agent.manaPointCurrent.ToString();
+        HPText.text = player.agent.hitPointCurrent.ToString() + "/" + player.agent.hitPoint.ToString();
+        MPText.text = player.agent.manaPointCurrent.ToString() + "/" + player.agent.manaPoint.ToString();
 
         //my bars are vertical so i need to change the fill amount of the bar
         HPBar.size = 1 / (player.agent.hitPoint / player.agent.hitPointCurrent);

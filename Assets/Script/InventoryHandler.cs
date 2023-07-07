@@ -36,63 +36,49 @@ public class InventoryHandler : MonoBehaviour
         player.inventory[index] = item;
     }
 
-    public void buyedItem(Item item)
-    {    
-        if(enoughInventorySpace())
-        {
-
-        if (hasAllItemsInRecipe(item) && hasRecipe(item))
-        {
-            if (hasEnoughMoney(calculatePrice(buyedItems, item)))
-            {
-                removeMoney(calculatePrice(buyedItems, item));
-                removeItemsInRecipe(item);
-                addItem(item);
-                recalculateInventory();
-                addStattoPlayer(item);
-            }
-            else
-            {
-                return;
-            }
-        }
-        else if(haveSomeItemsInRecipe(item) && hasRecipe(item))
-        {
-            if (hasEnoughMoney(calculatePrice(buyedItems, item)))
-            {
-                removeMoney(calculatePrice(buyedItems, item));
-                removeItemsInRecipe(item);
-                addItem(item);
-                recalculateInventory();
-                addStattoPlayer(item);
-            }
-            else
-            {
-                return;
-            }
-        }
-        else
-        {
-            if (hasEnoughMoney(calculatePrice(buyedItems, item)))
-            {
-                removeMoney(item.cost_Buy);
-                addItem(item);
-                recalculateInventory();
-                addStattoPlayer(item);
-            }
-            else
-            {
-                return;
-            }
-        }
-        }
-        else
-        {
-            print("not enough inventory space");
-            return;
-        }
-        clearBuyedItems();
+    public void buyItem(Item item)
+{
+    if (!enoughInventorySpace())
+    {
+        return;
     }
+
+    int totalPrice = 0;
+    if (hasRecipe(item))
+    {
+        if (hasAllItemsInRecipe(item))
+        {
+            totalPrice = calculatePrice(buyedItems,item);
+        }
+        else if (haveSomeItemsInRecipe(item))
+        {
+            totalPrice = calculatePrice(buyedItems, item);
+        }
+        else
+        {
+            totalPrice = calculatePrice(item);
+        }
+    }
+    else
+    {
+        totalPrice = calculatePrice(item);
+    }
+
+    if (!hasEnoughMoney(totalPrice))
+    {
+        return;
+    }
+
+    removeMoney(totalPrice);
+    removeItemsInRecipe(item);
+    addItem(item);
+    recalculateInventory();
+    addStattoPlayer(item);
+    clearBuyedItems();
+}
+
+
+
 
     public void removeMoney(int amount)
     {
@@ -101,12 +87,25 @@ public class InventoryHandler : MonoBehaviour
     }
     public int calculatePrice(List<Item> items, Item item)
     {
-        int total = 0;
+        //this function calculates the price of the item, check all buyed items and calculate the price of the item, then return the price
+        int price = 0;
         foreach (Item child in items)
         {
-            total += child.cost_Buy;
+            price += child.cost_Buy;
         }
-        return item.cost_Buy - total;
+        foreach (Item child in item.recipe)
+        {
+            price -= child.cost_Buy;
+        }
+        price += item.cost_Buy;
+        return price;
+    }
+
+    public int calculatePrice(Item item)
+    {
+        int price = 0;
+        price += item.cost_Buy;
+        return price;
     }
 
     public bool hasEnoughMoney(int amount)
@@ -125,9 +124,9 @@ public class InventoryHandler : MonoBehaviour
     {
         if(!inventoryHasItem(item))
         {
-        removeStatfromPlayer(item);
-        removeItem(item);
-        recalculateInventory();
+            removeStatfromPlayer(item);
+            removeItem(item);
+            recalculateInventory();
         }
 
     }
@@ -150,7 +149,7 @@ public class InventoryHandler : MonoBehaviour
 
     public bool hasRecipe(Item item)
     {
-        if (item.recipe.Length > 0 && item.recipe != null)
+        if (item.recipe.Count > 0 && item.recipe != null)
         {
             return true;
         }
@@ -160,12 +159,7 @@ public class InventoryHandler : MonoBehaviour
         }
     }
     public bool hasAllItemsInRecipe(Item item)
-    {
-        //create a list of items that are in the player inventory
-        //check if the player has all the items in the recipe that are in the player inventory
-        //recipe can have same item more then once, so check the enough of the item in the inventory with removing the items from the list
-
-        
+    {        
         int count = 0;
         if (hasRecipe(item))
         {
@@ -188,23 +182,18 @@ public class InventoryHandler : MonoBehaviour
             }
         }
         
-            if (count == item.recipe.Length)
-            {
-                print("has all items in recipe");
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        if (count == item.recipe.Count)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool haveSomeItemsInRecipe(Item item)
     {
-        //create a list of items that are in the player inventory
-        //check if the player has some of the items in the recipe that are in the player inventory
-        //recipe can have same item more then once, so check the enough of the item in the inventory with removing the items from the list
-        
         int count = 0;
         if (hasRecipe(item))
         {
@@ -228,7 +217,6 @@ public class InventoryHandler : MonoBehaviour
         }
         if (count > 0)
         {
-            print("has some items in recipe");
             return true;
         }
         else
@@ -250,8 +238,8 @@ public class InventoryHandler : MonoBehaviour
         {
             if (inventoryHasItem(child))
             {
-                    removeStatfromPlayer(child);
-                    removeItem(child);
+                removeStatfromPlayer(child);
+                removeItem(child);
             }
         }
     }
@@ -349,7 +337,7 @@ public class InventoryHandler : MonoBehaviour
     }
     public void buy(Item item)
     {
-        buyedItem(item);
+        buyItem(item);
     }
 
     public void sell(Item item)

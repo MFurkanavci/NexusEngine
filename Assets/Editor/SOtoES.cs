@@ -931,8 +931,10 @@ public class ItemEditorWindow : EditorWindow
         item.damage_Physical = EditorGUILayout.FloatField("Physical Damage", item.damage_Physical);
         item.damage_Magical = EditorGUILayout.FloatField("Magical Damage", item.damage_Magical);
         item.hitPoint = EditorGUILayout.FloatField("Hit Points", item.hitPoint);
+        item.hitPointCurrent = EditorGUILayout.FloatField("Current Hit Points", item.hitPointCurrent);
         item.regen_hitPoint = EditorGUILayout.FloatField("HP Regeneration", item.regen_hitPoint);
         item.manaPoint = EditorGUILayout.FloatField("Mana Points", item.manaPoint);
+        item.manaPointCurrent = EditorGUILayout.FloatField("Current Mana Points", item.manaPointCurrent);
         item.regen_manaPoint = EditorGUILayout.FloatField("MP Regeneration", item.regen_manaPoint);
         item.armor_Physical = EditorGUILayout.FloatField("Physical Armor", item.armor_Physical);
         item.armor_Magical = EditorGUILayout.FloatField("Magical Armor", item.armor_Magical);
@@ -991,14 +993,38 @@ public class ItemEditorWindow : EditorWindow
         EditorGUILayout.LabelField("Recipe", EditorStyles.boldLabel);
         EditorGUILayout.HelpBox("Drag and drop Item objects here.", MessageType.Info);
 
+        for (int i = 0; i < item.recipe.Count; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            item.recipe[i] = (Item)EditorGUILayout.ObjectField(item.recipe[i], typeof(Item), allowSceneObjects: true);
+            if (GUILayout.Button("X", GUILayout.Width(20)))
+            {
+                item.cost_Buy -= item.recipe[i].cost_Buy;
+                item.cost_Sell -= item.recipe[i].cost_Sell;
+                
+                item.recipe.RemoveAt(i);
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
         //add button to add new item
         if (GUILayout.Button("Add New Item"))
         {
-            //create a popup window to select an item from the asset folder
-            EditorUtility.DisplayDialog("Error", "This feature is not implemented yet.", "OK");
-
+            int controlID = EditorGUIUtility.GetControlID(FocusType.Passive);
+            EditorGUIUtility.ShowObjectPicker<Item>(null, true, "", controlID);
         }
-            EditorGUILayout.EndScrollView();
+        if (Event.current.commandName == "ObjectSelectorUpdated"&& Event.current.type == EventType.ExecuteCommand)
+        {
+            if (EditorGUIUtility.GetObjectPickerObject() != null)
+            {
+                item.recipe.Add((Item)EditorGUIUtility.GetObjectPickerObject());
+                item.cost_Buy += item.recipe[item.recipe.Count - 1].cost_Buy;
+                item.cost_Sell += item.recipe[item.recipe.Count - 1].cost_Sell;
+            }
+        }
+        
+        EditorGUILayout.EndScrollView();
+        
         }
 
         if(GUI.changed)

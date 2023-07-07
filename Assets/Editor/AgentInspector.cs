@@ -81,6 +81,10 @@ public class AgentInspector : Editor
         agent.canMoveThroughOthers = EditorGUILayout.Toggle("Can Move Through Others?", agent.canMoveThroughOthers);
         agent.isFriendly = EditorGUILayout.Toggle("Is Friendly?", agent.isFriendly);
         agent.isEnemy = EditorGUILayout.Toggle("Is Enemy?", agent.isEnemy);
+
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Agent Status", EditorStyles.boldLabel);
+        agent.gold = EditorGUILayout.IntField("Gold", agent.gold);
         
 
         EditorGUILayout.Space(10);

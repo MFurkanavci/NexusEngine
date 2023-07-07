@@ -50,13 +50,9 @@ public class Player : MonoBehaviour
         cooldownCalculator = GetComponent<CooldownCalculator>();
         cooldownCalculator.InitializeAbilityData(agent.activeSpells);
         
-        //agentStats = new dictionary();
+        agentStats = new dictionary();
         
-        //agentStats.setplayableagentBaseStats(agent);
-
-
-        //create a new instance of the makeanattack class
-        //add the agent to the makeanattack class
+        agentStats.setplayableagentBaseStats(agent);
     }
 
     public void Update()

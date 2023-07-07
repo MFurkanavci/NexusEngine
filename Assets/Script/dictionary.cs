@@ -13,6 +13,15 @@ public class dictionary {
 
     public Dictionary<string, float> stats = new Dictionary<string, float>();
 
+    public dictionary(){
+        //set the stats to 0
+        foreach (FieldInfo field in typeof(PlayableAgent).GetFields()){
+            if (field.FieldType == typeof(float)){
+                stats[field.Name] = 0;
+            }
+        }
+    }
+
     public float getStat(string name){
         return stats[name];
     }
@@ -30,7 +39,15 @@ public class dictionary {
     }
 
     public void addStat(Dictionary<string, float> stats){
+        //filter out the stats that are not in the dictionary and values that are 0
+        var filteredStats = new Dictionary<string, float>();
         foreach (KeyValuePair<string, float> stat in stats){
+            if (stat.Value != 0){
+                filteredStats[stat.Key] = stat.Value;
+            }
+        }
+        //add the stats
+        foreach (KeyValuePair<string, float> stat in filteredStats){
             addStat(stat.Key, stat.Value);
         }
     }
@@ -69,8 +86,10 @@ public class dictionary {
         setStat("damage_Physical", agent.damage_Physical);
         setStat("damage_Magical", agent.damage_Magical);
         setStat("hitPoint", agent.hitPoint);
+        setStat("hitPointCurrent", agent.hitPoint);
         setStat("regen_hitPoint", agent.regen_hitPoint);
         setStat("manaPoint", agent.manaPoint);
+        setStat("manaPointCurrent", agent.manaPoint);
         setStat("regen_manaPoint", agent.regen_manaPoint);
         setStat("wildPoint", agent.wildPoint);
         setStat("regen_wildPoint", agent.regen_wildPoint);
@@ -134,8 +153,10 @@ public class dictionary {
         setStat("damage_Physical", item.damage_Physical);
         setStat("damage_Magical", item.damage_Magical);
         setStat("hitPoint", item.hitPoint);
+        setStat("hitPointCurrent", item.hitPoint);
         setStat("regen_hitPoint", item.regen_hitPoint);
         setStat("manaPoint", item.manaPoint);
+        setStat("manaPointCurrent", item.manaPoint);
         setStat("regen_manaPoint", item.regen_manaPoint);
         setStat("wildPoint", item.wildPoint);
         setStat("regen_wildPoint", item.regen_wildPoint);

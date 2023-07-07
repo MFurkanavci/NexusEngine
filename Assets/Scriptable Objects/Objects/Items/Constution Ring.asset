@@ -20,8 +20,10 @@ MonoBehaviour:
   damage_Physical: 0
   damage_Magical: 0
   hitPoint: 100
+  hitPointCurrent: 100
   regen_hitPoint: 10
-  manaPoint: 0
+  manaPoint: 50
+  manaPointCurrent: 50
   regen_manaPoint: 0
   wildPoint: 0
   regen_wildPoint: 0

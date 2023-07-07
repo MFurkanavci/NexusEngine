@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: Regen Gloves
   m_EditorClassIdentifier: 
-  ID: 4002
+  ID: 4001
   Name: Regen Gloves
   SplashArt: {fileID: 0}
   type: 2
@@ -20,8 +20,10 @@ MonoBehaviour:
   damage_Physical: 0
   damage_Magical: 0
   hitPoint: 500
+  hitPointCurrent: 500
   regen_hitPoint: 100
   manaPoint: 0
+  manaPointCurrent: 0
   regen_manaPoint: 0
   wildPoint: 0
   regen_wildPoint: 0
@@ -48,7 +50,7 @@ MonoBehaviour:
   leech: 0
   time: 0
   cost_Buy: 800
-  cost_Sell: 125
+  cost_Sell: 500
   stack_Count: 0
   merge_Count: 0
   isCritible: 0
@@ -65,5 +67,5 @@ MonoBehaviour:
   activeSpells: []
   passiveSpells: []
   recipe:
-  - {fileID: 11400000, guid: 21aa89077bfab2c46bc3f817d1f55a51, type: 2}
   - {fileID: 11400000, guid: afee06d2264994246b59bba7ad95ad74, type: 2}
+  - {fileID: 11400000, guid: 21aa89077bfab2c46bc3f817d1f55a51, type: 2}

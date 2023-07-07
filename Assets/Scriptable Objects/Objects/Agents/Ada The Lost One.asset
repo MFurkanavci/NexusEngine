@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Ada The Lost One
-  ID: 1002
+  ID: 1000
   type: 2
   mobtype: 0
   description: 
@@ -25,7 +25,7 @@ MonoBehaviour:
   level: 5
   modifier: 1.2
   experience: 450
-  damage_Physical: 250
+  damage_Physical: 100
   damage_range: 3
   damage_Magical: 0
   damage_True: 0

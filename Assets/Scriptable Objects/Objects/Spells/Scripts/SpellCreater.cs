@@ -16,7 +16,6 @@ public class SpellCreater : MonoBehaviour
 
     public void CreateSpell(SpellArchitecture spellArch, GameObject caster, GameObject target)
     {
-        Debug.Log("SpellCreater");
         spell.spellArch = spellArch as Spells;
         spell.SetPlayer(caster);
         spell.SetSpellTarget(target);
@@ -33,7 +32,6 @@ public class SpellCreater : MonoBehaviour
         }
         else if (targetable && target != null)
         {
-            Debug.Log("Targetable spell");
             CreateSpellObject(spellArch.spellObjectType);
         }
         else if (!targetable)

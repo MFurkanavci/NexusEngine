@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Dummy
-  ID: 1003
+  ID: 1001
   type: 2
   mobtype: 4
   description: 
@@ -33,13 +33,14 @@ MonoBehaviour:
   hitPointCurrent: 9999
   regen_hitPoint: 99
   manaPoint: 99
+  manaPointCurrent: 0
   regen_manaPoint: 99
   wildPoint: 99
   regen_wildPoint: 99
   energyPoint: 99
   regen_energyPoint: 99
-  armor_Physical: 99
-  armor_Magical: 99
+  armor_Physical: 100
+  armor_Magical: 100
   speed_Movement: 99
   speed_Attack: 99
   speed_Cast: 99

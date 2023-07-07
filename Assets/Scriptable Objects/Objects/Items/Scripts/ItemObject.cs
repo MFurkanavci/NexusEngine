@@ -25,8 +25,10 @@ public class ItemObject : ScriptableObject
         damage_Physical = 0,
         damage_Magical = 0,
         hitPoint = 0,
+        hitPointCurrent = 0,
         regen_hitPoint = 0,
         manaPoint = 0,
+        manaPointCurrent = 0,
         regen_manaPoint = 0,
         wildPoint = 0,
         regen_wildPoint = 0,
@@ -79,6 +81,6 @@ public class ItemObject : ScriptableObject
         activeSpells,
         passiveSpells;
 
-    public Item[]
+    public List<Item>
         recipe;
 }

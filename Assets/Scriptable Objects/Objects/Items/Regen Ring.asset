@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: Regen Ring
   m_EditorClassIdentifier: 
-  ID: 4003
+  ID: 4002
   Name: Regen Ring
   SplashArt: {fileID: 0}
   type: 2
@@ -20,8 +20,10 @@ MonoBehaviour:
   damage_Physical: 0
   damage_Magical: 0
   hitPoint: 200
+  hitPointCurrent: 200
   regen_hitPoint: 50
   manaPoint: 0
+  manaPointCurrent: 0
   regen_manaPoint: 0
   wildPoint: 0
   regen_wildPoint: 0

@@ -11,6 +11,8 @@ public class DamageCalculations : MonoBehaviour
     private float magicalResistance;
     private float cachedDamage;
 
+    private DamageType cachedType;
+
     public DamageType damageType;
 
     public AgentObject agent;
@@ -33,24 +35,28 @@ public class DamageCalculations : MonoBehaviour
     public float RecieveDamage(float damage, DamageType type)
     {
         float totalDamage = 0;
-        switch (type)
+        if(cachedDamage != damage || cachedType != type)
         {
-            case DamageType.Physical:
-                totalDamage = damage * (100 /(100 + agent.armor_Physical));
-                break;
-            case DamageType.Magical:
-                totalDamage = damage * (100 / (100 + agent.armor_Magical));
-                break;
-            case DamageType.True:
-                totalDamage = damage;
-                break;
-        }
-
-        if (cachedDamage != totalDamage)
-        {
-            // update the cached damage
+            switch (type)
+            {
+                case DamageType.Physical:
+                    totalDamage = damage * (100 /(100 + agent.armor_Physical));
+                    break;
+                case DamageType.Magical:
+                    totalDamage = damage * (100 / (100 + agent.armor_Magical));
+                    break;
+                case DamageType.True:
+                    totalDamage = damage;
+                    break;
+            }
             cachedDamage = totalDamage;
+            cachedType = type;
         }
+        else
+        {
+            totalDamage = cachedDamage;
+        }
+        
         print("Recieved damage: " + totalDamage);
         return totalDamage;
     }
