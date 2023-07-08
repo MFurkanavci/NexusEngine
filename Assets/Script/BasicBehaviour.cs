@@ -9,9 +9,9 @@ public abstract class BasicBehaviour
     public notPlayableAgent notPlayableAgent { get; set; }
 
     public AgentObject agent { get; set; }
-    public abstract void makeanAttack(GameObject player, GameObject enemy);
-    public abstract void makeanAbility(GameObject player, GameObject enemy,SpellArchitecture spell,CooldownCalculator cooldownCalculator, int spellIndex);
-    public abstract void makeaDesicion();
+    public abstract void MakeAnAttack(GameObject player, GameObject enemy,CooldownCalculator cooldownCalculator);
+    public abstract void MakeAnAbility(GameObject player, GameObject enemy,SpellArchitecture spell,CooldownCalculator cooldownCalculator, int spellIndex);
+    public abstract void MakeADesicion();
 
     public BasicBehaviour(PlayableAgent playableAgent, notPlayableAgent notPlayableAgent, AgentObject agent)
     {

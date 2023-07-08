@@ -4,51 +4,34 @@ using UnityEngine;
 
 public class Targeter : MakeAnBehaviour
 {
-
-
     public Targeter(PlayableAgent playableAgent, notPlayableAgent notPlayableAgent, AgentObject agent) : base(playableAgent, notPlayableAgent, agent)
     {
     }
-    public bool checkAgentType()
+
+    public bool CheckAgentType()
     {
-        if (agent.GetType() == typeof(PlayableAgent))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return agent.GetType() == typeof(PlayableAgent);
     }
 
-    public void setTarget(GameObject enemy)
+    public void SetTarget(GameObject enemy)
     {
-        //check the agent type and set the target
-        if (checkAgentType())
+        if (CheckAgentType())
         {
-            //check _ishit is an enemy
-            if(targetTag(_isHit()) == "Mob")
+            string targetTag = TargetTag(enemy);
+            if (targetTag == "Mob")
             {
-                agent.enemyTarget = _isHit().transform.GetComponent<Mobs>().agent;
-                //Debug.Log("Target is an Enemy");
+                agent.enemyTarget = enemy.transform.GetComponent<Mobs>().agent;
             }
-            else if(targetTag(_isHit()) == "Player")
+            else if (targetTag == "Player" || targetTag == "Ally")
             {
-                agent.allyTarget = _isHit().transform.GetComponent<Player>().agent;
-                //Debug.Log("Target is an Player");
-            }
-            else if(targetTag(_isHit()) == "Ally")
-            {
-                agent.allyTarget = _isHit().transform.GetComponent<Player>().agent;
-                //Debug.Log("Target is an Player");
+                agent.allyTarget = enemy.transform.GetComponent<Player>().agent;
             }
             else
             {
                 Debug.Log("Target is null");
             }
-
         }
-        else if (!checkAgentType())
+        else
         {
             Collider[] enemies = Physics.OverlapSphere(enemy.transform.position, agent.damage_range);
             Collider closestPlayer = null;
@@ -56,7 +39,7 @@ public class Targeter : MakeAnBehaviour
             Vector3 position = enemy.transform.position;
             foreach (Collider player in enemies)
             {
-                if(player != null && player.tag == "Player")
+                if (player != null && player.tag == "Player")
                 {
                     Vector3 diff = player.transform.position - position;
                     float curDistance = diff.sqrMagnitude;
@@ -70,23 +53,17 @@ public class Targeter : MakeAnBehaviour
 
             if (closestPlayer != null)
             {
-                Debug.Log(closestPlayer.name);
                 agent.allyTarget = closestPlayer.transform.parent.GetComponent<Player>().agent;
-                Debug.Log("Target is an Player");
+                Debug.Log("Target is a Player");
             }
             else
             {
                 Debug.Log("Target is null");
             }
-
-        }
-        else
-        {
-            Debug.Log("Target is null");
         }
     }
 
-    public AgentObject getTarget()
+    public AgentObject GetTarget()
     {
         if (agent.enemyTarget != null)
         {
@@ -102,16 +79,15 @@ public class Targeter : MakeAnBehaviour
         }
     }
 
-    public void clearTarget()
+    public void ClearTarget()
     {
         agent.enemyTarget = null;
         agent.allyTarget = null;
         agent.spellTarget = null;
     }
 
-    public GameObject _isHit()
+    public GameObject IsHit()
     {
-        //check if the raycast hit something
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 100))
@@ -122,39 +98,23 @@ public class Targeter : MakeAnBehaviour
         {
             return null;
         }
-
     }
-    
 
-    public string targetTag(GameObject target)
+    public string TargetTag(GameObject target)
     {
         if (target == null)
         {
             return "Null";
         }
-        //check the tag of the target
-        if (target.tag == "Mob")
+
+        string tag = target.tag;
+        if (tag == "Mob" || tag == "Ally" || tag == "Player" || tag == "Interactable")
         {
-            return "Mob";
-        }
-        else if (target.tag == "Ally")
-        {
-            return "Ally";
-        }
-        else if (target.tag == "Player")
-        {
-            return "Player";
-        }
-        else if (target.tag == "Interactable")
-        {
-            return "Interactable";
+            return tag;
         }
         else
         {
             return "Null";
         }
     }
-
-    
-
 }

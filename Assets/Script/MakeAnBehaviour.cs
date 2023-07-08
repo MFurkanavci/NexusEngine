@@ -2,25 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GCD;  // <--- This is the namespace of the GCD.cs file
 using TMPro;
 
 public class MakeAnBehaviour : BasicBehaviour
 {
-    
-
     public MakeAnBehaviour(PlayableAgent playableAgent, notPlayableAgent notPlayableAgent, AgentObject agent) : base(playableAgent, notPlayableAgent, agent)
     {
         
     }
 
-    public AgentObject getAgent()
+    public AgentObject GetAgent()
     {
         return agent;
     }
-    public override void makeanAttack(GameObject player, GameObject enemy)
+
+    public override void MakeAnAttack(GameObject player, GameObject enemy, CooldownCalculator cooldownCalculator)
     {
-        CooldownCalculator cooldownCalculator = player.GetComponent<CooldownCalculator>();
+        if (agent.activeSpells[0] == null)
+            return;
         if (!cooldownCalculator.IsAbilityOnCooldown(agent.activeSpells[0]))
         {
             player.GetComponent<SpellCreater>().CreateSpell(agent.activeSpells[0], player, enemy);
@@ -29,7 +28,7 @@ public class MakeAnBehaviour : BasicBehaviour
         }        
     }
 
-    public override void makeanAbility(GameObject player, GameObject enemy, SpellArchitecture spell, CooldownCalculator cooldownCalculator, int spellIndex)
+    public override void MakeAnAbility(GameObject player, GameObject enemy, SpellArchitecture spell, CooldownCalculator cooldownCalculator, int spellIndex)
     {
         SpellCreater spellCreater = player.GetComponent<SpellCreater>();
         Player playerComponent = player.GetComponent<Player>();
@@ -57,31 +56,9 @@ public class MakeAnBehaviour : BasicBehaviour
         spellBarManager.SpellCasted(spellIndex);
     }
 
-    public override void makeaDesicion()
+    public override void MakeADesicion()
     {
-        //Debug.Log("Desicion");
-    }
-    
-    public void Update()
-    {
-        //keep updating the global cooldown for the agent
-
-    }
-
-    enum AgentState
-    {
-        Idle,
-        Moving,
-        Attacking,
-        Ability,
-        Dead
-    }
-
-    enum DamageType
-    {
-        Physical,
-        Magical,
-        True
+        //Debug.Log("Decision");
     }
 
 }

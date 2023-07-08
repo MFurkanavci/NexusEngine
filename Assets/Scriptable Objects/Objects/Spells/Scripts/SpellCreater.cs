@@ -31,7 +31,7 @@ public class SpellCreater : MonoBehaviour
             return;
         }
         else if (targetable && target != null)
-        {
+        {   
             CreateSpellObject(spellArch.spellObjectType);
         }
         else if (!targetable)
@@ -64,9 +64,12 @@ public class SpellCreater : MonoBehaviour
                 break;
             case SpellArcType.Target:
                 newSpell.AddComponent<TargetSpell>();
+                newSpell.GetComponent<TargetSpell>().SetSpell(spell);
                 break;
             case SpellArcType.Area:
                 newSpell.AddComponent<AreaSpell>();
+                newSpell.GetComponent<AreaSpell>().SetSpell(spell);
+                newSpell.transform.position = MousePosition.MousePosition.GetMousePosition();
                 break;
         }
     }

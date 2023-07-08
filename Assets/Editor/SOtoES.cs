@@ -115,9 +115,6 @@ public class SOtoES : EditorWindow
                 {
                     agentsList.Add(agent);
                 }
-                {
-                    agentsList.Add(agent);
-                }
             }
 
             string[] spellGuids = AssetDatabase.FindAssets("t:SpellArchitecture", new[] { "Assets/Scriptable Objects/Objects/Spells" });
@@ -487,7 +484,7 @@ public class AgentEditorWindow : EditorWindow
         agent.modifier = EditorGUILayout.FloatField("Modifier", agent.modifier);
         agent.experience = EditorGUILayout.FloatField("Experience", agent.experience);
         agent.damage_Physical = EditorGUILayout.FloatField("Physical Damage", agent.damage_Physical);
-        agent.damage_range = EditorGUILayout.FloatField("Range Damage", agent.damage_range);
+        agent.damage_range = EditorGUILayout.FloatField("Damage Range", agent.damage_range);
         agent.damage_Magical = EditorGUILayout.FloatField("Magical Damage", agent.damage_Magical);
         agent.damage_True = EditorGUILayout.FloatField("True Damage", agent.damage_True);
         agent.speed_Movement = EditorGUILayout.FloatField("Movement Speed", agent.speed_Movement);
@@ -889,6 +886,9 @@ public class ItemEditorWindow : EditorWindow
 
     private Vector2 scrollPos;
 
+    
+    private bool isRecipePickerOpen = false;
+
     public static void OpenWindow(ItemObject item)
     {
         var window = GetWindow<ItemEditorWindow>();
@@ -980,7 +980,7 @@ public class ItemEditorWindow : EditorWindow
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Spells", EditorStyles.boldLabel);
-        EditorGUILayout.HelpBox("Drag and drop SpellArchitecture objects here.", MessageType.Info);
+        EditorGUILayout.HelpBox("Click \"Add New Spell\" button to create a Item Spell.", MessageType.Info);
 
         //add button to add new spell
         if (GUILayout.Button("Add New Spell"))
@@ -989,37 +989,45 @@ public class ItemEditorWindow : EditorWindow
             EditorUtility.DisplayDialog("Error", "This feature is not implemented yet.", "OK");
         }
 
+
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Recipe", EditorStyles.boldLabel);
-        EditorGUILayout.HelpBox("Drag and drop Item objects here.", MessageType.Info);
+        EditorGUILayout.HelpBox("Click \"Add New Item\" button to create a recipe.", MessageType.Info);
 
-        for (int i = 0; i < item.recipe.Count; i++)
+        if (item.recipe == null)
         {
-            EditorGUILayout.BeginHorizontal();
-            item.recipe[i] = (Item)EditorGUILayout.ObjectField(item.recipe[i], typeof(Item), allowSceneObjects: true);
-            if (GUILayout.Button("X", GUILayout.Width(20)))
-            {
-                item.cost_Buy -= item.recipe[i].cost_Buy;
-                item.cost_Sell -= item.recipe[i].cost_Sell;
-                
-                item.recipe.RemoveAt(i);
-            }
-            EditorGUILayout.EndHorizontal();
+            item.recipe = new List<Item>();
         }
+        for (int i = 0; i < item.recipe.Count; i++)
+            {
+                EditorGUILayout.BeginHorizontal();
+                item.recipe[i] = (Item)EditorGUILayout.ObjectField(item.recipe[i], typeof(Item), allowSceneObjects: true);
+                if (GUILayout.Button("X", GUILayout.Width(20)))
+                {
+                    item.cost_Buy -= item.recipe[i].cost_Buy;
+                    item.cost_Sell -= item.recipe[i].cost_Sell;
+                
+                    item.recipe.RemoveAt(i);
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+        
 
         //add button to add new item
         if (GUILayout.Button("Add New Item"))
         {
             int controlID = EditorGUIUtility.GetControlID(FocusType.Passive);
             EditorGUIUtility.ShowObjectPicker<Item>(null, true, "", controlID);
+            isRecipePickerOpen = true;
         }
-        if (Event.current.commandName == "ObjectSelectorUpdated"&& Event.current.type == EventType.ExecuteCommand)
+        if (Event.current.commandName == "ObjectSelectorClosed"&& Event.current.type == EventType.ExecuteCommand)
         {
-            if (EditorGUIUtility.GetObjectPickerObject() != null)
+            if (isRecipePickerOpen && EditorGUIUtility.GetObjectPickerObject() != null)
             {
                 item.recipe.Add((Item)EditorGUIUtility.GetObjectPickerObject());
                 item.cost_Buy += item.recipe[item.recipe.Count - 1].cost_Buy;
                 item.cost_Sell += item.recipe[item.recipe.Count - 1].cost_Sell;
+                isRecipePickerOpen = false;
             }
         }
         
@@ -1027,7 +1035,7 @@ public class ItemEditorWindow : EditorWindow
         
         }
 
-        if(GUI.changed)
+        if(GUI.changed && !isRecipePickerOpen)
         {
             EditorUtility.SetDirty(item);
         }

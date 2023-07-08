@@ -33,7 +33,7 @@ public class AgentInspector : Editor
         agent.modifier = EditorGUILayout.FloatField("Modifier", agent.modifier);
         agent.experience = EditorGUILayout.FloatField("Experience", agent.experience);
         agent.damage_Physical = EditorGUILayout.FloatField("Physical Damage", agent.damage_Physical);
-        agent.damage_range = EditorGUILayout.FloatField("Range Damage", agent.damage_range);
+        agent.damage_range = EditorGUILayout.FloatField("Damage Range", agent.damage_range);
         agent.damage_Magical = EditorGUILayout.FloatField("Magical Damage", agent.damage_Magical);
         agent.damage_True = EditorGUILayout.FloatField("True Damage", agent.damage_True);
         agent.speed_Movement = EditorGUILayout.FloatField("Movement Speed", agent.speed_Movement);

@@ -41,7 +41,7 @@ MonoBehaviour:
   regen_energyPoint: 99
   armor_Physical: 100
   armor_Magical: 100
-  speed_Movement: 99
+  speed_Movement: 35
   speed_Attack: 99
   speed_Cast: 99
   penetration_Physical: 99

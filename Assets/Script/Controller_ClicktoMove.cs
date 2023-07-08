@@ -1,70 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using TMPro;
 
 public class Controller_ClicktoMove : MonoBehaviour
 {
-
-    [SerializeField] Camera _mainCamera;
+    [SerializeField] private Camera _mainCamera;
     public GameObject click;
 
     private NavMeshAgent agentNM;
 
-    public PlayableAgent agent;
+    private PlayableAgent agent;
 
     private MakeAnBehaviour behaviour;
 
     private Targeter targeter;
 
-    public GameObject 
-        target,
-        spellTarget;
-
-    public TMP_Text text;
+    public GameObject target;
+    public GameObject spellTarget;
 
     public bool isInRange = false;
 
     private void Start()
     {
         agentNM = GetComponent<NavMeshAgent>();
-        agent = this.gameObject.GetComponent<Player>().agent;
+        agent = GetComponent<Player>().agent;
         targeter = new Targeter(agent, null, null);
         behaviour = new MakeAnBehaviour(agent, null, null);
 
-        Debug.Log(agent.Name);
-        
-    }
+        if (_mainCamera == null)
+        {
+            _mainCamera = Camera.main;
+        }
 
+        if(agent.activeSpells[0] == null)
+        {
+            return;
+        }
+
+        if(agent.activeSpells[0].maxlenght < agent.damage_range)
+        {
+            agent.activeSpells[0].maxlenght = agent.damage_range;
+        }
+        else
+        {
+            agent.damage_range = agent.activeSpells[0].maxlenght;
+        }
+
+    }
 
     private void Update()
     {
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
-            //check if the mouse is over the UI
             if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
-                setSpellTarget(getTarget());
-                calculateRaycast();
+                SetSpellTarget(GetTarget());
+                CalculateRaycast();
             }
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            //check if the mouse is over the UI
             if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
-                setSpellTarget(getTarget());
+                SetSpellTarget(GetTarget());
             }
         }
 
         agentNM.speed = agent.speed_Movement;
-            
-        
-        if(target != null)
+
+        if (target != null)
         {
-            move(target);
+            Move(target);
         }
         else
         {
@@ -72,7 +78,7 @@ public class Controller_ClicktoMove : MonoBehaviour
             isInRange = false;
         }
 
-        if(spellTarget != null)
+        if (spellTarget != null)
         {
             agent.spellTarget = spellTarget;
         }
@@ -80,12 +86,8 @@ public class Controller_ClicktoMove : MonoBehaviour
         {
             agent.spellTarget = null;
         }
-
-        
-        
-
     }
-    //draw range of the agent
+
     private void OnDrawGizmos()
     {
         if (agent == null)
@@ -94,65 +96,58 @@ public class Controller_ClicktoMove : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, agent.damage_range);
     }
 
-
-
-    public void calculateRaycast()
+    public void CalculateRaycast()
     {
-        Ray _Ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit _isHit;
-        if (Physics.Raycast(_Ray, out _isHit, 100))
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
         {
-            if (_isHit.transform.tag == "Ground")
+            if (hit.transform.tag == "Ground" || hit.transform.tag == "Spell")
             {
-                move(_isHit.point);
+                Move(hit.point);
                 target = null;
-                targeter.clearTarget();
+                targeter.ClearTarget();
             }
-            else if (_isHit.transform.tag == "Mob")
+            else if (hit.transform.tag == "Mob")
             {
-                target = _isHit.transform.gameObject;
-                targeter.setTarget(null);
+                target = hit.transform.gameObject;
+                targeter.SetTarget(target);
             }
         }
-        
     }
 
-    //move to the point
-    public void move(Vector3 point)
+    public void Move(Vector3 point)
     {
         agentNM.SetDestination(point);
     }
 
-    public bool isTargetInRange()
+    public bool IsTargetInRange()
     {
         return isInRange;
     }
 
-    //move to the closest point
-    public void move(GameObject target)
+    public void Move(GameObject targetObject)
     {
-        if (isTargetInRange())
+        if (IsTargetInRange())
         {
-            behaviour.makeanAttack(gameObject, target);
+            behaviour.MakeAnAttack(gameObject, targetObject, GetComponent<Player>().cooldownCalculator);
         }
         else
         {
-            agentNM.SetDestination(closestPoint(isInRange));
+            agentNM.SetDestination(ClosestPoint(IsTargetInRange()));
         }
-        closestPoint(isInRange);
-        
+        ClosestPoint(IsTargetInRange());
     }
 
-    //get the closest point to the target
-    public Vector3 closestPoint(bool isTargetInRange)
+
+    public Vector3 ClosestPoint(bool isTargetInRange)
     {
-            
-        float distance = Vector3.Distance(transform.position, target.transform.position);    
+        float distance = Vector3.Distance(transform.position, target.transform.position);
         Vector3 closestPoint = target.GetComponent<Collider>().ClosestPoint(transform.position);
         Vector3 offset = closestPoint - transform.position;
         offset = offset.normalized * agent.damage_range;
         closestPoint = transform.position + offset;
-        if (distance <= agent.damage_range - .5f && !isTargetInRange)
+        if (distance <= agent.damage_range - 0.5f && !isTargetInRange)
         {
             isInRange = true;
             return transform.position;
@@ -165,41 +160,40 @@ public class Controller_ClicktoMove : MonoBehaviour
         else
         {
             return closestPoint;
-        }       
+        }
     }
 
-    public GameObject getTarget()
+    public GameObject GetTarget()
     {
-        Ray _Ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit _isHit;
-        if (Physics.Raycast(_Ray, out _isHit, 100))
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
         {
-            if (_isHit.transform.tag == "Ground")
+            if (hit.transform.tag == "Ground")
             {
                 spellTarget = null;
-                targeter.clearTarget();
+                targeter.ClearTarget();
             }
-            else if (_isHit.transform.tag == "Mob")
+            else if (hit.transform.tag == "Mob")
             {
-                spellTarget = _isHit.transform.gameObject;
+                spellTarget = hit.transform.gameObject;
             }
         }
         return spellTarget;
     }
 
-    public void setTarget(GameObject target)
+    public void SetTarget(GameObject target)
     {
         this.target = target;
     }
 
-    public void setSpellTarget(GameObject target)
+    public void SetSpellTarget(GameObject target)
     {
         this.spellTarget = target;
     }
 
-    Vector3 getTargetPosition()
+    Vector3 GetTargetPosition()
     {
         return target.transform.position;
     }
-
 }

@@ -105,6 +105,8 @@ public class CooldownCalculator : MonoBehaviour
 
         foreach (SpellArchitecture spell in spells)
         {
+            if (spell == null)
+                continue;
             int spellID = spell.ID;
 
             if (!abilityData.ContainsKey(spellID))

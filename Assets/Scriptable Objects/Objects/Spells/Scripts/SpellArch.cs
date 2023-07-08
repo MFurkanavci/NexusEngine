@@ -159,6 +159,8 @@ public class SpellArchitecture : ScriptableObject
 
     public void CopyFrom(SpellArchitecture source)
     {
+        if (source == null)
+            return;
         foreach (var item in source.GetType().GetFields())
         {
             this.GetType().GetField(item.Name).SetValue(this, item.GetValue(source));

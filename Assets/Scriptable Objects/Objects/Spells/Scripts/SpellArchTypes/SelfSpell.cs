@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SelfSpell : MonoBehaviour
 {
-    
     public Spell spell;
     public GameObject spellTarget;
     public DamageCalculations damageCalculations;
@@ -46,10 +45,17 @@ public class SelfSpell : MonoBehaviour
         rb.mass = 1f;
         GetComponent<Collider>().isTrigger = true;
         rb.constraints = rbConstraints;
+        StartCoroutine(DestroySpell());
     }
 
     public void FixedUpdate()
     {
         transform.position = spell.CheckPlayer().transform.localPosition;
+    }
+
+    IEnumerator DestroySpell()
+    {
+        yield return new WaitForSeconds(spell.CheckStayTime());
+        Destroy(gameObject);
     }
 }

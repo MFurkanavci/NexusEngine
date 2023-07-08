@@ -60,17 +60,30 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q))
         {
             BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
-            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[2], cooldownCalculator, 2);
+            behaviour.MakeAnAbility(this.gameObject, agent.spellTarget, spells[2], cooldownCalculator, 2);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
-            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[3], cooldownCalculator, 3);
+            behaviour.MakeAnAbility(this.gameObject, agent.spellTarget, spells[3], cooldownCalculator, 3);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
-            behaviour.makeanAbility(this.gameObject, agent.spellTarget, spells[4], cooldownCalculator, 4);
+            behaviour.MakeAnAbility(this.gameObject, agent.spellTarget, spells[4], cooldownCalculator, 4);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            BasicBehaviour behaviour = new MakeAnBehaviour(agent, null, null);
+            behaviour.MakeAnAbility(this.gameObject, agent.spellTarget, spells[5], cooldownCalculator, 5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (agent.spellTarget != null)
+            {
+                agent.spellTarget.GetComponent<mobAI>().Destination(new Vector3(0, 1, UnityEngine.Random.Range(-40, 40)));
+            }
         }
     }
 
