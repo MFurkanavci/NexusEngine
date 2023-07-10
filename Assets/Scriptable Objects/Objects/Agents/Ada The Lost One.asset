@@ -32,8 +32,8 @@ MonoBehaviour:
   hitPoint: 100
   hitPointCurrent: 100
   regen_hitPoint: 10
-  manaPoint: 500
-  manaPointCurrent: 500
+  manaPoint: 5000
+  manaPointCurrent: 5000
   regen_manaPoint: 0
   wildPoint: 100
   regen_wildPoint: 5

@@ -62,10 +62,6 @@ public class AreaSpell : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
-    {
-    }
-
     IEnumerator DestroySpell()
     {
         yield return new WaitForSeconds(spell.CheckStayTime());

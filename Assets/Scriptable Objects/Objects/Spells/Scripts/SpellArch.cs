@@ -116,46 +116,6 @@ public class SpellArchitecture : ScriptableObject
         direction,
         position;
 
-    public void SpellTypeSelecter()
-    {
-        switch (type)
-        {
-            case SpellArcType.Basic:
-                break;
-            case SpellArcType.Projectile:
-                ProjectileSpawn();
-                break;
-            case SpellArcType.Self:
-                SelfSpawn();
-                break;
-            case SpellArcType.Target:
-                TargetSpawn();
-                break;
-            case SpellArcType.Area:
-                AreaSpawn();
-                break;
-        }
-    }
-
-    public void ProjectileSpawn()
-    {  
-        
-    }
-
-    public void SelfSpawn()
-    {
-        Debug.Log("Self");
-    }
-
-    public void TargetSpawn()
-    {
-        Debug.Log("Target");
-    }
-
-    public void AreaSpawn()
-    {
-        Debug.Log("Area");
-    }
 
     public void CopyFrom(SpellArchitecture source)
     {

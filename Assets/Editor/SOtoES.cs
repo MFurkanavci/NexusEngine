@@ -365,6 +365,8 @@ public class SOtoES : EditorWindow
 
     private void DeleteAgentObject(AgentObject agent)
     {
+        int deletedID = agent.ID;
+        
         // Remove the agent from the list
         agentsList.Remove(agent);
 
@@ -394,6 +396,7 @@ public class SOtoES : EditorWindow
 
     private void DeleteSpellObject(SpellArchitecture spell)
     {
+        int deletedID = spell.ID;
         // Remove the spell from the list
         spellsList.Remove(spell);
 
@@ -423,6 +426,8 @@ public class SOtoES : EditorWindow
 
     private void DeleteItemObject(ItemObject item)
     {
+        int deletedID = item.ID;
+
         // Remove the item from the list
         itemsList.Remove(item);
 
@@ -473,7 +478,7 @@ public class AgentEditorWindow : EditorWindow
                 AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(agent), agent.Name);
             };
         }
-        EditorGUILayout.LabelField("ID                                     " + agent.ID.ToString());
+        agent.ID = EditorGUILayout.IntField("ID", agent.ID);
         agent.type = (agentType)EditorGUILayout.EnumPopup("Type", agent.type);
         agent.mobtype = (mobType)EditorGUILayout.EnumPopup("Mob Type", agent.mobtype);
         agent.description = EditorGUILayout.TextArea(agent.description, GUILayout.Height(100));
@@ -626,7 +631,7 @@ public class SpellEditorWindow : EditorWindow
         {
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         EditorGUILayout.Space(30);
-        EditorGUILayout.LabelField("ID                                     " + spellObject.ID.ToString());
+        spellObject.ID = EditorGUILayout.IntField("ID", spellObject.ID);
         spellObject.Name = EditorGUILayout.TextField("Name", spellObject.Name);
         if (GUI.changed)
         {
@@ -913,7 +918,7 @@ public class ItemEditorWindow : EditorWindow
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("General Information", EditorStyles.boldLabel);
-        EditorGUILayout.LabelField("ID                                     " + item.ID.ToString());
+        item.ID = EditorGUILayout.IntField("ID", item.ID);
         item.Name = EditorGUILayout.TextField("Name", item.Name);
         if (GUI.changed)
         {
