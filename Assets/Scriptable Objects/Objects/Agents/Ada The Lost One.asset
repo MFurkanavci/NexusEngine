@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 0}
   Name: Ada The Lost One
   ID: 1000
-  type: 2
+  type: 0
   mobtype: 0
   description: 
   enemyTarget: {fileID: 0}

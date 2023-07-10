@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: Regen Ring
   m_EditorClassIdentifier: 
-  ID: 4002
+  ID: 4001
   Name: Regen Ring
   SplashArt: {fileID: 0}
   type: 2

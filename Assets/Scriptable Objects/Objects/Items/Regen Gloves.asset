@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a59a37d1f962ae4193b7f79f88fbae9, type: 3}
   m_Name: Regen Gloves
   m_EditorClassIdentifier: 
-  ID: 4001
+  ID: 4002
   Name: Regen Gloves
   SplashArt: {fileID: 0}
   type: 2

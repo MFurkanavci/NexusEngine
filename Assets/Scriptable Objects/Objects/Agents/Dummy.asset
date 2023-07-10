@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   Name: Dummy
-  ID: 1001
-  type: 2
+  ID: 2000
+  type: 1
   mobtype: 4
   description: 
   enemyTarget: {fileID: 0}
