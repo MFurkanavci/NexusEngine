@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class mobAI : MonoBehaviour
 {
     private NavMeshAgent _agent;
-    private notPlayableAgent _agentObject;
+    private AgentObject _agentObject;
 
    public Vector3 
         _movePoint
@@ -14,15 +14,15 @@ public class mobAI : MonoBehaviour
 
     
 
-    private void Start()
+    private void Awake()
     {
-        _agentObject = GetComponent<Mobs>().agent;
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = _agentObject.speed_Movement;
     }
 
     public void Destination(Vector3 _destination)
     {
+        _agentObject = GetComponent<Mobs>().agent;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.speed = _agentObject.speed_Movement;
         _agent.SetDestination( _destination);
 
     }

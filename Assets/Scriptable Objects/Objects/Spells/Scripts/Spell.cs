@@ -44,6 +44,16 @@ public class Spell
         return spellArch.targetable;
     }
 
+    public float CheckRange()
+    {
+        return spellArch.range;
+    }
+
+    public float SetRange(float range)
+    {
+        return spellArch.range = range;
+    }
+
     public void SetTargetable(GameObject target)
     {
         spellArch.targetable = true;
@@ -101,6 +111,11 @@ public class Spell
     public bool CheckSpriteArea()
     {
         return spellArch.spriteHitArea;
+    }
+
+    public Sprite CheckSprite()
+    {
+        return spellArch.hitArea;
     }
 
     //check if the spell is has a way effect
@@ -272,7 +287,7 @@ public class Spell
     //check the stay time of the spell
     public float CheckStayTime()
     {
-        return spellArch.stayTime;
+        return spellArch.maxstayTime;
     }
 
     //check the return speed of the spell
@@ -329,10 +344,25 @@ public class Spell
         return spellArch.direction;
     }
 
+    public float CheckMaxDistance()
+    {
+        return spellArch.maxDistance;
+    }
+
+    public void SetDistnace(float distance)
+    {
+        spellArch.distance = distance;
+    }
+
+    public float CheckDistance()
+    {
+        return spellArch.distance;
+    }
+
     public void SetDirection(Vector3 direction)
     {
         //make sure the y is not changed at all
-        direction.y = 0;
+        direction.y = .5f;
         spellArch.direction = direction.normalized;
     }
 

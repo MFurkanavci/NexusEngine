@@ -10,55 +10,57 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ec3e985950f4346899b81aa3b6bc99, type: 3}
-  m_Name: Ada The Lost One
+  m_Name: Ada
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  Name: Ada The Lost One
+  Name: Ada
   ID: 1000
   type: 0
   mobtype: 0
-  description: 
+  description: Ada the Lost One.
   enemyTarget: {fileID: 0}
   allyTarget: {fileID: 0}
   spellTarget: {fileID: 0}
   damageCalculations: {fileID: 0}
-  level: 5
-  modifier: 1.2
-  experience: 450
-  damage_Physical: 100
+  modifier: 2.5
+  experience: 100
+  damage_Physical: 15
   damage_range: 3
   damage_Magical: 0
   damage_True: 0
-  hitPoint: 100
+  maxHitPoint: 100
   hitPointCurrent: 100
-  regen_hitPoint: 10
-  manaPoint: 5000
-  manaPointCurrent: 5000
+  regen_hitPoint: 5
+  maxManaPoint: 100
+  manaPointCurrent: 100
   regen_manaPoint: 0
-  wildPoint: 100
+  maxWildPoint: 0
+  wildPointCurrent: 0
   regen_wildPoint: 5
-  energyPoint: 0
+  maxEnergyPoint: 0
+  energyPointCurrent: 0
   regen_energyPoint: 0
-  armor_Physical: 15
-  armor_Magical: 10
-  speed_Movement: 25
-  speed_Attack: 0.7
+  armor_Physical: 0
+  armor_Magical: 0
+  speed_Movement: 30
+  speed_Attack: 1
   speed_Cast: 0
-  penetration_Physical: 5
-  penetration_Magical: 5
-  criticalchance_Physical: 30
-  criticaldamage_Physical: 150
+  penetration_Physical: 8
+  penetration_Magical: 0
+  criticalchance_Physical: 0
+  criticaldamage_Physical: 0
   criticalchance_Magical: 0
-  criticaldamage_Magical: 150
+  criticaldamage_Magical: 0
   rate_Block: 0
-  rate_Parry: 20
-  rate_Dodge: 10
+  rate_Parry: 0
+  rate_Dodge: 0
   accuracy: 0
   tenacity: 0
   penetration_Tenacity: 0
   speed_Jump: 0
   speed_Fly: 0
   leech: 0
+  level: 1
   drop_Gold: 0
   drop_Experience: 0
   gold: 1000

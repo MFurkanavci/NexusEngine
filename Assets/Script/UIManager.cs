@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.size = 1 / (agent.hitPoint / agent.hitPointCurrent);
-        hp_Base.text = agent.hitPointCurrent + "/" + agent.hitPoint;
+        healthBar.size = 1 / (agent.maxHitPoint / agent.hitPointCurrent);
+        hp_Base.text = agent.hitPointCurrent + "/" + agent.maxHitPoint;
     }
 }

@@ -29,10 +29,39 @@ public class ProjectileSpell : MonoBehaviour
         spellTarget = spell.CheckSpellTarget();
         gameObject.layer = 13;
         gameObject.tag = "Spell";
+
         gameObject.name = spell.CheckName();
-        transform.position = spell.CheckPlayer().transform.localPosition;
-        transform.localScale = new Vector3(spell.CheckMaxWidth(), spell.CheckMaxHeight(), spell.CheckMaxDepth());
-        transform.rotation = transform.rotation;
+
+        transform.TransformDirection(spell.CheckDirection());
+
+        transform.position = spell.CheckPlayer().transform.position;
+
+        if(spell.CheckDefaultHitArea())
+        {
+            transform.localScale = new Vector3(spell.CheckMaxWidth(), spell.CheckMaxHeight(), spell.CheckMaxDepth());
+        }
+        else if(spell.CheckSpriteArea())
+        {
+            Sprite sprite = spell.CheckSprite();
+
+            transform.localScale = new Vector3(sprite.texture.width, sprite.texture.height,sprite.texture.width).normalized;
+
+            transform.rotation = Quaternion.Euler(90, 0, 0);
+
+            DestroyImmediate(GetComponent<MeshFilter>());
+            DestroyImmediate(GetComponent<MeshRenderer>());
+
+            gameObject.AddComponent<SpriteRenderer>();
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+            
+        }
+        else if(spell.CheckSpellModel())
+        {
+            GameObject model = spell.spellArch.model;
+            var fire = Instantiate(model, transform.position, transform.rotation, transform);
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+
         var rb = gameObject.AddComponent<Rigidbody>();
         var rd = GetComponent<Renderer>();
         var rbConstraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
@@ -53,13 +82,14 @@ public class ProjectileSpell : MonoBehaviour
         {
             float damage = 50;
             damage = damageCalculations.DealDamage(other.gameObject, damageCalculations.damageTypeandValue(spell.getDamageType(spell.spellArch.damageType), damage));
-            other.gameObject.GetComponent<Mobs>().agent.hitPoint -= damage;
+            other.gameObject.GetComponent<Mobs>().agent.hitPointCurrent -= damage;
             Destroy(gameObject);
         }
     }
 
     public void FixedUpdate()
     {
+        
         if(spellTarget != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, spellTarget.transform.position, spell.spellArch.maxspeed);
@@ -68,11 +98,12 @@ public class ProjectileSpell : MonoBehaviour
         {
             //set direction to spell.checkdirection
             transform.position += spell.CheckDirection() * spell.spellArch.maxspeed;
-            spell.SetLenght(spell.CheckLenght() + spell.spellArch.maxspeed);
-            if (spell.CheckLenght() >= spell.CheckMaxLenght())
+            spell.SetDistnace(spell.CheckDistance() + spell.spellArch.maxspeed);
+
+            if (spell.CheckDistance() >= spell.CheckMaxDistance())
             {
                 Destroy(gameObject);
-                spell.SetLenght(0);
+                spell.SetDistnace(0);
             }
         }
     }

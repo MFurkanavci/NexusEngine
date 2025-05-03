@@ -485,8 +485,8 @@ public class AgentEditorWindow : EditorWindow
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Attributes", EditorStyles.boldLabel);
-        agent.level = EditorGUILayout.FloatField("Level", agent.level);
-        agent.modifier = EditorGUILayout.FloatField("Modifier", agent.modifier);
+        agent.level = EditorGUILayout.IntField("Level", agent.level);
+        agent.modifier = EditorGUILayout.FloatField("Level Up Modifier", agent.modifier);
         agent.experience = EditorGUILayout.FloatField("Experience", agent.experience);
         agent.damage_Physical = EditorGUILayout.FloatField("Physical Damage", agent.damage_Physical);
         agent.damage_range = EditorGUILayout.FloatField("Damage Range", agent.damage_range);
@@ -501,19 +501,22 @@ public class AgentEditorWindow : EditorWindow
         agent.criticalchance_Magical = EditorGUILayout.FloatField("Magical Critical Chance", agent.criticalchance_Magical);
         agent.criticaldamage_Physical = EditorGUILayout.FloatField("Physical Critical Damage", agent.criticaldamage_Physical);
         agent.criticaldamage_Magical = EditorGUILayout.FloatField("Magical Critical Damage", agent.criticaldamage_Magical);
+        agent.drop_Experience = EditorGUILayout.IntField("Experience Drop", agent.drop_Experience);
         
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Stats", EditorStyles.boldLabel);
-        agent.hitPoint = EditorGUILayout.FloatField("Hit Points", agent.hitPoint);
+        agent.maxHitPoint = EditorGUILayout.FloatField("Max Hit Points", agent.maxHitPoint);
         agent.hitPointCurrent = EditorGUILayout.FloatField("Current Hit Points", agent.hitPointCurrent);
         agent.regen_hitPoint = EditorGUILayout.FloatField("HP Regeneration", agent.regen_hitPoint);
-        agent.manaPoint = EditorGUILayout.FloatField("Mana Points", agent.manaPoint);
+        agent.maxManaPoint = EditorGUILayout.FloatField("Max Mana Points", agent.maxManaPoint);
         agent.manaPointCurrent = EditorGUILayout.FloatField("Current Mana Points", agent.manaPointCurrent);
         agent.regen_manaPoint = EditorGUILayout.FloatField("Mana Regeneration", agent.regen_manaPoint);
-        agent.wildPoint = EditorGUILayout.FloatField("Wild Points", agent.wildPoint);
+        agent.maxWildPoint = EditorGUILayout.FloatField("Max Wild Points", agent.maxWildPoint);
+        agent.wildPointCurrent = EditorGUILayout.FloatField("Current Wild Points", agent.wildPointCurrent);
         agent.regen_wildPoint = EditorGUILayout.FloatField("Wild Regeneration", agent.regen_wildPoint);
-        agent.energyPoint = EditorGUILayout.FloatField("Energy Points", agent.energyPoint);
+        agent.maxEnergyPoint = EditorGUILayout.FloatField("Max Energy Points", agent.maxEnergyPoint);
+        agent.energyPointCurrent = EditorGUILayout.FloatField("Current Energy Points", agent.energyPointCurrent);
         agent.regen_energyPoint = EditorGUILayout.FloatField("Energy Regeneration", agent.regen_energyPoint);
         agent.armor_Physical = EditorGUILayout.FloatField("Physical Armor", agent.armor_Physical);
         agent.armor_Magical = EditorGUILayout.FloatField("Magical Armor", agent.armor_Magical);
@@ -662,15 +665,21 @@ public class SpellEditorWindow : EditorWindow
         spellObject.manaCost = EditorGUILayout.FloatField("Mana Cost", spellObject.manaCost);
 
         EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Spell Range", EditorStyles.boldLabel);
+        spellObject.range = EditorGUILayout.FloatField("Range", spellObject.range);
+
+        EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Delay Time", EditorStyles.boldLabel);
         spellObject.delay = EditorGUILayout.Toggle("Has Delay Time ?",spellObject.delay);
 
         if (spellObject.delay)
         {
+            spellObject.maxDelayTime = EditorGUILayout.FloatField("Max Delay Time", spellObject.maxDelayTime);
             spellObject.delayTime = EditorGUILayout.FloatField("Delay time", spellObject.delayTime);
         }
         else
         {
+            spellObject.maxDelayTime = 0;
             spellObject.delayTime = 0;
         }
         
@@ -680,18 +689,12 @@ public class SpellEditorWindow : EditorWindow
 
         if (spellObject.cooldown)
         {
+            spellObject.maxCooldown = EditorGUILayout.FloatField("Max Cooldown", spellObject.maxCooldown);
             spellObject.CD = EditorGUILayout.FloatField("Cooldown", spellObject.CD);
         }
         else
         {
             spellObject.CD = 0;
-        }
-        if (spellObject.cooldown)
-        {
-            spellObject.maxCooldown = EditorGUILayout.FloatField("Max Cooldown", spellObject.maxCooldown);
-        }
-        else
-        {
             spellObject.maxCooldown = 0;
         }
 
@@ -701,11 +704,13 @@ public class SpellEditorWindow : EditorWindow
 
         if (spellObject.cast)
         {
+            spellObject.maxCastTime = EditorGUILayout.FloatField("Max Cast Time", spellObject.maxCastTime);
             spellObject.castTime = EditorGUILayout.FloatField("Cast time", spellObject.castTime);
             
         }
         else
         {
+            spellObject.maxCastTime = 0;
             spellObject.castTime = 0;
         }
 
@@ -728,8 +733,6 @@ public class SpellEditorWindow : EditorWindow
             spellObject.height = EditorGUILayout.FloatField("Height", spellObject.height);
             spellObject.maxdepth = EditorGUILayout.FloatField("Max Depth", spellObject.maxdepth);
             spellObject.depth = EditorGUILayout.FloatField("Depth", spellObject.depth);
-            spellObject.maxspeed = EditorGUILayout.FloatField("Max Speed", spellObject.maxspeed);
-            spellObject.speed = EditorGUILayout.FloatField("Speed", spellObject.speed);
             
             spellObject.havecolor = EditorGUILayout.Toggle("Have Color", spellObject.havecolor);
 
@@ -744,13 +747,23 @@ public class SpellEditorWindow : EditorWindow
         }
         else
         {
+            spellObject.maxdepth = 0;
+            spellObject.depth = 0;
+            spellObject.maxheight = 0;
+            spellObject.height = 0;
             spellObject.maxlenght = 0;
             spellObject.lenght = 0;
             spellObject.maxwidth = 0;
             spellObject.width = 0;
-            spellObject.maxspeed = 0;
-            spellObject.speed = 0;
         }
+
+        EditorGUILayout.Space(10);
+        spellObject.maxspeed = EditorGUILayout.FloatField("Max Speed", spellObject.maxspeed);
+        spellObject.speed = EditorGUILayout.FloatField("Speed", spellObject.speed);
+
+        EditorGUILayout.Space(10);
+        spellObject.maxDistance = EditorGUILayout.FloatField("Max Distance", spellObject.maxDistance);
+        spellObject.distance = EditorGUILayout.FloatField("Distance", spellObject.distance);
 
 
         EditorGUILayout.Space(10);
@@ -789,10 +802,12 @@ public class SpellEditorWindow : EditorWindow
 
         if (spellObject.wayEffect)
         {
+            spellObject.maxwayEffectTime = EditorGUILayout.FloatField("Max Way Effect Time", spellObject.maxwayEffectTime);
             spellObject.wayEffectTime = EditorGUILayout.FloatField("Way Effect Time", spellObject.wayEffectTime);
         }
         else
-        {
+        {   
+            spellObject.maxwayEffectTime = 0;
             spellObject.wayEffectTime = 0;
         }
 
@@ -803,10 +818,12 @@ public class SpellEditorWindow : EditorWindow
 
         if (spellObject.stay)
         {
+            spellObject.maxstayTime = EditorGUILayout.FloatField("Max Stay Time", spellObject.maxstayTime);
             spellObject.stayTime = EditorGUILayout.FloatField("Stay Time", spellObject.stayTime);
         }
         else
         {
+            spellObject.maxstayTime = 0;
             spellObject.stayTime = 0;
         }
 
@@ -935,10 +952,10 @@ public class ItemEditorWindow : EditorWindow
         EditorGUILayout.LabelField("Attributes", EditorStyles.boldLabel);
         item.damage_Physical = EditorGUILayout.FloatField("Physical Damage", item.damage_Physical);
         item.damage_Magical = EditorGUILayout.FloatField("Magical Damage", item.damage_Magical);
-        item.hitPoint = EditorGUILayout.FloatField("Hit Points", item.hitPoint);
+        item.maxHitPoint = EditorGUILayout.FloatField("Hit Points", item.maxHitPoint);
         item.hitPointCurrent = EditorGUILayout.FloatField("Current Hit Points", item.hitPointCurrent);
         item.regen_hitPoint = EditorGUILayout.FloatField("HP Regeneration", item.regen_hitPoint);
-        item.manaPoint = EditorGUILayout.FloatField("Mana Points", item.manaPoint);
+        item.maxManaPoint = EditorGUILayout.FloatField("Mana Points", item.maxManaPoint);
         item.manaPointCurrent = EditorGUILayout.FloatField("Current Mana Points", item.manaPointCurrent);
         item.regen_manaPoint = EditorGUILayout.FloatField("MP Regeneration", item.regen_manaPoint);
         item.armor_Physical = EditorGUILayout.FloatField("Physical Armor", item.armor_Physical);

@@ -48,7 +48,13 @@ public class SpellArchitecture : ScriptableObject
 
     public int architectureCount = 1;
 
-    public float manaCost;
+    public float 
+    manaCost,
+    energyCost,
+    wildPointCost;
+
+    public float range;
+
 
 
 
@@ -59,9 +65,11 @@ public class SpellArchitecture : ScriptableObject
 
     public float
         delayTime,
+        maxDelayTime,
         CD,
         maxCooldown,
         castTime,
+        maxCastTime,
         lenght,
         maxlenght,
         width,
@@ -73,10 +81,15 @@ public class SpellArchitecture : ScriptableObject
         speed,
         maxspeed,
         wayEffectTime,
+        maxwayEffectTime,
         afterEffectTime,
+        maxafterEffectTime,
         stayTime,
+        maxstayTime,
         returnSpeed,
-        maxreturnSpeed;
+        maxreturnSpeed,
+        maxDistance,
+        distance;
 
     public Color color;
 

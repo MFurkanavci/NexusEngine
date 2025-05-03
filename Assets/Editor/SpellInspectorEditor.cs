@@ -33,6 +33,10 @@ public class SpellInspectorEditor : Editor
         arcitecture.manaCost = EditorGUILayout.FloatField("Mana Cost", arcitecture.manaCost);
 
         EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Spell Range", EditorStyles.boldLabel);
+        arcitecture.range = EditorGUILayout.FloatField("Range", arcitecture.range);
+
+        EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Damage Type", EditorStyles.boldLabel);
         arcitecture.damageType = (DamageType)EditorGUILayout.EnumPopup("Damage Type", arcitecture.damageType);
 
@@ -42,10 +46,12 @@ public class SpellInspectorEditor : Editor
 
         if (arcitecture.delay)
         {
+            arcitecture.maxDelayTime = EditorGUILayout.FloatField("Max Delay time", arcitecture.maxDelayTime);
             arcitecture.delayTime = EditorGUILayout.FloatField("Delay time", arcitecture.delayTime);
         }
         else
         {
+            arcitecture.maxDelayTime = 0;
             arcitecture.delayTime = 0;
         }
         
@@ -56,17 +62,11 @@ public class SpellInspectorEditor : Editor
         if (arcitecture.cooldown)
         {
             arcitecture.CD = EditorGUILayout.FloatField("Cooldown", arcitecture.CD);
-        }
-        else
-        {
-            arcitecture.CD = 0;
-        }
-        if (arcitecture.cooldown)
-        {
             arcitecture.maxCooldown = EditorGUILayout.FloatField("Max Cooldown", arcitecture.maxCooldown);
         }
         else
         {
+            arcitecture.CD = 0;
             arcitecture.maxCooldown = 0;
         }
 
@@ -76,11 +76,13 @@ public class SpellInspectorEditor : Editor
 
         if (arcitecture.cast)
         {
+            arcitecture.maxCastTime = EditorGUILayout.FloatField("Max Cast time", arcitecture.maxCastTime);
             arcitecture.castTime = EditorGUILayout.FloatField("Cast time", arcitecture.castTime);
             
         }
         else
         {
+            arcitecture.maxCastTime = 0;
             arcitecture.castTime = 0;
         }
 
@@ -103,8 +105,6 @@ public class SpellInspectorEditor : Editor
             arcitecture.height = EditorGUILayout.FloatField("Height", arcitecture.height);
             arcitecture.maxdepth = EditorGUILayout.FloatField("Max Depth", arcitecture.maxdepth);
             arcitecture.depth = EditorGUILayout.FloatField("Depth", arcitecture.depth);
-            arcitecture.maxspeed = EditorGUILayout.FloatField("Max Speed", arcitecture.maxspeed);
-            arcitecture.speed = EditorGUILayout.FloatField("Speed", arcitecture.speed);
             
             arcitecture.havecolor = EditorGUILayout.Toggle("Have Color", arcitecture.havecolor);
 
@@ -119,13 +119,23 @@ public class SpellInspectorEditor : Editor
         }
         else
         {
+            arcitecture.maxheight = 0;
+            arcitecture.height = 0;
+            arcitecture.maxdepth = 0;
+            arcitecture.depth = 0;
             arcitecture.maxlenght = 0;
             arcitecture.lenght = 0;
             arcitecture.maxwidth = 0;
             arcitecture.width = 0;
-            arcitecture.maxspeed = 0;
-            arcitecture.speed = 0;
         }
+
+        EditorGUILayout.Space(10);
+        arcitecture.maxspeed = EditorGUILayout.FloatField("Max Speed", arcitecture.maxspeed);
+        arcitecture.speed = EditorGUILayout.FloatField("Speed", arcitecture.speed);
+
+        EditorGUILayout.Space(10);
+        arcitecture.maxDistance = EditorGUILayout.FloatField("Max Distance", arcitecture.maxDistance);
+        arcitecture.distance = EditorGUILayout.FloatField("Distance", arcitecture.distance);
 
 
         EditorGUILayout.Space(10);
@@ -164,10 +174,12 @@ public class SpellInspectorEditor : Editor
 
         if (arcitecture.wayEffect)
         {
+            arcitecture.maxwayEffectTime = EditorGUILayout.FloatField("Max Way Effect Time", arcitecture.maxwayEffectTime);
             arcitecture.wayEffectTime = EditorGUILayout.FloatField("Way Effect Time", arcitecture.wayEffectTime);
         }
         else
         {
+            arcitecture.maxwayEffectTime = 0;
             arcitecture.wayEffectTime = 0;
         }
 
@@ -178,10 +190,12 @@ public class SpellInspectorEditor : Editor
 
         if (arcitecture.stay)
         {
+            arcitecture.maxstayTime = EditorGUILayout.FloatField("Max Stay Time", arcitecture.maxstayTime);
             arcitecture.stayTime = EditorGUILayout.FloatField("Stay Time", arcitecture.stayTime);
         }
         else
         {
+            arcitecture.maxstayTime = 0;
             arcitecture.stayTime = 0;
         }
 

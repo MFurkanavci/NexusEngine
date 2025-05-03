@@ -45,7 +45,7 @@ public class MakeAnBehaviour : BasicBehaviour
             if (enemy == null)
                 return;
 
-            if (Vector3.Distance(player.transform.position, enemy.transform.position) > spell.maxlenght)
+            if (Vector3.Distance(player.transform.position, enemy.transform.position) > spell.range)
                 return;
         }
 

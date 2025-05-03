@@ -29,8 +29,8 @@ public class AgentInspector : Editor
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Attributes", EditorStyles.boldLabel);
-        agent.level = EditorGUILayout.FloatField("Level", agent.level);
-        agent.modifier = EditorGUILayout.FloatField("Modifier", agent.modifier);
+        agent.level = EditorGUILayout.IntField("Level", agent.level);
+        agent.modifier = EditorGUILayout.FloatField("Level Up Modifier", agent.modifier);
         agent.experience = EditorGUILayout.FloatField("Experience", agent.experience);
         agent.damage_Physical = EditorGUILayout.FloatField("Physical Damage", agent.damage_Physical);
         agent.damage_range = EditorGUILayout.FloatField("Damage Range", agent.damage_range);
@@ -49,15 +49,17 @@ public class AgentInspector : Editor
 
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Stats", EditorStyles.boldLabel);
-        agent.hitPoint = EditorGUILayout.FloatField("Hit Points", agent.hitPoint);
+        agent.maxHitPoint = EditorGUILayout.FloatField("Max Hit Points", agent.maxHitPoint);
         agent.hitPointCurrent = EditorGUILayout.FloatField("Current Hit Points", agent.hitPointCurrent);
         agent.regen_hitPoint = EditorGUILayout.FloatField("HP Regeneration", agent.regen_hitPoint);
-        agent.manaPoint = EditorGUILayout.FloatField("Mana Points", agent.manaPoint);
+        agent.maxManaPoint = EditorGUILayout.FloatField("Max Mana Points", agent.maxManaPoint);
         agent.manaPointCurrent = EditorGUILayout.FloatField("Current Mana Points", agent.manaPointCurrent);
         agent.regen_manaPoint = EditorGUILayout.FloatField("Mana Regeneration", agent.regen_manaPoint);
-        agent.wildPoint = EditorGUILayout.FloatField("Wild Points", agent.wildPoint);
+        agent.maxWildPoint = EditorGUILayout.FloatField("Max Wild Points", agent.maxWildPoint);
+        agent.wildPointCurrent = EditorGUILayout.FloatField("Current Wild Points", agent.wildPointCurrent);
         agent.regen_wildPoint = EditorGUILayout.FloatField("Wild Regeneration", agent.regen_wildPoint);
-        agent.energyPoint = EditorGUILayout.FloatField("Energy Points", agent.energyPoint);
+        agent.maxEnergyPoint = EditorGUILayout.FloatField("Max Energy Points", agent.maxEnergyPoint);
+        agent.energyPointCurrent = EditorGUILayout.FloatField("Current Energy Points", agent.energyPointCurrent);
         agent.regen_energyPoint = EditorGUILayout.FloatField("Energy Regeneration", agent.regen_energyPoint);
         agent.armor_Physical = EditorGUILayout.FloatField("Physical Armor", agent.armor_Physical);
         agent.armor_Magical = EditorGUILayout.FloatField("Magical Armor", agent.armor_Magical);

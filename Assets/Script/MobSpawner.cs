@@ -73,14 +73,14 @@ public class MobSpawner : MonoBehaviour
     {
         _mobCount--;
         var _mobEntity = Instantiate(_mob, _poolMob.transform);
-        _mobEntity.GetComponentInChildren<mobAI>().Destination(_destination.position);
+        _mobEntity.GetComponent<mobAI>().Destination(_destination.position);
         return _delay;
 
     }
     public float bossWave()
     {
         var _bossEntity = Instantiate(_boss, _poolBoss.transform);
-        _bossEntity.GetComponentInChildren<mobAI>().Destination(_destination.position);
+        _bossEntity.GetComponent<mobAI>().Destination(_destination.position);
         _mobCount = 20;
         _level++;
         return _spawntimer * _level;

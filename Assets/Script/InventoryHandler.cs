@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class InventoryHandler : MonoBehaviour
 {
-    //this is the ınventory handler for the player
-    //it is used to check if the player buy an item and calculate new item stats and add them to the player stats
-    //it is also used to check if the player sell an item and calculate new item stats and remove them from the player stats
-
     Player player;
     public dictionary[] itemStats = new dictionary[6];
 
@@ -87,7 +83,6 @@ public class InventoryHandler : MonoBehaviour
     }
     public int calculatePrice(List<Item> items, Item item)
     {
-        //this function calculates the price of the item, check all buyed items and calculate the price of the item, then return the price
         int price = 0;
         foreach (Item child in items)
         {

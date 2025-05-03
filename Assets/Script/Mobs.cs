@@ -51,7 +51,7 @@ public class Mobs : MonoBehaviour
 
     public bool stillAlive()
     {
-        if(agent.hitPoint <= 0)
+        if(agent.maxHitPoint <= 0)
         {
             agent.isAlive = false;
             return false;

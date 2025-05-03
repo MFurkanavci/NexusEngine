@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605a43ed6f0db244ba1c88e7623c93c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent_base: {fileID: 11400000, guid: 5a490e74168d47b45820f02696090e17, type: 2}
+  agent_base: {fileID: 11400000, guid: de6359d44322dcc4e97ba679c0066981, type: 2}
   agent: {fileID: 0}
   inventory:
   - {fileID: 0}

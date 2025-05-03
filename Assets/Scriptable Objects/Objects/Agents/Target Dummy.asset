@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ec3e985950f4346899b81aa3b6bc99, type: 3}
-  m_Name: Dummy
+  m_Name: Target Dummy
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  Name: Dummy
+  Name: Target Dummy
   ID: 2000
   type: 1
   mobtype: 4
@@ -22,26 +22,27 @@ MonoBehaviour:
   allyTarget: {fileID: 0}
   spellTarget: {fileID: 0}
   damageCalculations: {fileID: 0}
-  level: 99
   modifier: 99
   experience: 99
   damage_Physical: 99
   damage_range: 99
   damage_Magical: 99
   damage_True: 99
-  hitPoint: 9999
-  hitPointCurrent: 9999
-  regen_hitPoint: 99
-  manaPoint: 99
-  manaPointCurrent: 0
+  maxHitPoint: 100
+  hitPointCurrent: 100
+  regen_hitPoint: 0
+  maxManaPoint: 999
+  manaPointCurrent: 999
   regen_manaPoint: 99
-  wildPoint: 99
+  maxWildPoint: 999
+  wildPointCurrent: 999
   regen_wildPoint: 99
-  energyPoint: 99
+  maxEnergyPoint: 999
+  energyPointCurrent: 999
   regen_energyPoint: 99
   armor_Physical: 100
   armor_Magical: 100
-  speed_Movement: 35
+  speed_Movement: 5
   speed_Attack: 99
   speed_Cast: 99
   penetration_Physical: 99
@@ -59,8 +60,9 @@ MonoBehaviour:
   speed_Jump: 99
   speed_Fly: 99
   leech: 0
+  level: 99
   drop_Gold: 0
-  drop_Experience: 0
+  drop_Experience: 100
   gold: 0
   vaskaPoint: 0
   isAlive: 1

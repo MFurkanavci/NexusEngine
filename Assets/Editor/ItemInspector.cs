@@ -22,9 +22,9 @@ public class ItemInspector : Editor
         EditorGUILayout.LabelField("Attributes", EditorStyles.boldLabel);
         item.damage_Physical = EditorGUILayout.FloatField("Physical Damage", item.damage_Physical);
         item.damage_Magical = EditorGUILayout.FloatField("Magical Damage", item.damage_Magical);
-        item.hitPoint = EditorGUILayout.FloatField("Hit Points", item.hitPoint);
+        item.maxHitPoint = EditorGUILayout.FloatField("Hit Points", item.maxHitPoint);
         item.regen_hitPoint = EditorGUILayout.FloatField("HP Regeneration", item.regen_hitPoint);
-        item.manaPoint = EditorGUILayout.FloatField("Mana Points", item.manaPoint);
+        item.maxManaPoint = EditorGUILayout.FloatField("Mana Points", item.maxManaPoint);
         item.regen_manaPoint = EditorGUILayout.FloatField("MP Regeneration", item.regen_manaPoint);
         item.armor_Physical = EditorGUILayout.FloatField("Physical Armor", item.armor_Physical);
         item.armor_Magical = EditorGUILayout.FloatField("Magical Armor", item.armor_Magical);

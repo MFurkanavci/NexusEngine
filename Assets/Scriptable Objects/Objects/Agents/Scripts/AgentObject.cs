@@ -46,23 +46,23 @@ public class AgentObject : ScriptableObject
 
 
     public float
-        level = 0,
         modifier = 0,
         experience = 0,
         damage_Physical = 0,
         damage_range = 0,
         damage_Magical = 0,
-
         damage_True = 0,
-        hitPoint = 0,
+        maxHitPoint = 0,
         hitPointCurrent = 0,
         regen_hitPoint = 0,
-        manaPoint = 0,
+        maxManaPoint = 0,
         manaPointCurrent = 0,
         regen_manaPoint = 0,
-        wildPoint = 0,
+        maxWildPoint = 0,
+        wildPointCurrent = 0,
         regen_wildPoint = 0,
-        energyPoint = 0,
+        maxEnergyPoint = 0,
+        energyPointCurrent = 0,
         regen_energyPoint = 0,
         armor_Physical = 0,
         armor_Magical = 0,
@@ -86,6 +86,8 @@ public class AgentObject : ScriptableObject
         leech = 0;
 
     public int
+    
+        level = 0,
         drop_Gold = 0,
         drop_Experience = 0,
         gold = 0,

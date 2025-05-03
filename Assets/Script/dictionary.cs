@@ -1,5 +1,3 @@
-//this is a dictionary for stats
-//it is used to store the stats of the player
 
 using UnityEngine;
 using System.Collections;
@@ -7,14 +5,11 @@ using System.Collections.Generic;
 using System.Reflection;
 
 
-//create a dictionary for stats
-
 public class dictionary {
 
     public Dictionary<string, float> stats = new Dictionary<string, float>();
 
     public dictionary(){
-        //set the stats to 0
         foreach (FieldInfo field in typeof(PlayableAgent).GetFields()){
             if (field.FieldType == typeof(float)){
                 stats[field.Name] = 0;
@@ -85,15 +80,15 @@ public class dictionary {
     public void setplayableagentBaseStats(PlayableAgent agent){
         setStat("damage_Physical", agent.damage_Physical);
         setStat("damage_Magical", agent.damage_Magical);
-        setStat("hitPoint", agent.hitPoint);
-        setStat("hitPointCurrent", agent.hitPoint);
+        setStat("maxHitPoint", agent.maxHitPoint);
+        setStat("hitPointCurrent", agent.maxHitPoint);
         setStat("regen_hitPoint", agent.regen_hitPoint);
-        setStat("manaPoint", agent.manaPoint);
-        setStat("manaPointCurrent", agent.manaPoint);
+        setStat("maxManaPoint", agent.maxManaPoint);
+        setStat("manaPointCurrent", agent.maxManaPoint);
         setStat("regen_manaPoint", agent.regen_manaPoint);
-        setStat("wildPoint", agent.wildPoint);
+        setStat("maxWildPoint", agent.maxWildPoint);
         setStat("regen_wildPoint", agent.regen_wildPoint);
-        setStat("energyPoint", agent.energyPoint);
+        setStat("maxEnergyPoint", agent.maxEnergyPoint);
         setStat("regen_energyPoint", agent.regen_energyPoint);
         setStat("armor_Physical", agent.armor_Physical);
         setStat("armor_Magical", agent.armor_Magical);
@@ -120,13 +115,13 @@ public class dictionary {
     {
         setStat("damage_Physical", agent.damage_Physical);
         setStat("damage_Magical", agent.damage_Magical);
-        setStat("hitPoint", agent.hitPoint);
+        setStat("maxHitPoint", agent.maxHitPoint);
         setStat("regen_hitPoint", agent.regen_hitPoint);
-        setStat("manaPoint", agent.manaPoint);
+        setStat("maxManaPoint", agent.maxManaPoint);
         setStat("regen_manaPoint", agent.regen_manaPoint);
-        setStat("wildPoint", agent.wildPoint);
+        setStat("maxWildPoint", agent.maxWildPoint);
         setStat("regen_wildPoint", agent.regen_wildPoint);
-        setStat("energyPoint", agent.energyPoint);
+        setStat("maxEnergyPoint", agent.maxEnergyPoint);
         setStat("regen_energyPoint", agent.regen_energyPoint);
         setStat("armor_Physical", agent.armor_Physical);
         setStat("armor_Magical", agent.armor_Magical);
@@ -152,15 +147,15 @@ public class dictionary {
     {
         setStat("damage_Physical", item.damage_Physical);
         setStat("damage_Magical", item.damage_Magical);
-        setStat("hitPoint", item.hitPoint);
-        setStat("hitPointCurrent", item.hitPoint);
+        setStat("maxHitPoint", item.maxHitPoint);
+        setStat("hitPointCurrent", item.maxHitPoint);
         setStat("regen_hitPoint", item.regen_hitPoint);
-        setStat("manaPoint", item.manaPoint);
-        setStat("manaPointCurrent", item.manaPoint);
+        setStat("maxManaPoint", item.maxManaPoint);
+        setStat("manaPointCurrent", item.maxManaPoint);
         setStat("regen_manaPoint", item.regen_manaPoint);
-        setStat("wildPoint", item.wildPoint);
+        setStat("maxWildPoint", item.maxWildPoint);
         setStat("regen_wildPoint", item.regen_wildPoint);
-        setStat("energyPoint", item.energyPoint);
+        setStat("maxEnergyPoint", item.maxEnergyPoint);
         setStat("regen_energyPoint", item.regen_energyPoint);
         setStat("armor_Physical", item.armor_Physical);
         setStat("armor_Magical", item.armor_Magical);
